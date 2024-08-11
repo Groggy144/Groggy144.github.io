@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        <title>Satisfactory factory Planner</title>
+        <link rel="stylesheet" href="styles.css">
+
+
+
+    <style>
+        .content {
+        overflow: scroll;
+
+        }
+        table {
+            border:none;
+            border-collapse: collapse;
+        }
+
+        table td {
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+        }
+
+        table td:first-child {
+            border-left: none;
+        }
+
+        table td:last-child {
+            border-right: none;
+        }
+
+    </style>
+
+
+
+    <script>
+        function loadState(){
+            loadFactory()
+            BuildAllTables()
+            BuildAddTable()
+
+        }
+        window.addEventListener('load', loadState);
+    </script>
+
+    <!--Sm Factories  -->
+    <script>
+        // Each Pair of tiers gets its own list-> mor emodular? Maybe?
+        var FactoryItems = 
+        [
+            [
+                {id:"IronOre",Name:"Iron Ore",Asked:0,Needed:0,NeededList:[{id:"Steel Bar",Nr:0},{id:"Iron Bar",Nr:0}],Recepice:[{PerBuilding:120,Buildings:0, Product: 0,Req:[]}]},
+                {id:"IronBar",Name:"Iron Bar",Asked:0,Needed:0,NeededList:[{id:"Iron Plate",Nr:0},{id:"Iron Rod",Nr:0}],Recepice:[{PerBuilding:30,Buildings:0, Product: 0, Req:[{id:"IronOre",Nr:1}]}]},
+                {id:"IronRod",Name:"Iron Rod",Asked:0,Needed:0,NeededList:[{id:"Rotor",Nr:0},{id:"Modular Frame",Nr:0},{id:"Iron Screw",Nr:0}],
+                    Recepice:[{PerBuilding:15,Buildings:0, Product: 0, Req:[{id:"IronBar",Nr:1}]}]},
+                {id:"IronScrew",Name:"Iron Screw",Asked:0,Needed:0,NeededList:[{id:"Rotor",Nr:0},{id:"Reinforced Plate",Nr:0}],Recepice:[{PerBuilding:40,Buildings:0, Product: 0, Req:[{id:"IronRod",Nr:0.25}]}]},
+                {id:"Iron Plate",Name:"Iron Plate",Asked:0,Needed:0,NeededList:[{id:"Reinforced Plate",Nr:0}],Recepice:[{PerBuilding:"20",Buildings:0, Product: 0, Req:[{id:"IronBar",Nr:1.5}]}]},
+                {id:"Limestone",Name:"Limestone",Asked:0,Needed:0,NeededList:[{id:"Cement",Nr:0}], Recepice:[{PerBuilding:120,Buildings:0, Product: 0, Req:[],Product: 0, ByProducts:[]}]},
+                {id:"Cement",Name:"Cement",Asked:0,Needed:0,NeededList:[{id:"Encased Industrial Beam",Nr:0}],Recepice:[{PerBuilding:"15",Buildings:0, Product: 0, Req:[{id:"Limestone",Nr:3}]}]},
+                {id:"CopperOre",Name:"Copper Ore",Asked:0,Needed:0,NeededList:[{id:"Copper Bar",Nr:0}],Recepice:[{PerBuilding:120,Buildings:0, Product: 0, Req:[]}]},
+                {id:"CopperBar",Name:"Copper Bar",Asked:0,Needed:0,NeededList:[{id:"Copper Wire",Nr:0}],Recepice:[{PerBuilding:30,Buildings:0, Product: 0, Req:[{id:"CopperOre",Nr:1}]}]},
+                {id:"Copper Wire",Name:"Copper Wire",Asked:0,Needed:0,NeededList:[{id:"Cable",Nr:0},{id:"Stator",Nr:0}],Recepice:[{PerBuilding:"30",Buildings:0, Product: 0, Req:[{id:"CopperBar",Nr:0.5}]}]},
+                {id:"Cable",Name:"Cable",Asked:0,Needed:0,NeededList:[{id:"Automated Wireng",Nr:0}],Recepice:[{PerBuilding:"30",Buildings:0, Product: 0, Req:[{id:"Copper Wire",Nr:2}]}]}
+            ],
+            [
+                {id:"Reinforced Plate",Name:"Reinforced Plate",Asked:0,Needed:0,NeededList:[{id:"Smart Plating",Nr:2},{id:"Modular Frame",Nr:7.5},{id:"out",Nr:5}],Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Iron Plate",Nr:3},{id:"IronScrew",Nr:12}]}]},
+                {id:"Modular Frame",Name:"Modular Frame",Asked:0,Needed:0,NeededList:[{id:"Versatile Framework",Nr:2.5}],Recepice:[{PerBuilding:"2",Buildings:0, Product: 0, Req:[{id:"Reinforced Plate",Nr:1.5},{id:"IronRod",Nr:6}]}]},
+                {id:"Rotor",Name:"Rotor",Asked:0,Needed:0,NeededList:[{id:"Motor",Nr:10},{id:"Smart Plating",Nr:2}],Recepice:[{PerBuilding:"4",Buildings:0, Product: 0, Req:[{id:"IronRod",Nr:5},{id:"IronScrew",Nr:25}]}]},
+                {id:"Smart Plating",Name:"Smart Plating",Asked:0,Needed:0,NeededList:[{id:"out",Nr:2}],Recepice:[{PerBuilding:"2",Buildings:0, Product: 0, Req:[{id:"Reinforced Plate",Nr:1},{id:"Rotor",Nr:1}]}]}
+            ],
+            [
+                {id:"Coal",Name:"Coal",Asked:0,Needed:0,NeededList:[{id:"Steel Bar",Nr:0}],Recepice:[{PerBuilding:60,Buildings:0, Product: 0, Req:[]}]},
+                {id:"Steel Bar",Name:"Steel Bar",Asked:0,Needed:0,NeededList:[{id:"Steel Tube",Nr:0},{id:"Steel Beam",Nr:0}],Recepice:[{PerBuilding:"45",Buildings:0, Product: 0, Req:[{id:"Coal",Nr:1},{id:"IronOre",Nr:1}]}]},
+                {id:"Steel Beam",Name:"Steel Beam",Asked:0,Needed:0,NeededList:[{id:"Encased Industrial Beam",Nr:0},{id:"Versatile Framework",Nr:0}],Recepice:[{PerBuilding:"15",Buildings:0, Product: 0, Req:[{id:"Steel Bar",Nr:4}]}]},
+                {id:"Steel Tube",Name:"Steel Tube",Asked:0,Needed:0,NeededList:[{id:"Stator",Nr:0}],Recepice:[{PerBuilding:"20",Buildings:0, Product: 0, Req:[{id:"Steel Bar",Nr:1.5}]}]},
+                {id:"Versatile Framework",Name:"Versatile Framework",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Modular Frame",Nr:0.5},{id:"Steel Beam",Nr:6}]}]},
+                {id:"Encased Industrial Beam",Name:"Encased Industrial Beam",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"6",Buildings:0, Product: 0, Req:[{id:"Steel Beam",Nr:4},{id:"Cement",Nr:5}]}]},
+                {id:"Stator",Name:"Stator",Asked:0,Needed:0,NeededList:[{id:"Automated Wireng",Nr:0},{id:"Motor",Nr:0}],Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Copper Wire",Nr:8},{id:"Steel Tube",Nr:3}]}]},
+                {id:"Motor",Name:"Motor",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Rotor",Nr:2},{id:"Stator",Nr:2}]}]},
+                {id:"Automated Wiring",Name:"Automated Wireng",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"2.5",Buildings:0, Product: 0, Req:[{id:"Cable",Nr:20},{id:"Stator",Nr:1}]}]}
+            ],
+            [
+                {id:"Oil", Name:"Oil",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:120,Buildings:0, Product: 0, Req:[]}]},
+            ]
+        ]
+
+        function AddToFactory(NewItem, TierIndex){
+            // Check if the item with the same Id already exists
+            console.log(TierIndex)
+            var existingItem = FactoryItems[TierIndex].find(item => item.id === NewItem.id);
+            if (existingItem) {
+                console.log('Item '+NewItem.id +' already exists in newest Tier.');
+                return; // Exit the function to avoid adding the item again
+            }
+
+            FactoryItems[TierIndex].push(NewItem);
+            console.log('Item '+NewItem.id+' added to Tier', TierIndex);
+            saveState()
+        };
+</script>
+
+<script>
+        function getIndex(ID){
+            var lengTiers =FactoryItems.length  
+            for (var j = 0; j < lengTiers; j++) {
+                var foundIndex = FactoryItems[j].findIndex(item => item.id === ID);
+
+                if(foundIndex != -1){
+                    return [j, foundIndex]
+                }
+            }
+            console.log('Cant find', ID)
+        }
+
+        function AddNeeded(ID, DepItem){
+            var indexFactor = getIndex(ID)
+            var TierIndex = indexFactor[0]
+            var ItemIndex = indexFactor[1]
+            var item = FactoryItems[TierIndex][ItemIndex];
+            item.Needed = Number(DepItem.Nr)+Number(item.Needed);
+            var NeededListIndex = item.NeededList.findIndex(item => item.id === DepItem.id);
+            if(NeededListIndex === -1)
+            {
+                item.NeededList.push(DepItem)
+            }
+            else
+            {
+                item.NeededList[NeededListIndex].Nr = item.NeededList[NeededListIndex].Nr + Number(DepItem.Nr)
+            }
+            FactoryItems[TierIndex][ItemIndex] = item;
+            CalcOneBuilding(TierIndex, ItemIndex)
+            return
+        }
+
+        // This always uses the first /standard recipe! 
+        // TODO: Set standard by resorting 
+        function CalcOneBuilding(j,l){
+            var item =  FactoryItems[j][l]
+            // Loop over items in recipe
+            var length = item.Recepice[0].Req.length
+            for (var l = 0; l < length; l++) {
+                AddNeeded(item.Recepice[0].Req[l].id, {id: item.id, Nr: item.Recepice[0].Req[l].Nr*item.Needed})
+            }
+            
+        }
+
+
+        function CalcAllBuildings(){
+            var lengTiers =FactoryItems.length  
+            console.log("Tiers: ", lengTiers)
+            for (var j = 0; j < lengTiers; j++) {
+                var leng =FactoryItems[j].length  
+                console.log("Items at tiers ", j, ": ", leng)
+                for (var l = 0; l < leng; l++) {
+                    FactoryItems[j][l].Needed=0;
+                    FactoryItems[j][l].NeededList=[];
+                }
+            }
+            for (var j = 0; j < lengTiers; j++) {
+                var leng = FactoryItems[j].length  
+                for (var l = 0; l < leng; l++) {
+                    if(FactoryItems[j][l].Asked != 0)
+                    {
+                        FactoryItems[j][l].Needed = Number(FactoryItems[j][l].Asked)+Number(FactoryItems[j][l].Needed);
+                        FactoryItems[j][l].NeededList.push({id: "out", Nr: Number(FactoryItems[j][l].Asked)});
+                        CalcOneBuilding(j,l);
+                    }
+                }
+            }
+
+            for (var j = 0; j < lengTiers; j++) {
+                var leng = FactoryItems[j].length  
+                for (var l = 0; l < leng; l++) {
+                
+                    FactoryItems[j][l].Recepice[0].Buildings = Math.ceil(FactoryItems[j][l].Needed/ FactoryItems[j][l].Recepice[0].PerBuilding);
+                }
+            }
+        }
+
+
+        function handleAskedInput(ChoosenFactoryList, InputId,i,key){
+            var Input =document.getElementById(InputId);
+            console.log("New Asked: ", Input.value);
+            ChoosenFactoryList[i][key]=Input.value;
+            BuildAllTables();
+
+        };
+
+        function BuildAllTables(){
+            CalcAllBuildings()
+            RoadTable(FactoryItems[0], "table-Factory0")
+            RoadTable(FactoryItems[1], "table-Factory12")
+            RoadTable(FactoryItems[2], "table-Factory34")
+            RoadTable(FactoryItems[3], "table-Factory56")
+
+        }
+
+        function RoadTable(ChoosenFactoryList, TableIdentifier) {
+            var tableBody = document.getElementById(TableIdentifier);
+            var tbody = document.createElement('tbody'); // Create a new tbody element
+            tableBody.innerHTML = ''; // Clear the table body
+            var keys = Object.keys(ChoosenFactoryList[0]);
+            keys = keys.slice(1);
+
+            // Name
+            var key = keys[0];
+            var Row = document.createElement('tr');
+            var TitleCell = document.createElement('td');
+            TitleCell.textContent = key;
+            Row.appendChild(TitleCell);
+            for (var i = 0; i < ChoosenFactoryList.length; i++) {
+                var Cell = document.createElement('td');
+                Cell.textContent = ChoosenFactoryList[i][key];
+                Row.appendChild(Cell);
+            }
+            tbody.appendChild(Row);
+
+            // Asked as Input
+            var key = keys[1];
+            var Row = document.createElement('tr');
+            var TitleCell = document.createElement('td');
+            TitleCell.textContent = key;
+            Row.appendChild(TitleCell);
+            for (var i = 0; i < ChoosenFactoryList.length; i++) {
+                var Item = ChoosenFactoryList[i];
+                var Cell = document.createElement('td');
+                var input = document.createElement('input');
+                input.id = 'Input' + Item[keys[0]] + key;
+                input.oninput = handleAskedInput.bind(null, ChoosenFactoryList, input.id, i, key);
+                input.value = Item[key];
+                input.style.backgroundColor= 'transparent'; /* Set the background color to transparent */
+                input.style.opacity= 1.5  ; 
+                input.style.width= "50px"  ; 
+
+                Cell.appendChild(input);
+                Row.appendChild(Cell);
+            }
+            tbody.appendChild(Row);
+
+            // Ceil for Number
+            var key = keys[2];
+            var Row = document.createElement('tr');
+            var TitleCell = document.createElement('td');
+            TitleCell.textContent = key;
+            Row.appendChild(TitleCell);
+            for (var i = 0; i < ChoosenFactoryList.length; i++) {
+                var Cell = document.createElement('td');
+                Cell.textContent = Math.ceil(Number( ChoosenFactoryList[i][key]));
+                Row.appendChild(Cell);
+            }
+            tbody.appendChild(Row);
+
+
+            // The Recipies
+            var Row = document.createElement('tr');
+            var TitleCell = document.createElement('td');
+            {
+            var TitleTable = document.createElement('table');
+
+            var Row1 = document.createElement('tr');
+            var TitleElem = document.createElement('td');
+            TitleElem.textContent = "per Building";
+            Row1.appendChild(TitleElem);
+            TitleTable.append(Row1);
+            var Row2 = document.createElement('tr');
+            var TitleElem = document.createElement('td');
+            TitleElem.textContent = "Buildings";
+            Row2.appendChild(TitleElem);
+            TitleTable.append(Row2);
+            var Row3 = document.createElement('tr');
+            var TitleElem = document.createElement('td');
+            TitleElem.textContent = "Produced:";
+            Row3.appendChild(TitleElem);
+            TitleTable.append(Row3);
+            
+            TitleCell.append(TitleTable);
+            }
+            Row.appendChild(TitleCell);
+            for (var i = 0; i < ChoosenFactoryList.length; i++) {
+                var TableCell = document.createElement('td');
+                var RecepiceList = ChoosenFactoryList[i].Recepice;
+                
+                var Recepicekeys = Object.keys(RecepiceList[0]);
+                var RecepiceTable = document.createElement('table');
+                for(var l= 0; l < 3; l++)
+                {
+                    var RecepiceRow =  document.createElement('tr')
+
+                    for (var j = 0; j < RecepiceList.length; j++) {
+                        var ValueCell = document.createElement('td');
+
+                        ValueCell.textContent = RecepiceList[j][Recepicekeys[l]];
+                        RecepiceRow.appendChild(ValueCell)
+                    }
+                    RecepiceTable.appendChild(RecepiceRow)
+                }
+                var RecepiceRow =  document.createElement('tr')
+
+                /*
+                for (var j = 0; j < RecepiceList.length; j++) {
+                    var ValueCell = document.createElement('td');
+                    RecepiceList[j].ByProducts.forEach(function(ByProductItem){
+                        var ByProductCell = document.createElement('td')
+                        ValueCell.textContent = "Item: " + ByProductItem.id *" at " + ByProductItem.Nr 
+                    });
+                    RecepiceRow.appendChild(ValueCell)
+                    
+                }
+                    */
+                RecepiceTable.appendChild(RecepiceRow)
+                
+                TableCell.appendChild(RecepiceTable);
+                Row.appendChild(TableCell);
+            }
+            tbody.appendChild(Row);
+
+
+
+            // Needed List as Building Numbers
+            var key = keys[3];
+            var Row = document.createElement('tr');
+            var TitleCell = document.createElement('td');
+            TitleCell.style.width = "200px"
+            TitleCell.textContent = "Need per Item";
+            Row.appendChild(TitleCell);
+            for (var i = 0; i < ChoosenFactoryList.length; i++) {
+                var Cell = document.createElement('td');
+                var NeededList = ChoosenFactoryList[i][key];
+                var NeededTable = document.createElement('table');
+                for (var j = 0; j < NeededList.length; j++) {
+                    var NeededRow =  document.createElement('tr')
+                    var Cell1 = document.createElement('td')
+                    Cell1.textContent = NeededList[j].id
+                    var Cell2 = document.createElement('td')
+                    Cell2.textContent = Math.ceil(NeededList[j].Nr/ChoosenFactoryList[i].Recepice[0].PerBuilding)
+                    var Cell3 = document.createElement('td')
+                    Cell3.textContent = Math.ceil(NeededList[j].Nr)
+                    NeededRow.appendChild(Cell1)
+                    NeededRow.appendChild(Cell2)
+                    NeededRow.appendChild(Cell3)
+                    if(NeededList[j].Nr != 0 ){
+                        NeededTable.appendChild(NeededRow)
+                    }
+                }
+                Cell.appendChild(NeededTable)
+                Row.appendChild(Cell);
+            }
+            tbody.appendChild(Row);
+
+
+            var Row = document.createElement('tr');
+            var TitleCell = document.createElement('td');
+            TitleCell.textContent = "Overhead";
+            Row.appendChild(TitleCell);
+            for (var i = 0; i < ChoosenFactoryList.length; i++) {
+                var Cell = document.createElement('td');
+                Cell.textContent = ChoosenFactoryList[i].Recepice[0].Buildings*ChoosenFactoryList[i].Recepice[0].PerBuilding - ChoosenFactoryList[i].Needed;
+                Row.appendChild(Cell);
+            }
+            tbody.appendChild(Row);
+
+            tableBody.appendChild(tbody)
+        }
+    </script>
+
+    <script>
+        var NewItem = {
+                id: "", Name: "",
+                Asked: 0, Needed:0,
+                NeededList:[],
+                Recepice:[
+                ]
+            };
+            var NewRecepice = {PerBuilding:0,Buildings:0, Product: 0, Req:[]}
+
+        function AddRecipe(){
+            PerBuildingField = document.getElementById("InputAddingPerBuilding")
+            NewRecepice.PerBuilding = PerBuildingField.value
+            NewItem.Recepice.push(NewRecepice)
+            resetNewRecepice();
+        }
+
+        function handleAddButton(){
+
+            AddRecipe()
+            NameField = document.getElementById("InputAddingName")
+            NewItem.id  = NameField.value
+            NewItem.Name  = NameField.value
+
+            
+            TierField = document.getElementById("InputAddingTier");
+
+            AddToFactory(NewItem, TierField.value)
+            console.log("Addign item: ", NewItem)
+            resetNewItem();
+            BuildAllTables()
+
+        }
+        function resetNewItem(){
+            NewItem = {
+                id: "", Name: "",
+                Asked: 0, Needed:0,
+                NeededList:[],
+                Recepice:[
+                ]
+            };
+            NewRecepice = {PerBuilding:0,Buildings:0, Product: 0, Req:[]}
+            BuildAddTable()
+        }
+        function resetNewRecepice(){
+            NewRecepice = {PerBuilding:0,Buildings:0, Product: 0, Req:[]}
+        }
+        
+        function handleAddReqButton(){
+            console.log("adding req")
+            var ReqItem ={id: '', Nr: 1};
+
+            ReqNameField = document.getElementById("InputAddingReqItem")
+            ReqItem.id  = ReqNameField.value;
+            PerBuildingField = document.getElementById("InputAddingReqNumber")
+            ReqItem.Nr = Number(PerBuildingField.value)
+
+            NewRecepice.Req.push(ReqItem)
+
+            // Add to table to see
+            var Row = document.createElement('tr');
+            var TitleCell = document.createElement('td');
+            TitleCell.textContent = "";
+            Row.appendChild(TitleCell);
+            var Cell = document.createElement('td');
+            Cell.textContent = ReqItem.id;
+            Row.appendChild(Cell);
+            var Cell = document.createElement('td');
+            Cell.textContent = ReqItem.Nr;
+            Row.appendChild(Cell);
+
+            tbody = document.getElementById("tbodyAdd")
+            tbody.appendChild(Row)
+        }
+
+        function BuildAddTable() {
+            CalcAllBuildings()
+            var tableBody = document.getElementById('add-Factory');
+            var tbody = document.createElement('tbody'); // Create a new tbody element
+            tbody.id = "tbodyAdd"
+            tableBody.innerHTML = ''; // Clear the table body
+            var keys = Object.keys(FactoryItems[0][0]);
+
+
+            var TierRow = document.createElement('tr');
+            var TitleCell = document.createElement('td');
+            TitleCell.textContent = "Tier";
+            TitleCell.style.width = "200px"
+            TierRow.appendChild(TitleCell);
+            {
+                var Cell = document.createElement('td');
+                var input = document.createElement('input');
+                input.id = 'InputAddingTier';
+                input.style.backgroundColor= 'transparent'; /* Set the background color to transparent */
+                input.style.opacity= 1.5  ; 
+                input.value = 3;
+                Cell.appendChild(input);
+                TierRow.appendChild(Cell);
+            }
+            tbody.appendChild(TierRow);
+
+
+            {
+                var key = "Name";
+                var NameRow = document.createElement('tr');
+                var TitleCell = document.createElement('td');
+                TitleCell.textContent = key;
+                NameRow.appendChild(TitleCell);
+                var Cell = document.createElement('td');
+                var input = document.createElement('input');
+                input.id = 'InputAdding' + key;
+                input.style.backgroundColor= 'transparent'; /* Set the background color to transparent */
+                input.style.opacity= 1.5  ; 
+
+                Cell.appendChild(input);
+                NameRow.appendChild(Cell);
+                tbody.appendChild(NameRow);
+            }
+            {
+                NewItem.Recepice.forEach(function(Recipe){
+                    RecipRow = document.createElement('tr');
+                    var TitleCell = document.createElement('td');
+                    TitleCell.textContent = "Recipe";
+                    RecipRow.appendChild(TitleCell);
+                    var ReqCell = document.createElement('td');
+                    
+
+                });
+            }
+            {
+                var key = "PerBuilding";
+                var PerRow = document.createElement('tr');
+                var TitleCell = document.createElement('td');
+                TitleCell.textContent = key;
+                PerRow.appendChild(TitleCell);
+                var Cell = document.createElement('td');
+                var input = document.createElement('input');
+                input.id = 'InputAdding' + key;
+                input.style.backgroundColor= 'transparent'; /* Set the background color to transparent */
+                input.style.opacity= 1.5  ; 
+
+                Cell.appendChild(input);
+                PerRow.appendChild(Cell);
+                tbody.appendChild(PerRow);
+            }
+
+            {
+                var ReqRow = document.createElement('tr');
+                var TitleCell = document.createElement('td');
+                TitleCell.textContent = "Requirements";
+                ReqRow.appendChild(TitleCell);
+
+                {
+                    var DropDownCell = document.createElement('td');
+                    var DropDownSelect = document.createElement("select");
+                    DropDownSelect.id = "InputAddingReqItem";
+
+                    // Populate the drop-down with items from FactoryItems
+                    FactoryItems.forEach(function(FactoryTier) {
+                        FactoryTier.forEach(function(item) {
+                            var option = document.createElement("option");
+                            option.value = item.id;
+                            option.text = item.Name;
+                            DropDownSelect.appendChild(option);
+                        })
+                    });
+                    DropDownCell.appendChild(DropDownSelect);
+                    ReqRow.appendChild(DropDownCell);
+                }
+
+                {
+                    var NumberCell = document.createElement('td');
+                    var input = document.createElement('input');
+                    input.id = 'InputAddingReqNumber';
+                    input.style.backgroundColor= 'transparent'; /* Set the background color to transparent */
+                    input.style.opacity= 1.5  ; 
+
+                    NumberCell.appendChild(input);
+                    ReqRow.appendChild(NumberCell);
+                }
+                {
+                var AddCell = document.createElement('td');
+                var AddReqButton = document.createElement('button');
+                AddReqButton.id = "AddReqButton"
+                AddReqButton.textContent = "Add";
+                AddReqButton.onclick=handleAddReqButton;
+                AddCell.appendChild(AddReqButton);
+                ReqRow.appendChild(AddCell);
+                }
+            
+                tbody.appendChild(ReqRow);
+            }
+
+            tableBody.appendChild(tbody)
+        }
+
+
+
+
+    </script>
+
+
+    <!--Saving -->
+    <script>
+
+        function saveState() {
+            console.log("Saveing");
+            CalcAllBuildings();
+            localStorage.setItem('FactoryItemsTier0' , JSON.stringify(FactoryItems[0]));
+            localStorage.setItem('FactoryItemsTier12', JSON.stringify(FactoryItems[1]));
+            localStorage.setItem('FactoryItemsTier34', JSON.stringify(FactoryItems[2]));
+            localStorage.setItem('FactoryItemsTier56', JSON.stringify(FactoryItems[3]));
+            console.log("Saved");
+            }
+
+    
+        function loadFactory() {
+            var storedFactoryItemsTier0     = localStorage.getItem('FactoryItemsTier0');
+            var storedFactoryItemsTier12     = localStorage.getItem('FactoryItemsTier12');
+            var storedFactoryItemsTier34     = localStorage.getItem('FactoryItemsTier34');
+            var storedFactoryItemsTier56     = localStorage.getItem('FactoryItemsTier56');
+
+            if (storedFactoryItemsTier0) {
+                FactoryItems[0] = JSON.parse(storedFactoryItemsTier0);
+            }
+            if (storedFactoryItemsTier12) {
+                FactoryItems[1] = JSON.parse(storedFactoryItemsTier12);
+            }
+            if (storedFactoryItemsTier34) {
+                FactoryItems[2] = JSON.parse(storedFactoryItemsTier34);
+            }
+            if (storedFactoryItemsTier56) {
+                FactoryItems[3] = JSON.parse(storedFactoryItemsTier56);
+            }
+        }
+    </script>
+
+
+</head>
+
+<body>
+
+<h1> Factory planer</h1>
+        <h2> Generall Factories</h2>
+        <h3> Tier 0</h3>
+        <div id="table-container0">
+        <table id="table-Factory0">
+        </table>
+        </div>
+        <h3> Tiers 1 and 2</h3>
+        <div id="table-container12">
+        <table id="table-Factory12">
+        </table>
+        </div>
+        <h3> Tiers 3 and 4</h3>
+        <div id="table-container34">
+        <table id="table-Factory34">
+        </table>
+        </div>
+        <h3> Tiers 5 and 6</h3>
+        <div id="table-container56">
+        <table id="table-Factory56">
+        </table>
+        </div>
+        <button onclick=CalcAllBuildings()>Recalulate</button>
+        <button onclick=saveState()>Saving</button>
+
+        <h3> Add Item:</h3>
+        <div id="Add-container">
+        <table id="add-Factory">
+        </table>
+        </div>
+        <button id= "AddToFactoryButton" onclick=handleAddButton()>Add</button>
+        <button id= "ResetNEwItem" onclick=resetNewItem()>Reset Requirements</button>
+
+
+
+
+
+    </body>
