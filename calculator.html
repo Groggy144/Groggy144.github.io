@@ -51,50 +51,50 @@
         var FactoryItems = 
         [
             [
-                {id:"IronOre",Name:"Iron Ore",Asked:0,Needed:0,NeededList:[{id:"Steel Bar",Nr:0},{id:"Iron Bar",Nr:0}],Recepice:[{PerBuilding:120,Buildings:0, Product: 0,Req:[]}]},
-                {id:"IronBar",Name:"Iron Bar",Asked:0,Needed:0,NeededList:[{id:"Iron Plate",Nr:0},{id:"Iron Rod",Nr:0}],Recepice:[{PerBuilding:30,Buildings:0, Product: 0, Req:[{id:"IronOre",Nr:1}]}]},
-                {id:"IronRod",Name:"Iron Rod",Asked:0,Needed:0,NeededList:[{id:"Rotor",Nr:0},{id:"Modular Frame",Nr:0},{id:"Iron Screw",Nr:0}],
+                {id:"IronOre",Name:"Iron Ore",Asked:0,Needed:0,NeededList:[{id:"Steel Bar",Nr:0},{id:"Iron Bar",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:120,Buildings:0, Product: 0,Req:[]},{PerBuilding:60,Buildings:0, Product: 0,Req:[]}]},
+                {id:"IronBar",Name:"Iron Bar",Asked:0,Needed:0,NeededList:[{id:"Iron Plate",Nr:0},{id:"Iron Rod",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:30,Buildings:0, Product: 0, Req:[{id:"IronOre",Nr:1}]}]},
+                {id:"IronRod",Name:"Iron Rod",Asked:0,Needed:0,NeededList:[{id:"Rotor",Nr:0},{id:"Modular Frame",Nr:0},{id:"Iron Screw",Nr:0}], RecipeNr: 0,
                     Recepice:[{PerBuilding:15,Buildings:0, Product: 0, Req:[{id:"IronBar",Nr:1}]}]},
-                {id:"IronScrew",Name:"Iron Screw",Asked:0,Needed:0,NeededList:[{id:"Rotor",Nr:0},{id:"Reinforced Plate",Nr:0}],Recepice:[{PerBuilding:40,Buildings:0, Product: 0, Req:[{id:"IronRod",Nr:0.25}]}]},
-                {id:"Iron Plate",Name:"Iron Plate",Asked:0,Needed:0,NeededList:[{id:"Reinforced Plate",Nr:0}],Recepice:[{PerBuilding:"20",Buildings:0, Product: 0, Req:[{id:"IronBar",Nr:1.5}]}]},
-                {id:"Limestone",Name:"Limestone",Asked:0,Needed:0,NeededList:[{id:"Cement",Nr:0}], Recepice:[{PerBuilding:120,Buildings:0, Product: 0, Req:[],Product: 0, ByProducts:[]}]},
-                {id:"Cement",Name:"Cement",Asked:0,Needed:0,NeededList:[{id:"Encased Industrial Beam",Nr:0}],Recepice:[{PerBuilding:"15",Buildings:0, Product: 0, Req:[{id:"Limestone",Nr:3}]}]},
-                {id:"CopperOre",Name:"Copper Ore",Asked:0,Needed:0,NeededList:[{id:"Copper Bar",Nr:0}],Recepice:[{PerBuilding:120,Buildings:0, Product: 0, Req:[]}]},
-                {id:"CopperBar",Name:"Copper Bar",Asked:0,Needed:0,NeededList:[{id:"Copper Wire",Nr:0}],Recepice:[{PerBuilding:30,Buildings:0, Product: 0, Req:[{id:"CopperOre",Nr:1}]}]},
-                {id:"Copper Wire",Name:"Copper Wire",Asked:0,Needed:0,NeededList:[{id:"Cable",Nr:0},{id:"Stator",Nr:0}],Recepice:[{PerBuilding:"30",Buildings:0, Product: 0, Req:[{id:"CopperBar",Nr:0.5}]}]},
-                {id:"Cable",Name:"Cable",Asked:0,Needed:0,NeededList:[{id:"Automated Wireng",Nr:0}],Recepice:[{PerBuilding:"30",Buildings:0, Product: 0, Req:[{id:"Copper Wire",Nr:2}]}]}
+                {id:"IronScrew",Name:"Iron Screw",Asked:0,Needed:0,NeededList:[{id:"Rotor",Nr:0},{id:"Reinforced Plate",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:40,Buildings:0, Product: 0, Req:[{id:"IronRod",Nr:0.25}]}]},
+                {id:"Iron Plate",Name:"Iron Plate",Asked:0,Needed:0,NeededList:[{id:"Reinforced Plate",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:"20",Buildings:0, Product: 0, Req:[{id:"IronBar",Nr:1.5}]}]},
+                {id:"Limestone",Name:"Limestone",Asked:0,Needed:0,NeededList:[{id:"Cement",Nr:0}],RecipeNr: 0, Recepice:[{PerBuilding:120,Buildings:0, Product: 0, Req:[],Product: 0, ByProducts:[]}]},
+                {id:"Cement",Name:"Cement",Asked:0,Needed:0,NeededList:[{id:"Encased Industrial Beam",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:"15",Buildings:0, Product: 0, Req:[{id:"Limestone",Nr:3}]}]},
+                {id:"CopperOre",Name:"Copper Ore",Asked:0,Needed:0,NeededList:[{id:"Copper Bar",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:120,Buildings:0, Product: 0, Req:[]}]},
+                {id:"CopperBar",Name:"Copper Bar",Asked:0,Needed:0,NeededList:[{id:"Copper Wire",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:30,Buildings:0, Product: 0, Req:[{id:"CopperOre",Nr:1}]}]},
+                {id:"Copper Wire",Name:"Copper Wire",Asked:0,Needed:0,NeededList:[{id:"Cable",Nr:0},{id:"Stator",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:"30",Buildings:0, Product: 0, Req:[{id:"CopperBar",Nr:0.5}]}]},
+                {id:"Cable",Name:"Cable",Asked:0,Needed:0,NeededList:[{id:"Automated Wireng",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:"30",Buildings:0, Product: 0, Req:[{id:"Copper Wire",Nr:2}]}]}
             ],
             [
-                {id:"Reinforced Plate",Name:"Reinforced Plate",Asked:0,Needed:0,NeededList:[{id:"Smart Plating",Nr:2},{id:"Modular Frame",Nr:7.5},{id:"out",Nr:5}],Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Iron Plate",Nr:3},{id:"IronScrew",Nr:12}]}]},
-                {id:"Modular Frame",Name:"Modular Frame",Asked:0,Needed:0,NeededList:[{id:"Versatile Framework",Nr:2.5}],Recepice:[{PerBuilding:"2",Buildings:0, Product: 0, Req:[{id:"Reinforced Plate",Nr:1.5},{id:"IronRod",Nr:6}]}]},
-                {id:"Rotor",Name:"Rotor",Asked:0,Needed:0,NeededList:[{id:"Motor",Nr:10},{id:"Smart Plating",Nr:2}],Recepice:[{PerBuilding:"4",Buildings:0, Product: 0, Req:[{id:"IronRod",Nr:5},{id:"IronScrew",Nr:25}]}]},
-                {id:"Smart Plating",Name:"Smart Plating",Asked:0,Needed:0,NeededList:[{id:"out",Nr:2}],Recepice:[{PerBuilding:"2",Buildings:0, Product: 0, Req:[{id:"Reinforced Plate",Nr:1},{id:"Rotor",Nr:1}]}]}
+                {id:"Reinforced Plate",Name:"Reinforced Plate",Asked:0,Needed:0,NeededList:[{id:"Smart Plating",Nr:2},{id:"Modular Frame",Nr:7.5},{id:"out",Nr:5}],RecipeNr: 0,Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Iron Plate",Nr:3},{id:"IronScrew",Nr:12}]}]},
+                {id:"Modular Frame",Name:"Modular Frame",Asked:0,Needed:0,NeededList:[{id:"Versatile Framework",Nr:2.5}],RecipeNr: 0,Recepice:[{PerBuilding:"2",Buildings:0, Product: 0, Req:[{id:"Reinforced Plate",Nr:1.5},{id:"IronRod",Nr:6}]}]},
+                {id:"Rotor",Name:"Rotor",Asked:0,Needed:0,NeededList:[{id:"Motor",Nr:10},{id:"Smart Plating",Nr:2}],RecipeNr: 0,Recepice:[{PerBuilding:"4",Buildings:0, Product: 0, Req:[{id:"IronRod",Nr:5},{id:"IronScrew",Nr:25}]}]},
+                {id:"Smart Plating",Name:"Smart Plating",Asked:0,Needed:0,NeededList:[{id:"out",Nr:2}],RecipeNr: 0,Recepice:[{PerBuilding:"2",Buildings:0, Product: 0, Req:[{id:"Reinforced Plate",Nr:1},{id:"Rotor",Nr:1}]}]}
             ],
             [
-                {id:"Coal",Name:"Coal",Asked:0,Needed:0,NeededList:[{id:"Steel Bar",Nr:0}],Recepice:[{PerBuilding:60,Buildings:0, Product: 0, Req:[]}]},
-                {id:"Steel Bar",Name:"Steel Bar",Asked:0,Needed:0,NeededList:[{id:"Steel Tube",Nr:0},{id:"Steel Beam",Nr:0}],Recepice:[{PerBuilding:"45",Buildings:0, Product: 0, Req:[{id:"Coal",Nr:1},{id:"IronOre",Nr:1}]}]},
-                {id:"Steel Beam",Name:"Steel Beam",Asked:0,Needed:0,NeededList:[{id:"Encased Industrial Beam",Nr:0},{id:"Versatile Framework",Nr:0}],Recepice:[{PerBuilding:"15",Buildings:0, Product: 0, Req:[{id:"Steel Bar",Nr:4}]}]},
-                {id:"Steel Tube",Name:"Steel Tube",Asked:0,Needed:0,NeededList:[{id:"Stator",Nr:0}],Recepice:[{PerBuilding:"20",Buildings:0, Product: 0, Req:[{id:"Steel Bar",Nr:1.5}]}]},
-                {id:"Versatile Framework",Name:"Versatile Framework",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Modular Frame",Nr:0.5},{id:"Steel Beam",Nr:6}]}]},
-                {id:"Encased Industrial Beam",Name:"Encased Industrial Beam",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"6",Buildings:0, Product: 0, Req:[{id:"Steel Beam",Nr:4},{id:"Cement",Nr:5}]}]},
-                {id:"Stator",Name:"Stator",Asked:0,Needed:0,NeededList:[{id:"Automated Wireng",Nr:0},{id:"Motor",Nr:0}],Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Copper Wire",Nr:8},{id:"Steel Tube",Nr:3}]}]},
-                {id:"Motor",Name:"Motor",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Rotor",Nr:2},{id:"Stator",Nr:2}]}]},
-                {id:"Automated Wiring",Name:"Automated Wireng",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"2.5",Buildings:0, Product: 0, Req:[{id:"Cable",Nr:20},{id:"Stator",Nr:1}]}]}
+                {id:"Coal",Name:"Coal",Asked:0,Needed:0,NeededList:[{id:"Steel Bar",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:60,Buildings:0, Product: 0, Req:[]}]},
+                {id:"Steel Bar",Name:"Steel Bar",Asked:0,Needed:0,NeededList:[{id:"Steel Tube",Nr:0},{id:"Steel Beam",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:"45",Buildings:0, Product: 0, Req:[{id:"Coal",Nr:1},{id:"IronOre",Nr:1}]}]},
+                {id:"Steel Beam",Name:"Steel Beam",Asked:0,Needed:0,NeededList:[{id:"Encased Industrial Beam",Nr:0},{id:"Versatile Framework",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:"15",Buildings:0, Product: 0, Req:[{id:"Steel Bar",Nr:4}]}]},
+                {id:"Steel Tube",Name:"Steel Tube",Asked:0,Needed:0,NeededList:[{id:"Stator",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:"20",Buildings:0, Product: 0, Req:[{id:"Steel Bar",Nr:1.5}]}]},
+                {id:"Versatile Framework",Name:"Versatile Framework",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Modular Frame",Nr:0.5},{id:"Steel Beam",Nr:6}]}]},
+                {id:"Encased Industrial Beam",Name:"Encased Industrial Beam",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"6",Buildings:0, Product: 0, Req:[{id:"Steel Beam",Nr:4},{id:"Cement",Nr:5}]}]},
+                {id:"Stator",Name:"Stator",Asked:0,Needed:0,NeededList:[{id:"Automated Wireng",Nr:0},{id:"Motor",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Copper Wire",Nr:8},{id:"Steel Tube",Nr:3}]}]},
+                {id:"Motor",Name:"Motor",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Rotor",Nr:2},{id:"Stator",Nr:2}]}]},
+                {id:"Automated Wiring",Name:"Automated Wireng",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"2.5",Buildings:0, Product: 0, Req:[{id:"Cable",Nr:20},{id:"Stator",Nr:1}]}]}
             ],
             [
-                {id:"Oil",Name:"Oil",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:120,Buildings:0,Product:0,Req:[]}]},
-                {id:"HeavyOilResidue",Name:"HeavyOilResidue",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"0",Buildings:null,Product:0,Req:[]}]},
-                {id:"Plastic",Name:"Plastic",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"20",Buildings:0,Product:0,Req:[{id:"Oil","Nr":1.5},{id:"HeavyOilResidue","Nr":-0.5}]}]},
-                {id:"Rubber",Name:"Rubber",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"20",Buildings:0,Product:0,Req:[{id:"Oil","Nr":1.5},{id:"HeavyOilResidue","Nr":-1}]}]},
-                {id:"Polymer Resin",Name:"Polymer Resin",Asked:"0",Needed:0,NeededList:[],Recepice:[{PerBuilding:"130",Buildings:0,Product:0,Req:[{id:"Oil","Nr":0.4615},{id:"HeavyOilResidue","Nr":-0.1538}]}]},
-                {id:"Petroleum Coke",Name:"Petroleum Coke",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"120",Buildings:0,Product:0,Req:[{id:"HeavyOilResidue","Nr":0.33333333}]}]},
-                {id:"Fuel",Name:"Fuel",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"40",Buildings:0,Product:0,Req:[{id:"Oil","Nr":1.5},{id:"Polymer Resin","Nr":0.75}]}]},
-                {id:"Canister",Name:"Canister",Asked:0,Needed:0,NeededList:[],Recepice:[{PerBuilding:"60",Buildings:0,Product:0,Req:[{id:"Plastic","Nr":0.5}]}]},
-                {id:"Circuit Board",Name:"Circuit Board",Asked:"0",Needed:0,NeededList:[],Recepice:[{PerBuilding:"7.5",Buildings:0,Product:0,Req:[{id:"Copper SHeet","Nr":2},{id:"Plastic","Nr":4}]}]},
-                {id:"Heavy Modular Frame",Name:"Heavy Modular Frame",Asked:"0",Needed:0,NeededList:[],Recepice:[{PerBuilding:"2",Buildings:0,Product:0,Req:[{id:"Modular Frame","Nr":5},{id:"Steel Tube","Nr":15},{id:"Encased Industrial Beam","Nr":5},{id:"IronScrew","Nr":100}]}]},
-                {id:"Computer",Name:"Computer",Asked:"0",Needed:0,NeededList:[],Recepice:[{PerBuilding:"2.5",Buildings:0,Product:0,Req:[{id:"Circuit Board","Nr":10},{id:"Cable","Nr":9},{id:"Plastic","Nr":18},{id:"IronScrew","Nr":52}]}]},
-                {id:"Modular Engine",Name:"Modular Engine",Asked:"0",Needed:0,NeededList:[],Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Motor","Nr":2},{id:"Rubber","Nr":15},{id:"Smart Plating","Nr":2}]}]},
-                {id:"Adaptive COntrol Unit",Name:"Adaptive COntrol Unit",Asked:"0",Needed:0,NeededList:[],Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Automated Wiring","Nr":15},{id:"Circuit Board","Nr":10},{id:"Heavy Modular Frame","Nr":2},{id:"Computer","Nr":2}]}]}
+                {id:"Oil",Name:"Oil",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:120,Buildings:0,Product:0,Req:[]}]},
+                {id:"HeavyOilResidue",Name:"HeavyOilResidue",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"0",Buildings:null,Product:0,Req:[]}]},
+                {id:"Plastic",Name:"Plastic",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"20",Buildings:0,Product:0,Req:[{id:"Oil","Nr":1.5},{id:"HeavyOilResidue","Nr":-0.5}]}]},
+                {id:"Rubber",Name:"Rubber",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"20",Buildings:0,Product:0,Req:[{id:"Oil","Nr":1.5},{id:"HeavyOilResidue","Nr":-1}]}]},
+                {id:"Polymer Resin",Name:"Polymer Resin",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"130",Buildings:0,Product:0,Req:[{id:"Oil","Nr":0.4615},{id:"HeavyOilResidue","Nr":-0.1538}]}]},
+                {id:"Petroleum Coke",Name:"Petroleum Coke",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"120",Buildings:0,Product:0,Req:[{id:"HeavyOilResidue","Nr":0.33333333}]}]},
+                {id:"Fuel",Name:"Fuel",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"40",Buildings:0,Product:0,Req:[{id:"Oil","Nr":1.5},{id:"Polymer Resin","Nr":0.75}]}]},
+                {id:"Canister",Name:"Canister",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"60",Buildings:0,Product:0,Req:[{id:"Plastic","Nr":0.5}]}]},
+                {id:"Circuit Board",Name:"Circuit Board",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"7.5",Buildings:0,Product:0,Req:[{id:"Copper SHeet","Nr":2},{id:"Plastic","Nr":4}]}]},
+                {id:"Heavy Modular Frame",Name:"Heavy Modular Frame",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"2",Buildings:0,Product:0,Req:[{id:"Modular Frame","Nr":5},{id:"Steel Tube","Nr":15},{id:"Encased Industrial Beam","Nr":5},{id:"IronScrew","Nr":100}]}]},
+                {id:"Computer",Name:"Computer",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"2.5",Buildings:0,Product:0,Req:[{id:"Circuit Board","Nr":10},{id:"Cable","Nr":9},{id:"Plastic","Nr":18},{id:"IronScrew","Nr":52}]}]},
+                {id:"Modular Engine",Name:"Modular Engine",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Motor","Nr":2},{id:"Rubber","Nr":15},{id:"Smart Plating","Nr":2}]}]},
+                {id:"Adaptive COntrol Unit",Name:"Adaptive COntrol Unit",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Automated Wiring","Nr":15},{id:"Circuit Board","Nr":10},{id:"Heavy Modular Frame","Nr":2},{id:"Computer","Nr":2}]}]}
             ]
         ]
 
@@ -151,9 +151,9 @@
         function CalcOneBuilding(j,l){
             var item =  FactoryItems[j][l]
             // Loop over items in recipe
-            var length = item.Recepice[0].Req.length
+            var length = item.Recepice[item.RecipeNr].Req.length
             for (var l = 0; l < length; l++) {
-                AddNeeded(item.Recepice[0].Req[l].id, {id: item.id, Nr: item.Recepice[0].Req[l].Nr*item.Needed})
+                AddNeeded(item.Recepice[item.RecipeNr].Req[l].id, {id: item.id, Nr: item.Recepice[item.RecipeNr].Req[l].Nr*item.Needed})
             }
             
         }
@@ -185,35 +185,34 @@
             for (var j = 0; j < lengTiers; j++) {
                 var leng = FactoryItems[j].length  
                 for (var l = 0; l < leng; l++) {
-                
-                    FactoryItems[j][l].Recepice[0].Buildings = Math.ceil(FactoryItems[j][l].Needed/ FactoryItems[j][l].Recepice[0].PerBuilding);
+                    FactoryItems[j][l].Recepice[FactoryItems[j][l].RecipeNr].Buildings = Math.ceil(FactoryItems[j][l].Needed/ FactoryItems[j][l].Recepice[FactoryItems[j][l].RecipeNr].PerBuilding);
                 }
             }
         }
 
 
-        function handleAskedInput(ChoosenFactoryList, InputId,i,key){
+        function handleAskedInput(m, InputId,i,key){
             var Input =document.getElementById(InputId);
             console.log("New Asked: ", Input.value);
-            ChoosenFactoryList[i][key]=Input.value;
+            FactoryItems[m][i][key]=Input.value;
             BuildAllTables();
 
         };
 
         function BuildAllTables(){
             CalcAllBuildings()
-            RoadTable(FactoryItems[0], "table-Factory0")
-            RoadTable(FactoryItems[1], "table-Factory12")
-            RoadTable(FactoryItems[2], "table-Factory34")
-            RoadTable(FactoryItems[3], "table-Factory56")
+            RoadTable(0, "table-Factory0")
+            RoadTable(1, "table-Factory12")
+            RoadTable(2, "table-Factory34")
+            RoadTable(3, "table-Factory56")
 
         }
 
-        function RoadTable(ChoosenFactoryList, TableIdentifier) {
+        function RoadTable(m, TableIdentifier) {
             var tableBody = document.getElementById(TableIdentifier);
             var tbody = document.createElement('tbody'); // Create a new tbody element
             tableBody.innerHTML = ''; // Clear the table body
-            var keys = Object.keys(ChoosenFactoryList[0]);
+            var keys = Object.keys(FactoryItems[m][0]);
             keys = keys.slice(1);
 
             // Name
@@ -235,12 +234,12 @@
             var TitleCell = document.createElement('td');
             TitleCell.textContent = key;
             Row.appendChild(TitleCell);
-            for (var i = 0; i < ChoosenFactoryList.length; i++) {
-                var Item = ChoosenFactoryList[i];
+            for (var i = 0; i < FactoryItems[m].length; i++) {
+                var Item = FactoryItems[m][i];
                 var Cell = document.createElement('td');
                 var input = document.createElement('input');
                 input.id = 'Input' + Item[keys[0]] + key;
-                input.oninput = handleAskedInput.bind(null, ChoosenFactoryList, input.id, i, key);
+                input.oninput = handleAskedInput.bind(null, m, input.id, i, key);
                 input.value = Item[key];
                 input.style.backgroundColor= 'transparent'; /* Set the background color to transparent */
                 input.style.opacity= 1.5  ; 
@@ -257,9 +256,9 @@
             var TitleCell = document.createElement('td');
             TitleCell.textContent = key;
             Row.appendChild(TitleCell);
-            for (var i = 0; i < ChoosenFactoryList.length; i++) {
+            for (var i = 0; i < FactoryItems[m].length; i++) {
                 var Cell = document.createElement('td');
-                Cell.textContent = Math.ceil(Number( ChoosenFactoryList[i][key]));
+                Cell.textContent = Math.ceil(Number( FactoryItems[m][i][key]));
                 Row.appendChild(Cell);
             }
             tbody.appendChild(Row);
@@ -337,16 +336,16 @@
             TitleCell.style.width = "200px"
             TitleCell.textContent = "Need per Item";
             Row.appendChild(TitleCell);
-            for (var i = 0; i < ChoosenFactoryList.length; i++) {
+            for (var i = 0; i < FactoryItems[m].length; i++) {
                 var Cell = document.createElement('td');
-                var NeededList = ChoosenFactoryList[i][key];
+                var NeededList = FactoryItems[m][i][key];
                 var NeededTable = document.createElement('table');
                 for (var j = 0; j < NeededList.length; j++) {
                     var NeededRow =  document.createElement('tr')
                     var Cell1 = document.createElement('td')
                     Cell1.textContent = NeededList[j].id
                     var Cell2 = document.createElement('td')
-                    Cell2.textContent = Math.ceil(NeededList[j].Nr/ChoosenFactoryList[i].Recepice[0].PerBuilding)
+                    Cell2.textContent = Math.ceil(NeededList[j].Nr/FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr].PerBuilding)
                     var Cell3 = document.createElement('td')
                     Cell3.textContent = Math.ceil(NeededList[j].Nr)
                     NeededRow.appendChild(Cell1)
@@ -366,9 +365,9 @@
             var TitleCell = document.createElement('td');
             TitleCell.textContent = "Overhead";
             Row.appendChild(TitleCell);
-            for (var i = 0; i < ChoosenFactoryList.length; i++) {
+            for (var i = 0; i < FactoryItems[m].length; i++) {
                 var Cell = document.createElement('td');
-                Cell.textContent = ChoosenFactoryList[i].Recepice[0].Buildings*ChoosenFactoryList[i].Recepice[0].PerBuilding - ChoosenFactoryList[i].Needed;
+                Cell.textContent = FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr].Buildings*FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr].PerBuilding - FactoryItems[m][i].Needed;
                 Row.appendChild(Cell);
             }
             tbody.appendChild(Row);
