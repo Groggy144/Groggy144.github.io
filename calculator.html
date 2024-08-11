@@ -301,22 +301,27 @@
             TitleCell.append(TitleTable);
             }
             Row.appendChild(TitleCell);
-            for (var i = 0; i < ChoosenFactoryList.length; i++) {
+            for (var i = 0; i < FactoryItems[m].length; i++) {
                 var TableCell = document.createElement('td');
-                var RecepiceList = ChoosenFactoryList[i].Recepice;
+
+                // var RecepiceList = FactoryItems[m][i].Recepice;
                 
-                var Recepicekeys = Object.keys(RecepiceList[0]);
+                var Recepicekeys = Object.keys(FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr]);
                 var RecepiceTable = document.createElement('table');
                 for(var l= 0; l < 3; l++)
                 {
                     var RecepiceRow =  document.createElement('tr')
+                    var ValueCell = document.createElement('td');
 
-                    for (var j = 0; j < RecepiceList.length; j++) {
-                        var ValueCell = document.createElement('td');
+                    ValueCell.textContent = FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr][Recepicekeys[l]];
+                    RecepiceRow.appendChild(ValueCell)
+                    //for (var j = 0; j < RecepiceList.length; j++) {
+                    //    var ValueCell = document.createElement('td');
 
-                        ValueCell.textContent = RecepiceList[j][Recepicekeys[l]];
-                        RecepiceRow.appendChild(ValueCell)
-                    }
+                    //    ValueCell.textContent = RecepiceList[j][Recepicekeys[l]];
+                    //     RecepiceRow.appendChild(ValueCell)
+                    // }
+
                     RecepiceTable.appendChild(RecepiceRow)
                 }
                 var RecepiceRow =  document.createElement('tr')
