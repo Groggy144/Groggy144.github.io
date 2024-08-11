@@ -221,9 +221,21 @@
             var TitleCell = document.createElement('td');
             TitleCell.textContent = key;
             Row.appendChild(TitleCell);
-            for (var i = 0; i < ChoosenFactoryList.length; i++) {
-                var Cell = document.createElement('td');
-                Cell.textContent = ChoosenFactoryList[i][key];
+            for (var i = 0; i < FactoryItems[m].length; i++) {
+                let Cell = document.createElement('td');
+                Cell.textContent = FactoryItems[m][i][key];
+                let CycleRecipeButton = document.createElement('button')
+                CycleRecipeButton.onclick = (function(m, i) {
+                    return function() {
+                        console.log(FactoryItems[m][i]);
+                        FactoryItems[m][i].RecipeNr = (FactoryItems[m][i].RecipeNr + 1) % FactoryItems[m][i].Recepice.length;
+                        BuildAllTables() // THis loks recursve, but the function only gets called on cklick!
+                    };
+                })(m, i);
+                CycleRecipeButton.textContent = "Recipe "+(FactoryItems[m][i].RecipeNr+1)+"/"+(FactoryItems[m][i].Recepice.length);
+                CycleRecipeButton.style.float = "right";
+                Cell.appendChild(CycleRecipeButton);
+
                 Row.appendChild(Cell);
             }
             tbody.appendChild(Row);
