@@ -40,12 +40,12 @@
             loadFactory()
             BuildAllTables()
             BuildAddTable()
-
+            PowerTable()
         }
         window.addEventListener('load', loadState);
     </script>
 
-    <!--Sm Factories  -->
+    <!--Item Basics  -->
     <script>
         // Each Pair of tiers gets its own list-> mor emodular? Maybe?
         var FactoryItems = 
@@ -666,13 +666,126 @@
         }
     </script>
 
+<!-- Power-->
+<script>
+    var PowerSources = [
+    {Name: "Biomass Burner", Buildings: 0, PerBuilding: 35, Req: []},
+    {Name: "Coal Power Plant", Buildings: 0, PerBuilding: 75, Req: [{id: "Water", Nr: 45}, {id: "Coal", Nr: 15}]},
+    {Name: "Fuel Power Plant", Buildings: 0, PerBuilding: 125, Req: [{id: "Fuel", Nr: 15}]},
+    ]
+    function PowerConsumption(){
+        return 100
+        //TODO obvsl
+    }
+    function PowerProduction(){
+        var production = 0;
+        PowerSources.forEach(source => {
+            production += source.Buildings*source.PerBuilding;
+        })
+        return production
+    }
+    console.log(PowerSources)
+    function handlePowerBuildingInput(NAME){
+        var inputfield = document.getElementById('InputPower'+NAME)
+        var foundIndex = PowerSources.findIndex(
+            item => item.Name === NAME);
+        if(foundIndex === -1){
+            console.log('Cant find', ID)
+            return -1
+        }
+        PowerSources[foundIndex].Buildings = inputfield.value;
+        PowerTable()    
+        BuildAllTables()
+    }
+
+
+    function PowerTable()
+    {
+        var tableBody = document.getElementById('table-Power');
+        var tbody = document.createElement('tbody'); // Create a new tbody element
+        tbody.id = "tbodyAdd"
+        tableBody.innerHTML = ''; // Clear the table body
+        //Titles
+        {
+            var TitleRow = document.createElement('tr')
+            {
+                var TitleCell = document.createElement('td')
+                TitleCell.textContent = "Power"
+                TitleRow.appendChild(TitleCell)
+            }
+            {
+                var TitleCell = document.createElement('td')
+                TitleCell.textContent = "Demand"
+                TitleRow.appendChild(TitleCell)
+            }
+            PowerSources.forEach(element => {
+                var TitleCell = document.createElement('td')
+                TitleCell.textContent = element.Name
+                TitleRow.appendChild(TitleCell)
+            });
+            tbody.appendChild(TitleRow)
+        }
+        
+        // Power Production
+        {
+            var ProdRow = document.createElement('tr')
+            {
+                var TitleCell = document.createElement('td')
+                TitleCell.textContent = "Production"
+                ProdRow.appendChild(TitleCell)
+            }
+            {
+                var TitleCell2 = document.createElement('td')
+                TitleCell2.textContent = String(PowerProduction()) + "/" + String(PowerConsumption())
+                ProdRow.appendChild(TitleCell2)
+            }
+            PowerSources.forEach(element => {
+                var TitleCell = document.createElement('td')
+                TitleCell.textContent = element.Buildings*element.PerBuilding
+                ProdRow.appendChild(TitleCell)
+            });
+            tbody.appendChild(ProdRow)
+        }
+        {
+            var BuildingsRow = document.createElement('tr')
+            {
+                var TitleCell = document.createElement('td')
+                TitleCell.textContent = "Buildings"
+                BuildingsRow.appendChild(TitleCell)
+            }
+            {
+                var TitleCell2 = document.createElement('td')
+                BuildingsRow.appendChild(TitleCell2)
+            }
+            PowerSources.forEach(element => {
+                var Cell = document.createElement('td');
+                var input = document.createElement('input');
+                input.id = 'InputPower'+element.Name;
+                input.oninput = handlePowerBuildingInput.bind(null, element.Name);
+                input.value = element.Buildings;
+                input.style.backgroundColor= 'transparent'; /* Set the background color to transparent */
+                input.style.opacity= 1.5  ; 
+                input.style.width= "50px"  ; 
+
+                Cell.appendChild(input);
+                BuildingsRow.appendChild(Cell);
+            });
+            tbody.appendChild(BuildingsRow)
+        }
+        tableBody.appendChild(tbody)
+
+
+    }
+
+    </script>
+
 
 </head>
 
 <body>
 
 <h1> Factory planer</h1>
-        <h2> Generall Factories</h2>
+        <h2> Items</h2>
         <h3> Tier 0</h3>
         <div id="table-container0">
         <table id="table-Factory0">
@@ -722,7 +835,10 @@
         <button id= "ResetNEwItem" onclick=resetNewItem()>Reset Requirements</button>
 
 
-
-
+        <h2> Power </h2>
+        <div id="table-containerpower">
+            <table id="table-Power">
+            </table>
+        </div>
 
     </body>
