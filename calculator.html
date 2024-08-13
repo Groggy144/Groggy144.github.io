@@ -98,7 +98,7 @@
                 {id:"Heavy Modular Frame",Name:"Heavy Modular Frame",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"2",Buildings:0,Product:0,Req:[{id:"Modular Frame","Nr":5},{id:"Steel Tube","Nr":15},{id:"Encased Industrial Beam","Nr":5},{id:"IronScrew","Nr":100}]}]},
                 {id:"Computer",Name:"Computer",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"2.5",Buildings:0,Product:0,Req:[{id:"Circuit Board","Nr":10},{id:"Cable","Nr":9},{id:"Plastic","Nr":18},{id:"IronScrew","Nr":52}]}]},
                 {id:"Modular Engine",Name:"Modular Engine",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Motor","Nr":2},{id:"Rubber","Nr":15},{id:"Smart Plating","Nr":2}]}]},
-                {id:"Adaptive COntrol Unit",Name:"Adaptive COntrol Unit",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Automated Wiring","Nr":15},{id:"Circuit Board","Nr":10},{id:"Heavy Modular Frame","Nr":2},{id:"Computer","Nr":2}]}]}
+                {id:"Adaptive Control Unit",Name:"Adaptive COntrol Unit",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Automated Wiring","Nr":15},{id:"Circuit Board","Nr":10},{id:"Heavy Modular Frame","Nr":2},{id:"Computer","Nr":2}]}]}
             ]
         ]
 
@@ -114,9 +114,7 @@
             FactoryItems[TierIndex].push(NewItem);
             console.log('Item '+NewItem.id+' added to Tier', TierIndex);
         };
-</script>
 
-<script>
         function getIndex(ID){
             var lengTiers =FactoryItems.length  
             for (var j = 0; j < lengTiers; j++) {
@@ -130,12 +128,18 @@
             return -1
         }
 
+</script>
+
+<!-- Calulation of Items-->
+<script>
+
         function AddNeeded(ID, DepItem){
             var indexFactor = getIndex(ID)
             var TierIndex = indexFactor[0]
             var ItemIndex = indexFactor[1]
             var item = FactoryItems[TierIndex][ItemIndex];
             item.Needed = Number(DepItem.Nr)+Number(item.Needed);
+
             var NeededListIndex = item.NeededList.findIndex(item => item.id === DepItem.id);
             if(NeededListIndex === -1)
             {
@@ -193,6 +197,10 @@
                 }
             }
         }
+        </script>
+<!-- BUild the Main table-->
+<script>
+
 
 
         function handleAskedInput(m, InputId,i,key){
@@ -398,6 +406,7 @@
         }
     </script>
 
+<!-- Adding new Items/Recipies-->
     <script>
         var NewItem = {
                 id: "", Name: "",
@@ -498,11 +507,11 @@
 
         function BuildAddTable() {
             CalcAllBuildings()
-            var tableBody = document.getElementById('add-Factory');
-            var tbody = document.createElement('tbody'); // Create a new tbody element
-            tbody.id = "tbodyAdd"
-            tableBody.innerHTML = ''; // Clear the table body
-            var keys = Object.keys(FactoryItems[0][0]);
+                var tableBody = document.getElementById('add-Factory');
+                var tbody = document.createElement('tbody'); // Create a new tbody element
+                tbody.id = "tbodyAdd"
+                tableBody.innerHTML = ''; // Clear the table body
+                var keys = Object.keys(FactoryItems[0][0]);
 
 
             var TierRow = document.createElement('tr');
@@ -618,10 +627,8 @@
             tableBody.appendChild(tbody)
         }
 
-
-
-
     </script>
+
 
 
     <!--Saving -->
@@ -691,11 +698,17 @@
         <table id="table-Factory56">
         </table>
         </div>
-        <button onclick=CalcAllBuildings()>Recalulate</button>
+        <button onclick=BuildAllTables()>Recalulate</button>
         <button onclick=saveState()>Saving</button>
 
-        <h3> Add New Recipe:</h3>
+        <h2> Add New Recipe:</h2>
         If the name is already taken, the recipe gets added as an alternate
+        <br>
+        IF you want to use two recipies for the same item,
+        the curent best practice is to add the alternative item as an extra Recipe
+        with the item as a byprodukt and as well as main product,
+        then manually set the prevered production rate as Asked.
+        
         <br>
         You can also use this to create "factory modules".
         Seperatly calulate the in and output of the
