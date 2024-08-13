@@ -40,12 +40,12 @@
             loadFactory()
             BuildAllTables()
             BuildAddTable()
-
+            PowerTable()
         }
         window.addEventListener('load', loadState);
     </script>
 
-    <!--Sm Factories  -->
+    <!--Item Basics  -->
     <script>
         // Each Pair of tiers gets its own list-> mor emodular? Maybe?
         var FactoryItems = 
@@ -69,6 +69,9 @@
                 {id:"Modular Frame",Name:"Modular Frame",Asked:0,Needed:0,NeededList:[{id:"Versatile Framework",Nr:2.5}],RecipeNr: 0,Recepice:[{PerBuilding:"2",Buildings:0, Product: 0, Req:[{id:"Reinforced Plate",Nr:1.5},{id:"IronRod",Nr:6}]}]},
                 {id:"Rotor",Name:"Rotor",Asked:0,Needed:0,NeededList:[{id:"Motor",Nr:10},{id:"Smart Plating",Nr:2}],RecipeNr: 0,Recepice:[{PerBuilding:"4",Buildings:0, Product: 0, Req:[{id:"IronRod",Nr:5},{id:"IronScrew",Nr:25}]}]},
                 {id:"Smart Plating",Name:"Smart Plating",Asked:0,Needed:0,NeededList:[{id:"out",Nr:2}],RecipeNr: 0,Recepice:[{PerBuilding:"2",Buildings:0, Product: 0, Req:[{id:"Reinforced Plate",Nr:1},{id:"Rotor",Nr:1}]}]}
+            ],
+            [
+                {id:"Caterium Ore", Name: "Caterium Ore", Asked:0, Needed:0, NeededList: [], RecipeNr:0, Recepice:[{PerBuilding: 60, }]}
             ],
             [
                 {id:"Coal",Name:"Coal",Asked:0,Needed:0,NeededList:[{id:"Steel Bar",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:60,Buildings:0, Product: 0, Req:[]}]},
@@ -110,11 +113,8 @@
 
             FactoryItems[TierIndex].push(NewItem);
             console.log('Item '+NewItem.id+' added to Tier', TierIndex);
-            saveState()
         };
-</script>
 
-<script>
         function getIndex(ID){
             var lengTiers =FactoryItems.length  
             for (var j = 0; j < lengTiers; j++) {
@@ -125,7 +125,13 @@
                 }
             }
             console.log('Cant find', ID)
+            return -1
         }
+
+</script>
+
+<!-- Calulation of Items-->
+<script>
 
         function AddNeeded(ID, DepItem){
             var indexFactor = getIndex(ID)
@@ -133,6 +139,7 @@
             var ItemIndex = indexFactor[1]
             var item = FactoryItems[TierIndex][ItemIndex];
             item.Needed = Number(DepItem.Nr)+Number(item.Needed);
+
             var NeededListIndex = item.NeededList.findIndex(item => item.id === DepItem.id);
             if(NeededListIndex === -1)
             {
@@ -159,6 +166,14 @@
             
         }
 
+        function AddPowers(){
+            PowerSources.forEach(Source => {
+                Source.Req.forEach(ReqItem => {
+                    AddNeeded(ReqItem.id, {id: Source.Name, Nr: Source.Buildings*ReqItem.Nr})
+                })
+            })
+        }
+
 
         function CalcAllBuildings(){
             var lengTiers =FactoryItems.length  
@@ -182,7 +197,7 @@
                     }
                 }
             }
-
+            AddPowers()
             for (var j = 0; j < lengTiers; j++) {
                 var leng = FactoryItems[j].length  
                 for (var l = 0; l < leng; l++) {
@@ -190,6 +205,10 @@
                 }
             }
         }
+        </script>
+<!-- BUild the Main table-->
+<script>
+
 
 
         function handleAskedInput(m, InputId,i,key){
@@ -204,8 +223,9 @@
             CalcAllBuildings()
             RoadTable(0, "table-Factory0")
             RoadTable(1, "table-Factory12")
-            RoadTable(2, "table-Factory34")
-            RoadTable(3, "table-Factory56")
+            RoadTable(2, "table-FactoryMAM")
+            RoadTable(3, "table-Factory34")
+            RoadTable(4, "table-Factory56")
 
         }
 
@@ -394,26 +414,37 @@
         }
     </script>
 
+<!-- Adding new Items/Recipies-->
     <script>
         var NewItem = {
                 id: "", Name: "",
                 Asked: 0, Needed:0,
                 NeededList:[],
+                RecipeNr:0,
                 Recepice:[
                 ]
             };
             var NewRecepice = {PerBuilding:0,Buildings:0, Product: 0, Req:[]}
 
-        function AddRecipe(){
+        function NewItemAddRecipe(){
             PerBuildingField = document.getElementById("InputAddingPerBuilding")
             NewRecepice.PerBuilding = PerBuildingField.value
             NewItem.Recepice.push(NewRecepice)
             resetNewRecepice();
         }
+        function AddAlternativeRecipe(ItemID)
+        {
+            var PerBuildingField = document.getElementById("InputAddingPerBuilding")
+            NewRecepice.PerBuilding = PerBuildingField.value
+            var index = getIndex(ItemID)
 
-        function handleAddButton(){
+            FactoryItems[index[0]][index[1]].Recepice.push(NewRecepice)
+            resetNewRecepice();
+            return
+        }
 
-            AddRecipe()
+        function AddNewItem(){
+            NewItemAddRecipe()
             NameField = document.getElementById("InputAddingName")
             NewItem.id  = NameField.value
             NewItem.Name  = NameField.value
@@ -424,6 +455,19 @@
             AddToFactory(NewItem, TierField.value)
             console.log("Addign item: ", NewItem)
             resetNewItem();
+        }
+        function handleAddButton(){
+            var NameField = document.getElementById("InputAddingName")
+            var index = getIndex( NameField.value)
+            console.log("NEw item name: ", NameField.value)
+            console.log("FOund at ", index)
+            if( index === -1){
+                AddNewItem()
+            }
+            else(
+                AddAlternativeRecipe(NameField.value)
+            )
+
             BuildAllTables()
 
         }
@@ -471,11 +515,11 @@
 
         function BuildAddTable() {
             CalcAllBuildings()
-            var tableBody = document.getElementById('add-Factory');
-            var tbody = document.createElement('tbody'); // Create a new tbody element
-            tbody.id = "tbodyAdd"
-            tableBody.innerHTML = ''; // Clear the table body
-            var keys = Object.keys(FactoryItems[0][0]);
+                var tableBody = document.getElementById('add-Factory');
+                var tbody = document.createElement('tbody'); // Create a new tbody element
+                tbody.id = "tbodyAdd"
+                tableBody.innerHTML = ''; // Clear the table body
+                var keys = Object.keys(FactoryItems[0][0]);
 
 
             var TierRow = document.createElement('tr');
@@ -543,7 +587,8 @@
             {
                 var ReqRow = document.createElement('tr');
                 var TitleCell = document.createElement('td');
-                TitleCell.textContent = "Requirements";
+                TitleCell.style.whiteSpace = "pre"
+                TitleCell.textContent = "Requirements\nEnter byproducts as negative needs";
                 ReqRow.appendChild(TitleCell);
 
                 {
@@ -590,10 +635,8 @@
             tableBody.appendChild(tbody)
         }
 
-
-
-
     </script>
+
 
 
     <!--Saving -->
@@ -623,12 +666,125 @@
                 FactoryItems[1] = JSON.parse(storedFactoryItemsTier12);
             }
             if (storedFactoryItemsTier34) {
-                FactoryItems[2] = JSON.parse(storedFactoryItemsTier34);
+                FactoryItems[3] = JSON.parse(storedFactoryItemsTier34);
             }
             if (storedFactoryItemsTier56) {
-                FactoryItems[3] = JSON.parse(storedFactoryItemsTier56);
+                FactoryItems[4] = JSON.parse(storedFactoryItemsTier56);
             }
         }
+    </script>
+
+<!-- Power-->
+<script>
+    var PowerSources = [
+    {Name: "Biomass Burner", Buildings: 0, PerBuilding: 35, Req: []},
+    {Name: "Coal Power Plant", Buildings: 0, PerBuilding: 75, Req: [{id: "Water", Nr: 45}, {id: "Coal", Nr: 15}]},
+    {Name: "Fuel Power Plant", Buildings: 0, PerBuilding: 125, Req: [{id: "Fuel", Nr: 15}]},
+    ]
+    function PowerConsumption(){
+        return 100
+        //TODO obvsl
+    }
+    function PowerProduction(){
+        var production = 0;
+        PowerSources.forEach(source => {
+            production += source.Buildings*source.PerBuilding;
+        })
+        return production
+    }
+    console.log(PowerSources)
+    function handlePowerBuildingInput(NAME){
+        var inputfield = document.getElementById('InputPower'+NAME)
+        var foundIndex = PowerSources.findIndex(
+            item => item.Name === NAME);
+        if(foundIndex === -1){
+            console.log('Cant find', ID)
+            return -1
+        }
+        PowerSources[foundIndex].Buildings = inputfield.value;
+        PowerTable()    
+        BuildAllTables()
+    }
+
+
+    function PowerTable()
+    {
+        var tableBody = document.getElementById('table-Power');
+        var tbody = document.createElement('tbody'); // Create a new tbody element
+        tbody.id = "tbodyAdd"
+        tableBody.innerHTML = ''; // Clear the table body
+        //Titles
+        {
+            var TitleRow = document.createElement('tr')
+            {
+                var TitleCell = document.createElement('td')
+                TitleCell.textContent = "Power"
+                TitleRow.appendChild(TitleCell)
+            }
+            {
+                var TitleCell = document.createElement('td')
+                TitleCell.textContent = "Demand"
+                TitleRow.appendChild(TitleCell)
+            }
+            PowerSources.forEach(element => {
+                var TitleCell = document.createElement('td')
+                TitleCell.textContent = element.Name
+                TitleRow.appendChild(TitleCell)
+            });
+            tbody.appendChild(TitleRow)
+        }
+        
+        // Power Production
+        {
+            var ProdRow = document.createElement('tr')
+            {
+                var TitleCell = document.createElement('td')
+                TitleCell.textContent = "Production"
+                ProdRow.appendChild(TitleCell)
+            }
+            {
+                var TitleCell2 = document.createElement('td')
+                TitleCell2.textContent = String(PowerProduction()) + "/" + String(PowerConsumption())
+                ProdRow.appendChild(TitleCell2)
+            }
+            PowerSources.forEach(element => {
+                var TitleCell = document.createElement('td')
+                TitleCell.textContent = element.Buildings*element.PerBuilding
+                ProdRow.appendChild(TitleCell)
+            });
+            tbody.appendChild(ProdRow)
+        }
+        {
+            var BuildingsRow = document.createElement('tr')
+            {
+                var TitleCell = document.createElement('td')
+                TitleCell.textContent = "Buildings"
+                BuildingsRow.appendChild(TitleCell)
+            }
+            {
+                var TitleCell2 = document.createElement('td')
+                BuildingsRow.appendChild(TitleCell2)
+            }
+            PowerSources.forEach(element => {
+                var Cell = document.createElement('td');
+                var input = document.createElement('input');
+                input.id = 'InputPower'+element.Name;
+                input.oninput = handlePowerBuildingInput.bind(null, element.Name);
+                input.value = element.Buildings;
+                input.style.backgroundColor= 'transparent'; /* Set the background color to transparent */
+                input.style.opacity= 1.5  ; 
+                input.style.width= "50px"  ; 
+
+                Cell.appendChild(input);
+                BuildingsRow.appendChild(Cell);
+            });
+            tbody.appendChild(BuildingsRow)
+        }
+        tableBody.appendChild(tbody)
+
+
+    }
+
     </script>
 
 
@@ -637,7 +793,7 @@
 <body>
 
 <h1> Factory planer</h1>
-        <h2> Generall Factories</h2>
+        <h2> Items</h2>
         <h3> Tier 0</h3>
         <div id="table-container0">
         <table id="table-Factory0">
@@ -646,6 +802,11 @@
         <h3> Tiers 1 and 2</h3>
         <div id="table-container12">
         <table id="table-Factory12">
+        </table>
+        </div>
+        <h3> MAM Research</h3>
+        <div id="table-containerMAM">
+        <table id="table-FactoryMAM">
         </table>
         </div>
         <h3> Tiers 3 and 4</h3>
@@ -658,10 +819,22 @@
         <table id="table-Factory56">
         </table>
         </div>
-        <button onclick=CalcAllBuildings()>Recalulate</button>
+        <button onclick=BuildAllTables()>Recalulate</button>
         <button onclick=saveState()>Saving</button>
 
-        <h3> Add Item:</h3>
+        <h2> Add New Recipe:</h2>
+        If the name is already taken, the recipe gets added as an alternate
+        <br>
+        IF you want to use two recipies for the same item,
+        the curent best practice is to add the alternative item as an extra Recipe
+        with the item as a byprodukt and as well as main product,
+        then manually set the prevered production rate as Asked.
+        
+        <br>
+        You can also use this to create "factory modules".
+        Seperatly calulate the in and output of the
+        moduls, e.g. in a seperate tab, and include them as a new "Item".
+        You maually have to set the number via the "asked" fields later.
         <div id="Add-container">
         <table id="add-Factory">
         </table>
@@ -670,7 +843,10 @@
         <button id= "ResetNEwItem" onclick=resetNewItem()>Reset Requirements</button>
 
 
-
-
+        <h2> Power </h2>
+        <div id="table-containerpower">
+            <table id="table-Power">
+            </table>
+        </div>
 
     </body>
