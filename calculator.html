@@ -125,6 +125,7 @@
                 }
             }
             console.log('Cant find', ID)
+            return -1
         }
 
         function AddNeeded(ID, DepItem){
@@ -399,21 +400,31 @@
                 id: "", Name: "",
                 Asked: 0, Needed:0,
                 NeededList:[],
+                RecipeNr:0,
                 Recepice:[
                 ]
             };
             var NewRecepice = {PerBuilding:0,Buildings:0, Product: 0, Req:[]}
 
-        function AddRecipe(){
+        function NewItemAddRecipe(){
             PerBuildingField = document.getElementById("InputAddingPerBuilding")
             NewRecepice.PerBuilding = PerBuildingField.value
             NewItem.Recepice.push(NewRecepice)
             resetNewRecepice();
         }
+        function AddAlternativeRecipe(ItemID)
+        {
+            var PerBuildingField = document.getElementById("InputAddingPerBuilding")
+            NewRecepice.PerBuilding = PerBuildingField.value
+            var index = getIndex(ItemID)
 
-        function handleAddButton(){
+            FactoryItems[index[0]][index[1]].Recepice.push(NewRecepice)
+            resetNewRecepice();
+            return
+        }
 
-            AddRecipe()
+        function AddNewItem(){
+            NewItemAddRecipe()
             NameField = document.getElementById("InputAddingName")
             NewItem.id  = NameField.value
             NewItem.Name  = NameField.value
@@ -424,6 +435,19 @@
             AddToFactory(NewItem, TierField.value)
             console.log("Addign item: ", NewItem)
             resetNewItem();
+        }
+        function handleAddButton(){
+            var NameField = document.getElementById("InputAddingName")
+            var index = getIndex( NameField.value)
+            console.log("NEw item name: ", NameField.value)
+            console.log("FOund at ", index)
+            if( index === -1){
+                AddNewItem()
+            }
+            else(
+                AddAlternativeRecipe(NameField.value)
+            )
+
             BuildAllTables()
 
         }
@@ -661,7 +685,7 @@
         <button onclick=CalcAllBuildings()>Recalulate</button>
         <button onclick=saveState()>Saving</button>
 
-        <h3> Add Item:</h3>
+        <h3> Add New Recipe:</h3>
         <div id="Add-container">
         <table id="add-Factory">
         </table>
