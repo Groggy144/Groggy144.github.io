@@ -571,7 +571,8 @@
             {
                 var ReqRow = document.createElement('tr');
                 var TitleCell = document.createElement('td');
-                TitleCell.textContent = "Requirements";
+                TitleCell.style.whiteSpace = "pre"
+                TitleCell.textContent = "Requirements\nEnter byproducts as negative needs";
                 ReqRow.appendChild(TitleCell);
 
                 {
@@ -695,6 +696,12 @@
         <button onclick=saveState()>Saving</button>
 
         <h3> Add New Recipe:</h3>
+        If the name is already taken, the recipe gets added as an alternate
+        <br>
+        You can also use this to create "factory modules".
+        Seperatly calulate the in and output of the
+        moduls, e.g. in a seperate tab, and include them as a new "Item".
+        You maually have to set the number via the "asked" fields later.
         <div id="Add-container">
         <table id="add-Factory">
         </table>
