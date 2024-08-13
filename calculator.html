@@ -166,6 +166,14 @@
             
         }
 
+        function AddPowers(){
+            PowerSources.forEach(Source => {
+                Source.Req.forEach(ReqItem => {
+                    AddNeeded(ReqItem.id, {id: Source.Name, Nr: Source.Buildings*ReqItem.Nr})
+                })
+            })
+        }
+
 
         function CalcAllBuildings(){
             var lengTiers =FactoryItems.length  
@@ -189,7 +197,7 @@
                     }
                 }
             }
-
+            AddPowers()
             for (var j = 0; j < lengTiers; j++) {
                 var leng = FactoryItems[j].length  
                 for (var l = 0; l < leng; l++) {
