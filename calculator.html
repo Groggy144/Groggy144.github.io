@@ -8,36 +8,12 @@
 
 
 
-    <style>
-        .content {
-        overflow: scroll;
-
-        }
-        table {
-            border:none;
-            border-collapse: collapse;
-        }
-
-        table td {
-            border-left: 1px solid #000;
-            border-right: 1px solid #000;
-        }
-
-        table td:first-child {
-            border-left: none;
-        }
-
-        table td:last-child {
-            border-right: none;
-        }
-
-    </style>
 
 
 
     <script>
         function loadState(){
-            loadFactory()
+            //loadFactory()
             BuildAllTables()
             BuildAddTable()
             PowerTable()
@@ -767,7 +743,28 @@
         PowerTable()    
         BuildAllTables()
     }
+    function updatePowerBar() {
+        const production = PowerProduction();
+        const consumption = PowerConsumption();
+        const ratio = production / consumption;
+        const bar = document.getElementById('power-bar');
+        
+        let color;
+        if (ratio < 1) {
+            color = 'red';
+        } else if (ratio >= 1 && ratio <= 1.05) {
+            color = 'yellow';
+        } else {
+            color = 'green';
+        }
+        
+        const width = Math.max(5, Math.min(ratio / 1.2 * 100, 100)); // Ensure the width does not exceed 100%
 
+        console.log(`Ratio: ${ratio}, Width: ${width}%, Color: ${color}`); // Debug log
+
+        bar.style.width = width + '%';
+        bar.style.backgroundColor = color;
+    }
 
     function PowerTable()
     {
@@ -825,6 +822,23 @@
             }
             {
                 var TitleCell2 = document.createElement('td')
+                 // Create bar container and bar
+                var barContainer = document.createElement('div');
+                barContainer.className = 'bar-container';
+                var bar = document.createElement('div');
+                bar.className = 'bar';
+                bar.id = 'power-bar';
+                barContainer.appendChild(bar);
+
+                var marker1 = document.createElement('div');
+                marker1.className = 'marker';
+                marker1.style.color = 'black'
+                marker1.style.left = (1 / 1.2 * 100) + '%'; // Position of 1 on the bar
+                barContainer.appendChild(marker1);
+
+                barContainer.style.backgroundColor = "transparent";
+                // Append bar container to the table cell
+                TitleCell2.appendChild(barContainer);
                 BuildingsRow.appendChild(TitleCell2)
             }
             PowerSources.forEach(element => {
@@ -843,6 +857,7 @@
             tbody.appendChild(BuildingsRow)
         }
         tableBody.appendChild(tbody)
+        updatePowerBar()
 
 
     }

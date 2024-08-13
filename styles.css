@@ -133,3 +133,44 @@ button:disabled {
     border-color: #6c6c6c; /* Gray border when disabled */
     cursor: not-allowed;
 }
+.content {
+overflow: scroll;
+
+}
+table {
+    border:none;
+    border-collapse: collapse;
+}
+
+table td {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+table td:first-child {
+    border-left: none;
+}
+
+table td:last-child {
+    border-right: none;
+}
+
+.bar-container {
+    width: 100%;
+    background-color: #ccc;
+    border: 1px solid #000;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.bar {
+    height: 30px;
+    width: 0;
+    transition: width 0.5s;
+}
+.marker {
+    position: absolute;
+    height: 100%;
+    width: 20px;
+    background-color: black;
+    top: 0;
+}
