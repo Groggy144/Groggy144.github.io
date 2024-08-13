@@ -675,6 +675,46 @@
             }
         }
     </script>
+<!-- Determin the building-->
+<script>
+     // var Buildings = [Constructor, Assembler, Manufactorer, Refinery, Blender, smelter, Foundary, Miner, Water, Oil ]
+    function BuildingType(Recepie){
+        var fluids = ["Water", "Oil", "Fuel", "HeavyOilResidue"];
+        var Ores = ["IreonOre", "CopperOre", "Caterium Ore"];
+        if(Recepie.Req.some(req => fluids.includes(req.id)))
+        {
+            if(Recepie.Req.length <3){
+                return 3
+            }
+            else{
+                return 4
+            }
+        }
+        else{
+            if(Recepie.Req.length === 1){
+                if(Recepie.Req.some(req => Ores.includes(req.id))){
+                    return 5
+                }
+                else{ return 0}
+            }
+            if(Recepie.Req.length === 2){
+                if(Recepie.Req.some(req => Ores.includes(req.id))){
+                    return 6
+                }
+                else{ return 1}
+            }
+            if(Recepie.Req.length > 2){
+                return 2
+            }
+        }
+    }
+
+    FactoryItems.forEach(Tier => {
+        Tier.forEach(Item=>{
+            Item.Recepice.forEach(Rec => {console.log(Item.Name, BuildingType(Rec))})
+        })
+    })
+</script>
 
 <!-- Power-->
 <script>
@@ -683,10 +723,30 @@
     {Name: "Coal Power Plant", Buildings: 0, PerBuilding: 75, Req: [{id: "Water", Nr: 45}, {id: "Coal", Nr: 15}]},
     {Name: "Fuel Power Plant", Buildings: 0, PerBuilding: 125, Req: [{id: "Fuel", Nr: 15}]},
     ]
+    // var Buildings = [Constructor, Assembler, Manufactorer, Refinery, Blender, smelter, Foundary, Miner, Water, Oil ]
+    var BuildingsPower = [4, 15, 55, 30,75, 4, 16, 12, 20, 40]
     function PowerConsumption(){
-        return 100
+        var Demand = 0;
+        FactoryItems.forEach(Tier => {
+            Tier.forEach(Item=>{
+                if(Item.Recepice[Item.RecipeNr].Req.length == 0)
+                {
+
+                }
+                else{
+                    // console.log(Item.Name, Item.Recepice.length, BuildingType(Item.Recepice[Item.RecipeNr]))
+                    Demand += (
+                        Item.Recepice[Item.RecipeNr].Buildings
+                        *BuildingsPower[ BuildingType(Item.Recepice[Item.RecipeNr])]
+                    )
+                }
+            })
+        })
+
+        return Demand
         //TODO obvsl
     }
+
     function PowerProduction(){
         var production = 0;
         PowerSources.forEach(source => {
@@ -694,7 +754,7 @@
         })
         return production
     }
-    console.log(PowerSources)
+
     function handlePowerBuildingInput(NAME){
         var inputfield = document.getElementById('InputPower'+NAME)
         var foundIndex = PowerSources.findIndex(
