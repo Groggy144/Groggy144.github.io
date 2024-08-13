@@ -71,6 +71,9 @@
                 {id:"Smart Plating",Name:"Smart Plating",Asked:0,Needed:0,NeededList:[{id:"out",Nr:2}],RecipeNr: 0,Recepice:[{PerBuilding:"2",Buildings:0, Product: 0, Req:[{id:"Reinforced Plate",Nr:1},{id:"Rotor",Nr:1}]}]}
             ],
             [
+                {id:"Caterium Ore", Name: "Caterium Ore", Asked:0, Needed:0, NeededList: [], RecipeNr:0, Recepice:[{PerBuilding: 60, }]}
+            ],
+            [
                 {id:"Coal",Name:"Coal",Asked:0,Needed:0,NeededList:[{id:"Steel Bar",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:60,Buildings:0, Product: 0, Req:[]}]},
                 {id:"Steel Bar",Name:"Steel Bar",Asked:0,Needed:0,NeededList:[{id:"Steel Tube",Nr:0},{id:"Steel Beam",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:"45",Buildings:0, Product: 0, Req:[{id:"Coal",Nr:1},{id:"IronOre",Nr:1}]}]},
                 {id:"Steel Beam",Name:"Steel Beam",Asked:0,Needed:0,NeededList:[{id:"Encased Industrial Beam",Nr:0},{id:"Versatile Framework",Nr:0}],RecipeNr: 0,Recepice:[{PerBuilding:"15",Buildings:0, Product: 0, Req:[{id:"Steel Bar",Nr:4}]}]},
@@ -205,8 +208,9 @@
             CalcAllBuildings()
             RoadTable(0, "table-Factory0")
             RoadTable(1, "table-Factory12")
-            RoadTable(2, "table-Factory34")
-            RoadTable(3, "table-Factory56")
+            RoadTable(2, "table-FactoryMAM")
+            RoadTable(3, "table-Factory34")
+            RoadTable(4, "table-Factory56")
 
         }
 
@@ -647,10 +651,10 @@
                 FactoryItems[1] = JSON.parse(storedFactoryItemsTier12);
             }
             if (storedFactoryItemsTier34) {
-                FactoryItems[2] = JSON.parse(storedFactoryItemsTier34);
+                FactoryItems[3] = JSON.parse(storedFactoryItemsTier34);
             }
             if (storedFactoryItemsTier56) {
-                FactoryItems[3] = JSON.parse(storedFactoryItemsTier56);
+                FactoryItems[4] = JSON.parse(storedFactoryItemsTier56);
             }
         }
     </script>
@@ -670,6 +674,11 @@
         <h3> Tiers 1 and 2</h3>
         <div id="table-container12">
         <table id="table-Factory12">
+        </table>
+        </div>
+        <h3> MAM Research</h3>
+        <div id="table-containerMAM">
+        <table id="table-FactoryMAM">
         </table>
         </div>
         <h3> Tiers 3 and 4</h3>
