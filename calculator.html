@@ -72,18 +72,20 @@
             ],
             [
                 {id:"Oil",Name:"Oil",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:120,Buildings:0,Product:0,Req:[]}]},
-                {id:"HeavyOilResidue",Name:"Heavy Oil-Residue",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"0",Buildings:null,Product:0,Req:[]}]},
                 {id:"Plastic",Name:"Plastic",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"20",Buildings:0,Product:0,Req:[{id:"Oil","Nr":1.5},{id:"HeavyOilResidue","Nr":-0.5}]}]},
                 {id:"Rubber",Name:"Rubber",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"20",Buildings:0,Product:0,Req:[{id:"Oil","Nr":1.5},{id:"HeavyOilResidue","Nr":-1}]}]},
-                {id:"Polymer Resin",Name:"Polymer Resin",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"130",Buildings:0,Product:0,Req:[{id:"Oil","Nr":0.4615},{id:"HeavyOilResidue","Nr":-0.1538}]}]},
+                {id:"HeavyOilResidue",Name:"Heavy Oil-Residue",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"0",Buildings:null,Product:0,Req:[]}]},
+                {id:"Polymer Resin",Name:"Polymer Resin",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"130",Buildings:0,Product:0,Req:[{id:"Oil","Nr":6/13},{id:"HeavyOilResidue","Nr":-2/13}]}]},
                 {id:"Petroleum Coke",Name:"Petroleum Coke",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"120",Buildings:0,Product:0,Req:[{id:"HeavyOilResidue","Nr":1/3}]}]},
                 {id:"Fuel",Name:"Fuel",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"40",Buildings:0,Product:0,Req:[{id:"Oil","Nr":1.5},{id:"Polymer Resin","Nr":0.75}]}]},
+            ],
+            [
                 {id:"Canister",Name:"Canister",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"60",Buildings:0,Product:0,Req:[{id:"Plastic","Nr":0.5}]}]},
                 {id:"Circuit Board",Name:"Circuit Board",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"7.5",Buildings:0,Product:0,Req:[{id:"Copper SHeet","Nr":2},{id:"Plastic","Nr":4}]}]},
                 {id:"Heavy Modular Frame",Name:"Heavy Modular Frame",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"2",Buildings:0,Product:0,Req:[{id:"Modular Frame","Nr":5},{id:"Steel Tube","Nr":15},{id:"Encased Industrial Beam","Nr":5},{id:"IronScrew","Nr":100}]}]},
                 {id:"Computer",Name:"Computer",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"2.5",Buildings:0,Product:0,Req:[{id:"Circuit Board","Nr":10},{id:"Cable","Nr":9},{id:"Plastic","Nr":18},{id:"IronScrew","Nr":52}]}]},
                 {id:"Modular Engine",Name:"Modular Engine",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Motor","Nr":2},{id:"Rubber","Nr":15},{id:"Smart Plating","Nr":2}]}]},
-                {id:"Adaptive COntrol Unit",Name:"Adaptive Control Unit",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Automated Wiring","Nr":15},{id:"Circuit Board","Nr":10},{id:"Heavy Modular Frame","Nr":2},{id:"Computer","Nr":2}]}]}
+                {id:"Adaptive Control Unit",Name:"Adaptive Control Unit",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Automated Wiring","Nr":15},{id:"Circuit Board","Nr":10},{id:"Heavy Modular Frame","Nr":2},{id:"Computer","Nr":2}]}]}
             ],
             [
                 {id:"Bauxit",Name:"Bauxit",Asked:0,Needed:0,NeededList:[],RecipeNr:1,Recepice:[{PerBuilding:60,Buildings:0,Product:0,Req:[]},{PerBuilding:120,Buildings:0,Product:0,Req:[]}]},
@@ -227,8 +229,9 @@
             RoadTable(1, "table-Factory12")
             RoadTable(2, "table-FactoryMAM")
             RoadTable(3, "table-Factory34")
-            RoadTable(4, "table-Factory56")
-            RoadTable(5, "table-Factory78")
+            RoadTable(4, "table-Factory5")
+            RoadTable(5, "table-Factory6")
+            RoadTable(6, "table-Factory78")
 
         }
 
@@ -649,44 +652,25 @@
         function saveState() {
             console.log("Saveing");
             CalcAllBuildings();
-            localStorage.setItem('FactoryItemsTier0' , JSON.stringify(FactoryItems[0]));
-            localStorage.setItem('FactoryItemsTier12', JSON.stringify(FactoryItems[1]));
-            localStorage.setItem('FactoryItemsMAM', JSON.stringify(FactoryItems[2]));
-            localStorage.setItem('FactoryItemsTier34', JSON.stringify(FactoryItems[3]));
-            localStorage.setItem('FactoryItemsTier56', JSON.stringify(FactoryItems[4]));
-            localStorage.setItem('FactoryItemsTier78', JSON.stringify(FactoryItems[5]));
+            var Tiers = FactoryItems.length;
+            for(var i = 0; i< Tiers; i++)
+            {
+                localStorage.setItem('FactoryItemsTier_'+String(i) , JSON.stringify(FactoryItems[i]));   
+            }
             console.log("Saved");
             }
 
     
         function loadFactory() {
-            var storedFactoryItemsTier0     = localStorage.getItem('FactoryItemsTier0');
-            var storedFactoryItemsTier12    = localStorage.getItem('FactoryItemsTier12');
-            var storedFactoryItemsTierMAM   = localStorage.getItem('FactoryItemsMAM');
-            var storedFactoryItemsTier34    = localStorage.getItem('FactoryItemsTier34');
-            var storedFactoryItemsTier56    = localStorage.getItem('FactoryItemsTier56');
-            var storedFactoryItemsTier78    = localStorage.getItem('FactoryItemsTier78');
-
-            if (storedFactoryItemsTier0) {
-                FactoryItems[0] = JSON.parse(storedFactoryItemsTier0);
+            var Tiers = FactoryItems.length;
+            for(var i = 0; i< Tiers; i++)
+            {
+                var storedFactoryItemsTier     = localStorage.getItem('FactoryItemsTier_'+String(i));
+                if (storedFactoryItemsTier) {
+                    FactoryItems[i] = JSON.parse(storedFactoryItemsTier);
+                }
             }
-            if (storedFactoryItemsTier12) {
-                console.log(FactoryItems[1])
-                FactoryItems[1] = JSON.parse(storedFactoryItemsTier12);
-                console.log(FactoryItems[1])
-            }
-            if (storedFactoryItemsTierMAM) {
-                FactoryItems[2] = JSON.parse(storedFactoryItemsTierMAM);
-            }
-            if (storedFactoryItemsTier34) {
-                FactoryItems[3] = JSON.parse(storedFactoryItemsTier34);
-            }
-            if (storedFactoryItemsTier56) {
-                FactoryItems[4] = JSON.parse(storedFactoryItemsTier56);
-            }
-            if (storedFactoryItemsTier78) {
-                FactoryItems[5] = JSON.parse(storedFactoryItemsTier78);
-            }
+            console.log("Loaded state from memory")
         }
     </script>
 <!-- Determin the building-->
@@ -926,9 +910,15 @@
         <table id="table-Factory34">
         </table>
         </div>
-        <h3> Tiers 5 and 6</h3>
-        <div id="table-container56">
-        <table id="table-Factory56">
+        <h3> Tiers 5: Oil</h3>
+        <div id="table-container5">
+        <table id="table-Factory5">
+        </table>
+        </div>
+
+        <h3> Tiers 6</h3>
+        <div id="table-container6">
+        <table id="table-Factory6">
         </table>
         </div>
         <h3> Tiers 7 and 8</h3>
@@ -938,6 +928,7 @@
         </div>
         <button onclick=BuildAllTables()>Recalulate</button>
         <button onclick=saveState()>Saving</button>
+        <button onclick=loadFactory()>Reload</button>
 
         <h2> Add New Recipe:</h2>
         If the name is already taken, the recipe gets added as an alternate
