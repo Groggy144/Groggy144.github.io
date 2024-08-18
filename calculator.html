@@ -795,6 +795,7 @@
 
         bar.style.width = width + '%';
         bar.style.backgroundColor = color;
+        bar.textContent = String(Math.floor(ratio*100))+"%"
     }
 
     function PowerTable()
@@ -861,12 +862,15 @@
                 bar.id = 'power-bar';
                 barContainer.appendChild(bar);
 
+                /*
                 var marker1 = document.createElement('div');
                 marker1.className = 'marker';
                 marker1.style.color = 'black'
                 marker1.style.left = (1 / 1.2 * 100) + '%'; // Position of 1 on the bar
                 barContainer.appendChild(marker1);
+                */
 
+                // barContainer.textContent = (PowerProduction()/PowerConsumption())
                 barContainer.style.backgroundColor = "transparent";
                 // Append bar container to the table cell
                 TitleCell2.appendChild(barContainer);
