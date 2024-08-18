@@ -196,7 +196,13 @@
             for (var j = 0; j < lengTiers; j++) {
                 var leng = FactoryItems[j].length  
                 for (var l = 0; l < leng; l++) {
-                    FactoryItems[j][l].Recepice[FactoryItems[j][l].RecipeNr].Buildings = Math.ceil(FactoryItems[j][l].Needed/ FactoryItems[j][l].Recepice[FactoryItems[j][l].RecipeNr].PerBuilding);
+                    if((FactoryItems[j][l].Recepice[FactoryItems[j][l].RecipeNr].PerBuilding) == 0){
+                        continue;
+                    }
+                    FactoryItems[j][l].Recepice[FactoryItems[j][l].RecipeNr].Buildings = (
+                        Math.ceil(FactoryItems[j][l].Needed/FactoryItems[j][l].Recepice[FactoryItems[j][l].RecipeNr].PerBuilding)
+                );
+
                 }
             }
         }
