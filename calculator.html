@@ -753,11 +753,6 @@
 
         return Demand
     }
-    FactoryItems.forEach(Tier => {
-        Tier.forEach(Item=>{
-            console.log(Item.Name, BuildingType(Item), BuildingsPower[ BuildingType(Item)])
-        })
-    })
 
     function PowerProduction(){
         var production = 0;
