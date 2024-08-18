@@ -691,13 +691,13 @@
     </script>
 <!-- Determin the building-->
 <script>
-     // var Buildings = [Constructor, Assembler, Manufactorer, Refinery, Blender, smelter, Foundary, Miner, Water, Oil ]
-    function BuildingType(Recepie){
+     // var Buildings = [Constructor, Assembler, Manufactorer, Refinery, Blender, smelter, Foundary, Miner, Water, Oil, NOne ]
+    function BuildingType(Item){
         var fluids = ["Water", "Oil", "Fuel", "HeavyOilResidue"];
-        var Ores = ["IreonOre", "CopperOre", "Caterium Ore"];
-        if(Recepie.Req.some(req => fluids.includes(req.id)))
+        var Ores = ["IronOre", "Iron Ore", "CopperOre", "CopperOre", "Caterium Ore", "Coal", "Quartz", "Limestone", "Bauxit"];
+        if(Item.Recepice[Item.RecipeNr].Req.some(req => fluids.includes(req.id)))
         {
-            if(Recepie.Req.length <3){
+            if(Item.Recepice[Item.RecipeNr].Req.length <3){
                 return 3
             }
             else{
@@ -705,30 +705,28 @@
             }
         }
         else{
-            if(Recepie.Req.length === 1){
-                if(Recepie.Req.some(req => Ores.includes(req.id))){
+            if(Item.Recepice[Item.RecipeNr].Req.length === 1){
+                if(Item.Recepice[Item.RecipeNr].Req.some(req => Ores.includes(req.id))){
                     return 5
                 }
                 else{ return 0}
             }
-            if(Recepie.Req.length === 2){
-                if(Recepie.Req.some(req => Ores.includes(req.id))){
+            if(Item.Recepice[Item.RecipeNr].Req.length === 2){
+                if(Item.Recepice[Item.RecipeNr].Req.some(req => Ores.includes(req.id))){
                     return 6
                 }
                 else{ return 1}
             }
-            if(Recepie.Req.length > 2){
+            if(Item.Recepice[Item.RecipeNr].Req.length > 2){
                 return 2
             }
         }
+        if(Ores.includes(Item.id)){ return 7;}
+        if(Item.id === "Water"){return 8;}
+        if(Item.id === "Oil"){return 9;}
+        if(Item.id === "HeavyOilResidue"){return 10;}
     }
-    /*
-    FactoryItems.forEach(Tier => {
-        Tier.forEach(Item=>{
-            Item.Recepice.forEach(Rec => {console.log(Item.Name, BuildingType(Rec))})
-        })
-    })
-    */
+    
 </script>
 
 <!-- Power-->
@@ -739,28 +737,27 @@
     {Name: "Fuel Power Plant", Buildings: 0, PerBuilding: 125, Req: [{id: "Fuel", Nr: 15}]},
     ]
     // var Buildings = [Constructor, Assembler, Manufactorer, Refinery, Blender, smelter, Foundary, Miner, Water, Oil ]
-    var BuildingsPower = [4, 15, 55, 30,75, 4, 16, 12, 20, 40]
+    var BuildingsPower = [4, 15, 55, 30,75, 4, 16, 12, 20, 40, 0]
     function PowerConsumption(){
         var Demand = 0;
         FactoryItems.forEach(Tier => {
             Tier.forEach(Item=>{
-                if(Item.Recepice[Item.RecipeNr].Req.length == 0)
-                {
 
-                }
-                else{
-                    // console.log(Item.Name, Item.Recepice.length, BuildingType(Item.Recepice[Item.RecipeNr]))
-                    Demand += (
-                        Item.Recepice[Item.RecipeNr].Buildings
-                        *BuildingsPower[ BuildingType(Item.Recepice[Item.RecipeNr])]
-                    )
-                }
+ 
+                Demand += (
+                    Item.Recepice[Item.RecipeNr].Buildings
+                    *BuildingsPower[ BuildingType(Item)]
+                )
             })
         })
 
         return Demand
-        //TODO obvsl
     }
+    FactoryItems.forEach(Tier => {
+        Tier.forEach(Item=>{
+            console.log(Item.Name, BuildingType(Item), BuildingsPower[ BuildingType(Item)])
+        })
+    })
 
     function PowerProduction(){
         var production = 0;
