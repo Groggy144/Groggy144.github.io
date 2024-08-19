@@ -13,7 +13,7 @@
 
     <script>
         function loadState(){
-            //loadFactory()
+            loadFactory()
             BuildAllTables()
             BuildAddTable()
             PowerTable()
@@ -212,13 +212,23 @@
 <!-- BUild the Main table-->
 <script>
 
-
+        function debouncedHandleAskedInput(m, InputId, i, key) {
+            clearTimeout(debounceTimeouts[InputId]);
+            debounceTimeouts[InputId] = setTimeout(() => {
+                handleAskedInput(m, InputId, i, key);
+            }, 300); // Adjust the delay as needed (300 milliseconds in this example)
+        }
+        let debounceTimeouts = {};
 
         function handleAskedInput(m, InputId,i,key){
-            var Input =document.getElementById(InputId);
-            console.log("New Asked: ", Input.value);
-            FactoryItems[m][i][key]=Input.value;
-            BuildAllTables();
+
+            clearTimeout(debounceTimeouts[InputId]);
+            debounceTimeouts[InputId] = setTimeout(() => {
+                var Input =document.getElementById(InputId);
+                console.log("New Asked: ", Input.value);
+                FactoryItems[m][i][key]=Input.value;
+                BuildAllTables();
+            }, 300); // Adjust the delay as needed (300 milliseconds in this example)
 
         };
 
@@ -254,7 +264,6 @@
                 let CycleRecipeButton = document.createElement('button')
                 CycleRecipeButton.onclick = (function(m, i) {
                     return function() {
-                        console.log(FactoryItems[m][i]);
                         FactoryItems[m][i].RecipeNr = (FactoryItems[m][i].RecipeNr + 1) % FactoryItems[m][i].Recepice.length;
                         BuildAllTables() // THis loks recursve, but the function only gets called on cklick!
                     };
@@ -845,7 +854,6 @@
                 bar.className = 'bar';
                 bar.id = 'power-bar';
                 barContainer.appendChild(bar);
-
                 /*
                 var marker1 = document.createElement('div');
                 marker1.className = 'marker';
