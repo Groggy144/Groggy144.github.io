@@ -458,6 +458,23 @@
             return
         }
 
+        function AddAlternative(){
+            var NameField = document.getElementById("InputAddingName")
+            var index = getIndex( NameField.value)
+            console.log("Copying Item", NameField.value, " from", index)
+            if (index === -1) return;
+            var ItemCopy = structuredClone(FactoryItems[index[0]][index[1]])
+            var RecepiceLength = ItemCopy.Recepice.length
+            for(var i = 0; i< RecepiceLength; i++)
+            {
+                ItemCopy.Recepice[i].Req.push({id: ItemCopy.Id, Nr: -1})
+            }
+            ItemCopy.id = "Alternative" + ItemCopy.id
+            ItemCopy.Name = "Alternative" + ItemCopy.Name
+            AddToFactory(ItemCopy, index[0])
+            BuildAllTables();
+        }
+
         function AddNewItem(){
             NewItemAddRecipe()
             NameField = document.getElementById("InputAddingName")
@@ -957,6 +974,7 @@
         </div>
         <button id= "AddToFactoryButton" onclick=handleAddButton()>Add</button>
         <button id= "ResetNEwItem" onclick=resetNewItem()>Reset Requirements</button>
+        <button id= "AddAlternative" onclick=AddAlternative()>Copy Item</button>
 
 
         <h2> Power </h2>
