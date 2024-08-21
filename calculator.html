@@ -104,7 +104,7 @@
             console.log(TierIndex)
             var existingItem = FactoryItems[TierIndex].find(item => item.id === NewItem.id);
             if (existingItem) {
-                console.log('Item '+NewItem.id +' already exists in newest Tier.');
+                console.log('Item '+NewItem.id +' already exists in Tier', TierIndex);
                 return; // Exit the function to avoid adding the item again
             }
 
