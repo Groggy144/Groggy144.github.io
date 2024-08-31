@@ -212,13 +212,14 @@
 <!-- BUild the Main table-->
 <script>
 
-        function debouncedHandleAskedInput(m, InputId, i, key) {
-            clearTimeout(debounceTimeouts[InputId]);
-            debounceTimeouts[InputId] = setTimeout(() => {
-                handleAskedInput(m, InputId, i, key);
-            }, 300); // Adjust the delay as needed (300 milliseconds in this example)
-        }
+
         let debounceTimeouts = {};
+        var ShowRecipesExplitily = false;
+        function togglerecipe(){
+            ShowRecipesExplitily = !ShowRecipesExplitily
+            console.log("Show REcipe: ", ShowRecipesExplitily)
+            BuildAllTables()
+        }
 
         function handleAskedInput(m, InputId,i,key){
 
@@ -394,18 +395,60 @@
                     }
                 }
                 Cell.appendChild(NeededTable)
-                Row.appendChild(Cell);
+                PerItemRow.appendChild(Cell);
             }
-            tbody.appendChild(Row);
+            tbody.appendChild(PerItemRow);
 
+            // Explicit recipe
+            var RecipeExplRow = document.createElement('tr');
+            var TitleCell = document.createElement('td');
+            TitleCell.style.width = "200px"
+            TitleCell.textContent = "Recipe used";
+            RecipeExplRow.appendChild(TitleCell);
+            for (var i = 0; i < FactoryItems[m].length; i++) {
+                var Cell = document.createElement('td');
+                var Recepie = FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr];
+                var RecipeExplTable = document.createElement('table');
+                for (var j = 0; j < Recepie.Req.length; j++) {
+                    var RecipeRow =  document.createElement('tr')
+                    var Cell1 = document.createElement('td')
+                    Cell1.textContent = Recepie.Req[j].id
+                    var Cell2 = document.createElement('td')
+                    Cell2.textContent = Math.ceil(Recepie.Req[j].Nr*Recepie.PerBuilding)
+                    RecipeRow.appendChild(Cell1)
+                    RecipeRow.appendChild(Cell2)
+                    RecipeExplTable.appendChild(RecipeRow)
+                }
+                Cell.appendChild(RecipeExplTable)
+                RecipeExplRow.appendChild(Cell);
+            }
+            if(ShowRecipesExplitily){
+                tbody.appendChild(RecipeExplRow);
+            }
 
             var Row = document.createElement('tr');
             var TitleCell = document.createElement('td');
-            TitleCell.textContent = "Overhead";
+            TitleCell.textContent = "Overhead / Underclock to";
             Row.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
                 var Cell = document.createElement('td');
-                Cell.textContent = FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr].Buildings*FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr].PerBuilding - FactoryItems[m][i].Needed;
+                var recipe = FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr]
+                var Overhead = recipe.Buildings*recipe.PerBuilding - FactoryItems[m][i].Needed;
+                var Underclock = 1-(Overhead/recipe.PerBuilding);
+                if(Underclock === 1) Underclock = 0
+                if(FactoryItems[m][i].Needed < 0)
+                {
+                        console.log(FactoryItems[m][i].id, recipe)
+
+                        Cell.style.background = "red";
+                }
+                Cell.textContent = (String(Overhead)
+                    + " / " + String(Math.ceil(100*Underclock) ) + "%" 
+                );
+                if(recipe.PerBuilding == 0)
+                {
+                    Cell.textContent = (String(Overhead))
+                }
                 Row.appendChild(Cell);
             }
             tbody.appendChild(Row);
@@ -531,13 +574,14 @@
             tbody.appendChild(Row)
         }
 
+
+
         function BuildAddTable() {
-            CalcAllBuildings()
-                var tableBody = document.getElementById('add-Factory');
-                var tbody = document.createElement('tbody'); // Create a new tbody element
-                tbody.id = "tbodyAdd"
-                tableBody.innerHTML = ''; // Clear the table body
-                var keys = Object.keys(FactoryItems[0][0]);
+            var tableBody = document.getElementById('add-Factory');
+            var tbody = document.createElement('tbody'); // Create a new tbody element
+            tbody.id = "tbodyAdd"
+            tableBody.innerHTML = ''; // Clear the table body
+            var keys = Object.keys(FactoryItems[0][0]);
 
 
             var TierRow = document.createElement('tr');
@@ -652,6 +696,8 @@
 
             tableBody.appendChild(tbody)
         }
+
+
 
     </script>
 
@@ -939,6 +985,7 @@
         <button onclick=BuildAllTables()>Recalulate</button>
         <button onclick=saveState()>Saving</button>
         <button onclick=loadFactory()>Reload</button>
+        <button onclick=togglerecipe()>Toggle Recipe</button>
 
         <h2> Add New Recipe:</h2>
         If the name is already taken, the recipe gets added as an alternate
