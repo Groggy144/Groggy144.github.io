@@ -312,67 +312,47 @@
             tbody.appendChild(Row);
 
 
-            // The Recipies
+            // The Builings
             var Row = document.createElement('tr');
             var TitleCell = document.createElement('td');
             {
-            var TitleTable = document.createElement('table');
+                var TitleTable = document.createElement('table');
 
-            var Row1 = document.createElement('tr');
-            var TitleElem = document.createElement('td');
-            TitleElem.textContent = "per Building";
-            Row1.appendChild(TitleElem);
-            TitleTable.append(Row1);
-            var Row2 = document.createElement('tr');
-            var TitleElem = document.createElement('td');
-            TitleElem.textContent = "Buildings";
-            Row2.appendChild(TitleElem);
-            TitleTable.append(Row2);
-            var Row3 = document.createElement('tr');
-            var TitleElem = document.createElement('td');
-            TitleElem.textContent = "Produced:";
-            Row3.appendChild(TitleElem);
-            TitleTable.append(Row3);
-            
-            TitleCell.append(TitleTable);
+                var Row1 = document.createElement('tr');
+                var TitleElem = document.createElement('td');
+                TitleElem.textContent = "per Building";
+                Row1.appendChild(TitleElem);
+                TitleTable.append(Row1);
+                var Row2 = document.createElement('tr');
+                var TitleElem = document.createElement('td');
+                TitleElem.textContent = "Buildings";
+                Row2.appendChild(TitleElem);
+                TitleTable.append(Row2);
+                var Row3 = document.createElement('tr');
+                Row3.appendChild(TitleElem);
+                TitleTable.append(Row3);
+                
+                TitleCell.append(TitleTable);
             }
             Row.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
                 var TableCell = document.createElement('td');
 
-                // var RecepiceList = FactoryItems[m][i].Recepice;
+                var Recepie = FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr];
                 
-                var Recepicekeys = Object.keys(FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr]);
+                var Recepicekeys = Object.keys(Recepie);
                 var RecepiceTable = document.createElement('table');
-                for(var l= 0; l < 3; l++)
+                for(var l= 0; l < 2; l++)
                 {
                     var RecepiceRow =  document.createElement('tr')
                     var ValueCell = document.createElement('td');
 
-                    ValueCell.textContent = FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr][Recepicekeys[l]];
+                    ValueCell.textContent =Recepie[Recepicekeys[l]];
                     RecepiceRow.appendChild(ValueCell)
-                    //for (var j = 0; j < RecepiceList.length; j++) {
-                    //    var ValueCell = document.createElement('td');
-
-                    //    ValueCell.textContent = RecepiceList[j][Recepicekeys[l]];
-                    //     RecepiceRow.appendChild(ValueCell)
-                    // }
-
                     RecepiceTable.appendChild(RecepiceRow)
                 }
                 var RecepiceRow =  document.createElement('tr')
 
-                /*
-                for (var j = 0; j < RecepiceList.length; j++) {
-                    var ValueCell = document.createElement('td');
-                    RecepiceList[j].ByProducts.forEach(function(ByProductItem){
-                        var ByProductCell = document.createElement('td')
-                        ValueCell.textContent = "Item: " + ByProductItem.id *" at " + ByProductItem.Nr 
-                    });
-                    RecepiceRow.appendChild(ValueCell)
-                    
-                }
-                    */
                 RecepiceTable.appendChild(RecepiceRow)
                 
                 TableCell.appendChild(RecepiceTable);
