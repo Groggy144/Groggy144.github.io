@@ -364,11 +364,11 @@
 
             // Needed List as Building Numbers
             var key = keys[3];
-            var Row = document.createElement('tr');
+            var PerItemRow = document.createElement('tr');
             var TitleCell = document.createElement('td');
             TitleCell.style.width = "200px"
             TitleCell.textContent = "Need per Item";
-            Row.appendChild(TitleCell);
+            PerItemRow.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
                 var Cell = document.createElement('td');
                 var NeededList = FactoryItems[m][i][key];
@@ -379,6 +379,11 @@
                     Cell1.textContent = NeededList[j].id
                     var Cell2 = document.createElement('td')
                     Cell2.textContent = Math.ceil(NeededList[j].Nr/FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr].PerBuilding)
+                    
+                    if(FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr].PerBuilding == 0)
+                    {
+                        Cell2.textContent = "";
+                    }
                     var Cell3 = document.createElement('td')
                     Cell3.textContent = Math.ceil(NeededList[j].Nr)
                     NeededRow.appendChild(Cell1)
