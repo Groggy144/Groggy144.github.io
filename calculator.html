@@ -135,18 +135,25 @@
             var TierIndex = indexFactor[0]
             var ItemIndex = indexFactor[1]
             var item = FactoryItems[TierIndex][ItemIndex];
-            item.Needed = Number(DepItem.Nr)+Number(item.Needed);
 
             var NeededListIndex = item.NeededList.findIndex(item => item.id === DepItem.id);
             if(NeededListIndex === -1)
             {
                 item.NeededList.push(DepItem)
+                item.Needed = Number(DepItem.Nr)+Number(item.Needed);
             }
             else
             {
-                item.NeededList[NeededListIndex].Nr = item.NeededList[NeededListIndex].Nr + Number(DepItem.Nr)
+                console.log("ALready have ", DepItem.id )
+                console.log(item.NeededList[NeededListIndex])
+                console.log(DepItem)
+                var previousNeed = item.NeededList[NeededListIndex].Nr
+                item.NeededList[NeededListIndex].Nr = Number(DepItem.Nr)
+                item.Needed = Number(DepItem.Nr)+Number(item.Needed) - previousNeed;
+                console.log(item.NeededList[NeededListIndex])
             }
-            FactoryItems[TierIndex][ItemIndex] = item;
+            FactoryItems[TierIndex][ItemIndex] = item; 
+            console.log(item)
             CalcOneBuilding(TierIndex, ItemIndex)
             return
         }
