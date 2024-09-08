@@ -641,13 +641,13 @@
     <script>
         var NewItem = {
                 id: "", Name: "",
-                Asked: 0, Needed:0,
+                Asked:0, Needed:0,
                 NeededList:[],
                 RecipeNr:0,
                 Recepice:[
                 ]
             };
-            var NewRecepice = {PerBuilding:0,Buildings:0, Product: 0, Req:[]}
+            var NewRecepice = {PerBuilding:0,Buildings:0,  Req:[]}
 
         function NewItemAddRecipe(){
             PerBuildingField = document.getElementById("InputAddingPerBuilding")
@@ -714,17 +714,17 @@
         function resetNewItem(){
             NewItem = {
                 id: "", Name: "",
-                Asked: 0, Needed:0,
+                Asked:0, Needed:0,
                 NeededList:[],
                 RecipeNr:0,
                 Recepice:[
                 ]
             };
-            NewRecepice = {PerBuilding:0,Buildings:0, Product: 0, Req:[]}
+            NewRecepice = {PerBuilding:0,Buildings:0,  Req:[]}
             BuildAddTable()
         }
         function resetNewRecepice(){
-            NewRecepice = {PerBuilding:0,Buildings:0, Product: 0, Req:[]}
+            NewRecepice = {PerBuilding:0,Buildings:0,  Req:[]}
         }
         
         function handleAddReqButton(){
@@ -964,7 +964,6 @@
         FactoryItems.forEach(Tier => {
             Tier.forEach(Item=>{
 
- 
                 Demand += (
                     Item.Recepice[Item.RecipeNr].Buildings
                     *BuildingsPower[ BuildingType(Item)]
