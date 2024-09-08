@@ -302,16 +302,15 @@
             }
             else
             {
-                console.log("ALready have ", DepItem.id )
-                console.log(item.NeededList[NeededListIndex])
-                console.log(DepItem)
+                // console.log("ALready have ", DepItem.id )
+                // console.log(item.NeededList[NeededListIndex])
+                // console.log(DepItem)
                 var previousNeed = item.NeededList[NeededListIndex].Nr
                 item.NeededList[NeededListIndex].Nr = Number(DepItem.Nr)
                 item.Needed = Number(DepItem.Nr)+Number(item.Needed) - previousNeed;
-                console.log(item.NeededList[NeededListIndex])
+                // console.log(item.NeededList[NeededListIndex])
             }
             FactoryItems[TierIndex][ItemIndex] = item; 
-            console.log(item)
             CalcOneBuilding(TierIndex, ItemIndex)
             return
         }
