@@ -915,7 +915,7 @@
      // var Buildings = [Constructor, Assembler, Manufactorer, Refinery, Blender, smelter, Foundary, Miner, Water, Oil, NOne ]
     function BuildingType(Item){
         var fluids = ["Water", "Oil", "Fuel", "HeavyOilResidue"];
-        var Ores = ["IronOre", "Iron Ore", "CopperOre", "CopperOre", "Caterium Ore", "Coal", "Quartz", "Limestone", "Bauxit"];
+        var Ores = ["IronOre", "Iron Ore", "CopperOre", "CopperOre", "Caterium Ore", "Coal", "Quartz", "Limestone", "Bauxit", "Sulfur", "UraniumOre"];
         if(Item.Recepice[Item.RecipeNr].Req.some(req => fluids.includes(req.id)))
         {
             if(Item.Recepice[Item.RecipeNr].Req.length <3){
@@ -946,6 +946,7 @@
         if(Item.id === "Water"){return 8;}
         if(Item.id === "Oil"){return 9;}
         if(Item.id === "HeavyOilResidue"){return 10;}
+        if(Item.id === "Nuclear Waste"){return 10;}
     }
     
 </script>
@@ -955,7 +956,10 @@
     var PowerSources = [
     {Name: "Biomass Burner", Buildings: 0, PerBuilding: 35, Req: []},
     {Name: "Coal Power Plant", Buildings: 0, PerBuilding: 75, Req: [{id: "Water", Nr: 45}, {id: "Coal", Nr: 15}]},
+    // {Name: "Compacted Coal Power Plant", Buildings: 0, PerBuilding: 75, Req: [{id: "Water", Nr: 45}, {id: "Coal", Nr: 15}]},
     {Name: "Fuel Power Plant", Buildings: 0, PerBuilding: 125, Req: [{id: "Fuel", Nr: 15}]},
+    // {Name: "Turbofuel Power Plant", Buildings: 0, PerBuilding: 125, Req: [{id: "Fuel", Nr: 15}]},
+    {Name: "Uranium Power Plant", Buildings: 0, PerBuilding: 2500, Req: [{id: "Uranium Fuel Rod", Nr: 0.2},{id: "Water", Nr: 240}, {id:"Nuclear Waste", Nr: 10}]},
     ]
     // var Buildings = [Constructor, Assembler, Manufactorer, Refinery, Blender, smelter, Foundary, Miner, Water, Oil ]
     var BuildingsPower = [4, 15, 55, 30,75, 4, 16, 12, 20, 40, 0]
