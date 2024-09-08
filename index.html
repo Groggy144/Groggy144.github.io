@@ -379,9 +379,15 @@
 
         let debounceTimeouts = {};
         var ShowRecipesExplitily = false;
+        var ShowOnlyNeeded = false;
         function togglerecipe(){
             ShowRecipesExplitily = !ShowRecipesExplitily
             console.log("Show REcipe: ", ShowRecipesExplitily)
+            BuildAllTables()
+        }
+        function toggleShowAll(){
+            ShowOnlyNeeded = !ShowOnlyNeeded
+            console.log("Show REcipe: ", ShowOnlyNeeded)
             BuildAllTables()
         }
 
@@ -390,7 +396,7 @@
             clearTimeout(debounceTimeouts[InputId]);
             debounceTimeouts[InputId] = setTimeout(() => {
                 var Input =document.getElementById(InputId);
-                console.log("New Asked: ", Input.value);
+                console.log("New Asked:", Input.value);
                 FactoryItems[m][i][key]=Input.value;
                 BuildAllTables();
             }, 400);
@@ -425,6 +431,8 @@
             TitleCell.textContent = key;
             Row.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
+                console.log(FactoryItems[m][i].id, FactoryItems[m][i].Needed)
+                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){console.log("skip"); continue}
                 let Cell = document.createElement('td');
                 Cell.textContent = FactoryItems[m][i][key];
                 let CycleRecipeButton = document.createElement('button')
@@ -449,6 +457,7 @@
             TitleCell.textContent = key;
             Row.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
+                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){console.log("skip"); continue}
                 var Item = FactoryItems[m][i];
                 var Cell = document.createElement('td');
                 var input = document.createElement('input');
@@ -465,15 +474,17 @@
             tbody.appendChild(Row);
 
             // Ceil for Number
-            var key = keys[2];
+            var key = "Needed";
             var Row = document.createElement('tr');
             var TitleCell = document.createElement('td');
             TitleCell.textContent = key;
             Row.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
+                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){console.log("skip"); continue}
                 var Cell = document.createElement('td');
                 Cell.textContent = Math.ceil(Number( FactoryItems[m][i][key]));
                 Row.appendChild(Cell);
+                console.log(FactoryItems[m][i].id, "here")
             }
             tbody.appendChild(Row);
 
@@ -502,6 +513,7 @@
             }
             Row.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
+                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){console.log("skip"); continue}
                 var TableCell = document.createElement('td');
 
                 var Recepie = FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr];
@@ -536,6 +548,7 @@
             TitleCell.textContent = "Need per Item";
             PerItemRow.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
+                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){console.log("skip"); continue}
                 var Cell = document.createElement('td');
                 var NeededList = FactoryItems[m][i][key];
                 var NeededTable = document.createElement('table');
@@ -571,6 +584,7 @@
             TitleCell.textContent = "Recipe used";
             RecipeExplRow.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
+                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){console.log("skip"); continue}
                 var Cell = document.createElement('td');
                 var Recepie = FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr];
                 var RecipeExplTable = document.createElement('table');
@@ -596,6 +610,7 @@
             TitleCell.textContent = "Overhead / Underclock to";
             Row.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
+                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){console.log("skip"); continue}
                 var Cell = document.createElement('td');
                 var recipe = FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr]
                 var Overhead = recipe.Buildings*recipe.PerBuilding - FactoryItems[m][i].Needed;
@@ -1156,6 +1171,7 @@
         <button onclick=saveState()>Saving</button>
         <button onclick=loadFactory()>Reload</button>
         <button onclick=togglerecipe()>Toggle Recipe</button>
+        <button onclick=toggleShowAll()>Toggle All Items</button>
 
         <h2> Add New Recipe:</h2>
         If the name is already taken, the recipe gets added as an alternate
