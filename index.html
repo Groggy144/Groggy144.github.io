@@ -26,82 +26,234 @@
         var FactoryItems = 
         [
             [
-                {id:"IronOre",Name:"Iron Ore",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:120,Buildings:0, Product: 0,Req:[]},{PerBuilding:60,Buildings:0, Product: 0,Req:[]}]},
-                {id:"IronBar",Name:"Iron Bar",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:30,Buildings:0, Product: 0, Req:[{id:"IronOre",Nr:1}]}]},
+                {id:"IronOre",Name:"Iron Ore",Asked:0,Needed:0,NeededList:[],RecipeNr: 1,Recepice:[
+                    {PerBuilding:60,Buildings:0, Req:[]},
+                    {PerBuilding:120,Buildings:0, Req:[]},
+                    {PerBuilding:240,Buildings:0, Req:[]}
+                   ]},
+                {id:"IronBar",Name:"Iron Bar",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:30,Buildings:0,  Req:[{id:"IronOre",Nr:1}]}
+                   ]},
                 {id:"IronRod",Name:"Iron Rod",Asked:0,Needed:0,NeededList:[], RecipeNr: 0,
-                    Recepice:[{PerBuilding:15,Buildings:0, Product: 0, Req:[{id:"IronBar",Nr:1}]}]},
-                {id:"IronScrew",Name:"Iron Screw",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:40,Buildings:0, Product: 0, Req:[{id:"IronRod",Nr:0.25}]}]},
-                {id:"Iron Plate",Name:"Iron Plate",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"20",Buildings:0, Product: 0, Req:[{id:"IronBar",Nr:1.5}]}]},
-                {id:"Limestone",Name:"Limestone",Asked:0,Needed:0,NeededList:[],RecipeNr: 0, Recepice:[{PerBuilding:120,Buildings:0, Product: 0, Req:[],Product: 0, ByProducts:[]}]},
-                {id:"Cement",Name:"Cement",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"15",Buildings:0, Product: 0, Req:[{id:"Limestone",Nr:3}]}]},
-                {id:"CopperOre",Name:"Copper Ore",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:120,Buildings:0, Product: 0, Req:[]}]},
-                {id:"CopperBar",Name:"Copper Bar",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:30,Buildings:0, Product: 0, Req:[{id:"CopperOre",Nr:1}]}]},
-                {id:"Copper Wire",Name:"Copper Wire",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"30",Buildings:0, Product: 0, Req:[{id:"CopperBar",Nr:0.5}]}]},
-                {id:"Cable",Name:"Cable",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"30",Buildings:0, Product: 0, Req:[{id:"Copper Wire",Nr:2}]}]}
+                    Recepice:[
+                    {PerBuilding:15,Buildings:0,  Req:[{id:"IronBar",Nr:1}]}
+                   ]},
+                {id:"IronScrew",Name:"Iron Screw",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:40,Buildings:0,  Req:[{id:"IronRod",Nr:0.25}]}
+                   ]},
+                {id:"Iron Plate",Name:"Iron Plate",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"20",Buildings:0,  Req:[{id:"IronBar",Nr:1.5}]}
+                   ]},
+                {id:"Limestone",Name:"Limestone",Asked:0,Needed:0,NeededList:[],RecipeNr: 1, Recepice:[
+                    {PerBuilding:60,Buildings:0, Req:[]},
+                    {PerBuilding:120,Buildings:0, Req:[]},
+                    {PerBuilding:240,Buildings:0, Req:[]}
+                   ]},
+                {id:"Concrete",Name:"Concrete",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"15",Buildings:0,  Req:[{id:"Limestone",Nr:3}]}
+                   ]},
+                {id:"CopperOre",Name:"Copper Ore",Asked:0,Needed:0,NeededList:[],RecipeNr: 1,Recepice:[
+                    {PerBuilding:60,Buildings:0, Req:[]},
+                    {PerBuilding:120,Buildings:0, Req:[]},
+                    {PerBuilding:240,Buildings:0, Req:[]}
+                   ]},
+                {id:"CopperBar",Name:"Copper Bar",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:30,Buildings:0,  Req:[{id:"CopperOre",Nr:1}]}
+                   ]},
+                {id:"Copper Wire",Name:"Copper Wire",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"30",Buildings:0,  Req:[{id:"CopperBar",Nr:0.5}]}
+                   ]},
+                {id:"Cable",Name:"Cable",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"30",Buildings:0,  Req:[{id:"Copper Wire",Nr:2}]}]}
             ],
             [
-                {id:"Reinforced Plate",Name:"Reinforced Plate",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Iron Plate",Nr:3},{id:"IronScrew",Nr:12}]}]},
-                {id:"Modular Frame",Name:"Modular Frame",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"2",Buildings:0, Product: 0, Req:[{id:"Reinforced Plate",Nr:1.5},{id:"IronRod",Nr:6}]}]},
-                {id:"Rotor",Name:"Rotor",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"4",Buildings:0, Product: 0, Req:[{id:"IronRod",Nr:5},{id:"IronScrew",Nr:25}]}]},
-                {id:"Smart Plating",Name:"Smart Plating",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"2",Buildings:0, Product: 0, Req:[{id:"Reinforced Plate",Nr:1},{id:"Rotor",Nr:1}]}]}
+                {id:"Reinforced Plate",Name:"Reinforced Plate",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"5",Buildings:0,  Req:[{id:"Iron Plate",Nr:3},{id:"IronScrew",Nr:12}]}
+                   ]},
+                {id:"Modular Frame",Name:"Modular Frame",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"2",Buildings:0,  Req:[{id:"Reinforced Plate",Nr:1.5},{id:"IronRod",Nr:6}]}
+                   ]},
+                {id:"Rotor",Name:"Rotor",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"4",Buildings:0,  Req:[{id:"IronRod",Nr:5},{id:"IronScrew",Nr:25}]}
+                   ]},
+                {id:"Smart Plating",Name:"Smart Plating",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"2",Buildings:0,  Req:[{id:"Reinforced Plate",Nr:1},{id:"Rotor",Nr:1}]}]}
             ],
             [
-                {id:"Caterium Ore",Name:"Caterium Ore",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:60,Buildings:0,Product:0,Req:[]},{PerBuilding:120,Buildings:0,Product:0,Req:[]}]},
-                {id:"Caterium Bar",Name:"Caterium Bar",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:15,Buildings:0,Product:0,Req:[{id:"Caterium Ore",Nr:3}]}]},
-                {id:"Quickwire",Name:"Quickwire",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"60",Buildings:0,Product:0,Req:[{id:"Caterium Bar",Nr:0.2}]}]},
-                {id:"AI Limiter",Name:"AI Limiter",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"5",Buildings:0,Product:0,Req:[{id:"Copper SHeet",Nr:5},{id:"Quickwire",Nr:20}]}]},
-                {id:"High-Speed Connector",Name:"High-Speed Connector",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"3.75",Buildings:0,Product:0,Req:[{id:"Quickwire",Nr:56},{id:"Cable",Nr:10},{id:"Circuit Board",Nr:1}]}]},
-                {id:"Quartz",Name:"Quartz",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"60",Buildings:0,Product:0,Req:[]}]},
-                {id:"Quartz Crystal",Name:"Quartz Crystal",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"22.5",Buildings:0,Product:0,Req:[{id:"Quartz",Nr:1.6666666666666667}]}]},
-                {id:"Crystal Oscillator",Name:"Crystal Oscillator",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Quartz Crystal",Nr:18},{id:"Cable",Nr:14},{id:"Reinforced Plate",Nr:2.5}]}]},
-                {id:"Silica",Name:"Silica",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"37.5",Buildings:0,Product:0,Req:[{id:"Quartz",Nr:0.6}]}]},
-                {id:"Sulfur",Name:"Sulfur",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"120",Buildings:0,Product:0,Req:[]}]}
+                {id:"Caterium Ore",Name:"Caterium Ore",Asked:0,Needed:0,NeededList:[],RecipeNr:1,Recepice:[
+                    {PerBuilding:60,Buildings:0, Req:[]},
+                    {PerBuilding:120,Buildings:0, Req:[]},
+                    {PerBuilding:240,Buildings:0, Req:[]}
+                   ]},
+                {id:"Caterium Bar",Name:"Caterium Bar",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:15,Buildings:0,Req:[{id:"Caterium Ore",Nr:3}]}
+                   ]},
+                {id:"Quickwire",Name:"Quickwire",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"60",Buildings:0,Req:[{id:"Caterium Bar",Nr:0.2}]}
+                   ]},
+                {id:"AI Limiter",Name:"AI Limiter",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"5",Buildings:0,Req:[{id:"Copper Sheet",Nr:5},{id:"Quickwire",Nr:20}]}
+                   ]},
+                {id:"High-Speed Connector",Name:"High-Speed Connector",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"3.75",Buildings:0,Req:[{id:"Quickwire",Nr:56},{id:"Cable",Nr:10},{id:"Circuit Board",Nr:1}]}
+                   ]},
+                {id:"Quartz",Name:"Quartz",Asked:0,Needed:0,NeededList:[],RecipeNr:1,Recepice:[
+                    {PerBuilding:60,Buildings:0, Req:[]},
+                    {PerBuilding:120,Buildings:0, Req:[]},
+                    {PerBuilding:240,Buildings:0, Req:[]}
+                   ]},
+                {id:"Quartz Crystal",Name:"Quartz Crystal",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"22.5",Buildings:0,Req:[{id:"Quartz",Nr:1.6666666666666667}]}
+                   ]},
+                {id:"Crystal Oscillator",Name:"Crystal Oscillator",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"1",Buildings:0,Req:[{id:"Quartz Crystal",Nr:18},{id:"Cable",Nr:14},{id:"Reinforced Plate",Nr:2.5}]}
+                   ]},
+                {id:"Silica",Name:"Silica",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"37.5",Buildings:0,Req:[{id:"Quartz",Nr:0.6}]}
+                   ]},
+                {id:"Sulfur",Name:"Sulfur",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"120",Buildings:0,Req:[]}]}
             ],
             [
-                {id:"Coal",Name:"Coal",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:60,Buildings:0, Product: 0, Req:[]}]},
-                {id:"Water", Name: "Water", Asked:0, Needed:0, NeededList:[], RecipeNr:0, Recepice:[{PerBuilding:120,Buildings:0, Product: 0,Req:[]}]},
-                {id:"Steel Bar",Name:"Steel Bar",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"45",Buildings:0, Product: 0, Req:[{id:"Coal",Nr:1},{id:"IronOre",Nr:1}]}]},
-                {id:"Steel Beam",Name:"Steel Beam",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"15",Buildings:0, Product: 0, Req:[{id:"Steel Bar",Nr:4}]}]},
-                {id:"Steel Tube",Name:"Steel Tube",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"20",Buildings:0, Product: 0, Req:[{id:"Steel Bar",Nr:1.5}]}]},
-                {id:"Copper SHeet", Name:"Copper SHeet", Asked:0, Needed:0, NeededList:[],RecipeNr: 0, Recepice:[{PerBuilding:10, Buildings:0, Product:0, Req:[{id:"CopperBar", Nr:2}]}]},
-                {id:"Versatile Framework",Name:"Versatile Framework",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Modular Frame",Nr:0.5},{id:"Steel Beam",Nr:6}]}]},
-                {id:"Encased Industrial Beam",Name:"Encased Industrial Beam",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"6",Buildings:0, Product: 0, Req:[{id:"Steel Beam",Nr:4},{id:"Cement",Nr:5}]}]},
-                {id:"Stator",Name:"Stator",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Copper Wire",Nr:8},{id:"Steel Tube",Nr:3}]}]},
-                {id:"Motor",Name:"Motor",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"5",Buildings:0, Product: 0, Req:[{id:"Rotor",Nr:2},{id:"Stator",Nr:2}]}]},
-                {id:"Automated Wiring",Name:"Automated Wireng",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"2.5",Buildings:0, Product: 0, Req:[{id:"Cable",Nr:20},{id:"Stator",Nr:1}]}]}
+                {id:"Coal",Name:"Coal",Asked:0,Needed:0,NeededList:[],RecipeNr: 1,Recepice:[
+                    {PerBuilding:60,Buildings:0, Req:[]},
+                    {PerBuilding:120,Buildings:0, Req:[]},
+                    {PerBuilding:240,Buildings:0, Req:[]}
+                   ]},
+                {id:"Water", Name: "Water", Asked:0, Needed:0, NeededList:[], RecipeNr:0, Recepice:[
+                    {PerBuilding:120,Buildings:0, Req:[]}
+                   ]},
+                {id:"Steel Bar",Name:"Steel Bar",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"45",Buildings:0,  Req:[{id:"Coal",Nr:1},{id:"IronOre",Nr:1}]}
+                   ]},
+                {id:"Steel Beam",Name:"Steel Beam",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"15",Buildings:0,  Req:[{id:"Steel Bar",Nr:4}]}
+                   ]},
+                {id:"Steel Tube",Name:"Steel Tube",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"20",Buildings:0,  Req:[{id:"Steel Bar",Nr:1.5}]}
+                   ]},
+                {id:"Copper Sheet", Name:"Copper Sheet", Asked:0, Needed:0, NeededList:[],RecipeNr: 0, Recepice:[
+                    {PerBuilding:10, Buildings:0,  Req:[{id:"CopperBar", Nr:2}]}
+                   ]},
+                {id:"Versatile Framework",Name:"Versatile Framework",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"5",Buildings:0,  Req:[{id:"Modular Frame",Nr:0.5},{id:"Steel Beam",Nr:6}]}
+                   ]},
+                {id:"Encased Industrial Beam",Name:"Encased Industrial Beam",Asked:0,Needed:0,NeededList:[],RecipeNr: 0, Recepice:[
+                    {PerBuilding:"6",Buildings:0,  Req:[{id:"Steel Beam",Nr:4},{id:"Concrete",Nr:5}]},
+                    {PerBuilding:"4",Buildings:0,  Req:[{id:"Steel Tube",Nr:7},{id:"Concrete",Nr:5}]}
+                   ]},
+                {id:"Stator",Name:"Stator",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"5",Buildings:0,  Req:[{id:"Copper Wire",Nr:8},{id:"Steel Tube",Nr:3}]}
+                   ]},
+                {id:"Motor",Name:"Motor",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"5",Buildings:0,  Req:[{id:"Rotor",Nr:2},{id:"Stator",Nr:2}]}
+                   ]},
+                {id:"Automated Wiring",Name:"Automated Wireng",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"2.5",Buildings:0,  Req:[{id:"Cable",Nr:20},{id:"Stator",Nr:1}]}]}
             ],
             [
-                {id:"Oil",Name:"Oil",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:120,Buildings:0,Product:0,Req:[]}]},
-                {id:"Plastic",Name:"Plastic",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"20",Buildings:0,Product:0,Req:[{id:"Oil","Nr":1.5},{id:"HeavyOilResidue","Nr":-0.5}]}]},
-                {id:"Rubber",Name:"Rubber",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"20",Buildings:0,Product:0,Req:[{id:"Oil","Nr":1.5},{id:"HeavyOilResidue","Nr":-1}]}]},
-                {id:"HeavyOilResidue",Name:"Heavy Oil-Residue",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"0",Buildings:null,Product:0,Req:[]}]},
-                {id:"Polymer Resin",Name:"Polymer Resin",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"130",Buildings:0,Product:0,Req:[{id:"Oil","Nr":6/13},{id:"HeavyOilResidue","Nr":-2/13}]}]},
-                {id:"Petroleum Coke",Name:"Petroleum Coke",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"120",Buildings:0,Product:0,Req:[{id:"HeavyOilResidue","Nr":1/3}]}]},
-                {id:"Fuel",Name:"Fuel",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"40",Buildings:0,Product:0,Req:[{id:"Oil","Nr":1.5},{id:"Polymer Resin","Nr":0.75}]}]},
+                {id:"Oil",Name:"Oil",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:120,Buildings:0,Req:[]}
+                   ]},
+                {id:"Plastic",Name:"Plastic",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"20",Buildings:0,Req:[{id:"Oil",Nr:1.5},{id:"HeavyOilResidue",Nr:-0.5}]}
+                   ]},
+                {id:"Rubber",Name:"Rubber",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"20",Buildings:0,Req:[{id:"Oil",Nr:1.5},{id:"HeavyOilResidue",Nr:-1}]}
+                   ]},
+                {id:"HeavyOilResidue",Name:"Heavy Oil-Residue",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"0",Buildings:null,Req:[]}
+                   ]},
+                {id:"Polymer Resin",Name:"Polymer Resin",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"130",Buildings:0,Req:[{id:"Oil",Nr:6/13},{id:"HeavyOilResidue",Nr:-2/13}]}
+                   ]},
+                {id:"Petroleum Coke",Name:"Petroleum Coke",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"120",Buildings:0,Req:[{id:"HeavyOilResidue",Nr:1/3}]}
+                   ]},
+                {id:"Fuel",Name:"Fuel",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"40",Buildings:0,Req:[{id:"Oil",Nr:1.5},{id:"Polymer Resin",Nr:0.75}]}
+                   ]},
             ],
             [
-                {id:"Canister",Name:"Canister",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"60",Buildings:0,Product:0,Req:[{id:"Plastic","Nr":0.5}]}]},
-                {id:"Circuit Board",Name:"Circuit Board",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"7.5",Buildings:0,Product:0,Req:[{id:"Copper SHeet","Nr":2},{id:"Plastic","Nr":4}]}]},
-                {id:"Heavy Modular Frame",Name:"Heavy Modular Frame",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"2",Buildings:0,Product:0,Req:[{id:"Modular Frame","Nr":5},{id:"Steel Tube","Nr":15},{id:"Encased Industrial Beam","Nr":5},{id:"IronScrew","Nr":100}]}]},
-                {id:"Computer",Name:"Computer",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"2.5",Buildings:0,Product:0,Req:[{id:"Circuit Board","Nr":10},{id:"Cable","Nr":9},{id:"Plastic","Nr":18},{id:"IronScrew","Nr":52}]}]},
-                {id:"Modular Engine",Name:"Modular Engine",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Motor","Nr":2},{id:"Rubber","Nr":15},{id:"Smart Plating","Nr":2}]}]},
-                {id:"Adaptive Control Unit",Name:"Adaptive Control Unit",Asked:"0",Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:"1",Buildings:0,Product:0,Req:[{id:"Automated Wiring","Nr":15},{id:"Circuit Board","Nr":10},{id:"Heavy Modular Frame","Nr":2},{id:"Computer","Nr":2}]}]}
+                {id:"Canister",Name:"Canister",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"60",Buildings:0,Req:[{id:"Plastic",Nr:0.5}]}
+                   ]},
+                {id:"Circuit Board",Name:"Circuit Board",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"7.5",Buildings:0,Req:[{id:"Copper Sheet",Nr:2},{id:"Plastic",Nr:4}]}
+                   ]},
+                {id:"Heavy Modular Frame",Name:"Heavy Modular Frame",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"2",Buildings:0,Req:[{id:"Modular Frame",Nr:5},{id:"Steel Tube",Nr:15},{id:"Encased Industrial Beam",Nr:5},{id:"IronScrew",Nr:100}]},
+                    {PerBuilding: 45/16,Buildings:0,Req:[{id:"Modular Frame",Nr:8/3},{id:"Steel Tube",Nr:12},{id:"Encased Industrial Beam",Nr:10/3},{id:"Concrete",Nr:22/3}]}
+                   ]},
+                {id:"Computer",Name:"Computer",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"2.5",Buildings:0,Req:[{id:"Circuit Board",Nr:10},{id:"Cable",Nr:9},{id:"Plastic",Nr:18},{id:"IronScrew",Nr:52}]}
+                   ]},
+                {id:"Modular Engine",Name:"Modular Engine",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"1",Buildings:0,Req:[{id:"Motor",Nr:2},{id:"Rubber",Nr:15},{id:"Smart Plating",Nr:2}]}
+                   ]},
+                {id:"Adaptive Control Unit",Name:"Adaptive Control Unit",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
+                    {PerBuilding:"1",Buildings:0,Req:[{id:"Automated Wiring",Nr:15},{id:"Circuit Board",Nr:10},{id:"Heavy Modular Frame",Nr:2},{id:"Computer",Nr:2}]}]}
             ],
             [
-                {id:"Bauxit",Name:"Bauxit",Asked:0,Needed:0,NeededList:[],RecipeNr:1,Recepice:[{PerBuilding:60,Buildings:0,Product:0,Req:[]},{PerBuilding:120,Buildings:0,Product:0,Req:[]}]},
-                {id:"Alumina Solution",Name:"Alumina Solution",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"120",Buildings:0,Product:0,Req:[{id:"Silica",Nr:-0.4166666666666667},{id:"Water",Nr:1.5},{id:"Bauxit",Nr:1}]}]},
-                {id:"Aluminum Scrap",Name:"Aluminum Scrap",Asked:"0",Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"360",Buildings:0,Product:0,Req:[{id:"Alumina Solution",Nr:0.6666666666666666},{id:"Coal",Nr:0.3333333333333333},{id:"Water",Nr:-0.3333333333333333}]}]},
-                {id:"Aluminium Ingot",Name:"Aluminium Ingot",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"60",Buildings:0,Product:0,Req:[{id:"Silica",Nr:1.25},{id:"Aluminum Scrap",Nr:1.5}]}]},
-                {id:"Aluminum Casing",Name:"Aluminum Casing",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"60",Buildings:0,Product:0,Req:[{id:"Aluminium Ingot",Nr:1.5}]}]},
-                {id:"Radio Control Unit",Name:"Radio Control Unit",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"2.5",Buildings:0,Product:0,Req:[{id:"Aluminum Casing",Nr:16},{id:"Crystal Oscillator",Nr:0.5},{id:"Computer",Nr:0.5}]}]},
-                {id:"Supercomputer",Name:"Supercomputer",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"1.875",Buildings:0,Product:0,Req:[{id:"Computer",Nr:2},{id:"AI Limiter",Nr:2},{id:"High-Speed Connector",Nr:3},{id:"Plastic",Nr:28}]}]},
-                {id:"Alclad Aluminum Sheet",Name:"Alclad Aluminum Sheet",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"30",Buildings:0,Product:0,Req:[{id:"Aluminium Ingot",Nr:1},{id:"CopperBar",Nr:0.3333333333333333}]}]},
-                {id:"Sulfuric Acid",Name:"Sulfuric Acid",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"50",Buildings:0,Product:0,Req:[{id:"Water",Nr:1},{id:"Sulfur",Nr:1}]}]},
-                {id:"Battery",Name:"Battery",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"20",Buildings:0,Product:0,Req:[{id:"Sulfuric Acid",Nr:2.5},{id:"Alumina Solution",Nr:2},{id:"Aluminum Casing",Nr:1},{id:"Water",Nr:-1.5}]}]}
+                {id:"Bauxit",Name:"Bauxit",Asked:0,Needed:0,NeededList:[],RecipeNr:1,Recepice:[
+                    {PerBuilding:60,Buildings:0,Req:[]},
+                    {PerBuilding:120,Buildings:0,Req:[]},
+                    {PerBuilding:240,Buildings:0,Req:[]}
+                   ]},
+                {id:"Alumina Solution",Name:"Alumina Solution",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"120",Buildings:0,Req:[{id:"Silica",Nr:-0.4166666666666667},{id:"Water",Nr:1.5},{id:"Bauxit",Nr:1}]}
+                   ]},
+                {id:"Aluminum Scrap",Name:"Aluminum Scrap",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"360",Buildings:0,Req:[{id:"Alumina Solution",Nr:0.6666666666666666},{id:"Coal",Nr:0.3333333333333333},{id:"Water",Nr:-0.3333333333333333}]}
+                   ]},
+                {id:"Aluminium Ingot",Name:"Aluminium Ingot",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"60",Buildings:0,Req:[{id:"Silica",Nr:1.25},{id:"Aluminum Scrap",Nr:1.5}]}
+                   ]},
+                {id:"Aluminum Casing",Name:"Aluminum Casing",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"60",Buildings:0,Req:[{id:"Aluminium Ingot",Nr:1.5}]}
+                   ]},
+                {id:"Radio Control Unit",Name:"Radio Control Unit",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"2.5",Buildings:0,Req:[{id:"Aluminum Casing",Nr:16},{id:"Crystal Oscillator",Nr:0.5},{id:"Computer",Nr:0.5}]}
+                   ]},
+                {id:"Supercomputer",Name:"Supercomputer",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"1.875",Buildings:0,Req:[{id:"Computer",Nr:2},{id:"AI Limiter",Nr:2},{id:"High-Speed Connector",Nr:3},{id:"Plastic",Nr:28}]}
+                   ]},
+                {id:"Alclad Aluminum Sheet",Name:"Alclad Aluminum Sheet",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"30",Buildings:0,Req:[{id:"Aluminium Ingot",Nr:1},{id:"CopperBar",Nr:0.3333333333333333}]}
+                   ]},
+                {id:"Sulfuric Acid",Name:"Sulfuric Acid",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"50",Buildings:0,Req:[{id:"Water",Nr:1},{id:"Sulfur",Nr:1}]}
+                   ]},
+                {id:"Battery",Name:"Battery",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"20",Buildings:0,Req:[{id:"Sulfuric Acid",Nr:2.5},{id:"Alumina Solution",Nr:2},{id:"Aluminum Casing",Nr:1},{id:"Water",Nr:-1.5}]}]}
             ],
             [
-                {id:"UraniumOre",Name:"Uraniu Ore",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[{PerBuilding:120,Buildings:0, Product: 0,Req:[]},{PerBuilding:60,Buildings:0, Product: 0,Req:[]}]},
-
+                {id: "UraniumOre",Name: "Uranium Ore",Asked:0,Needed:200,NeededList: [{id: "Encased Uranium Cell",Nr: 200}],RecipeNr: 2,Recepice: [
+                    {PerBuilding: 60,Buildings: 2,Req: []},{PerBuilding: 120,Buildings: 2,Req: []},{PerBuilding: 240,Buildings: 1,Req: []}]},
+                {id: "Encased Uranium Cell",Name: "Encased Uranium Cell",Asked:0,Needed:100,NeededList: [{id: "Uranium Fuel Rod",Nr: 100}],RecipeNr: 0,Recepice: [
+                    {PerBuilding: "25",Buildings: 4,Req: [{id: "UraniumOre",Nr: 2},{id: "Concrete",Nr: 0.6},{id: "Sulfuric Acid",Nr: 1.6},{id: "Encased Uranium Cell Return",Nr: -0.4}]}]},
+                {id: "Elektromagnetic Control Rod",Name: "Elektromagnetic Control Rod",Asked:0,Needed:10,NeededList: [{id: "Uranium Fuel Rod",Nr: 10}],RecipeNr: 0,Recepice: [
+                    {PerBuilding: "4",Buildings: 3,Req: [{id: "AI Limiter",Nr: 1},{id: "Stator",Nr: 1.5}]}]},
+                {id: "Uranium Fuel Rod",Name: "Uranium Fuel Rod",Asked:0,Needed:2,NeededList: [{id: "out",Nr: 2},{id: "Uranium Power Plant",Nr: 0}],RecipeNr: 0,Recepice: [
+                    {PerBuilding: "0.4",Buildings: 5,Req: [{id: "Encased Uranium Cell",Nr: 50},{id: "Encased Industrial Beam",Nr: 3},{id: "Elektromagnetic Control Rod",Nr: 5}]}]},
+                {id: "Nuclear Waste",Name: "Nuclear Waste",Asked:0,Needed:0,NeededList: [{id: "Uranium Power Plant",Nr: 0}],RecipeNr: 0,Recepice: [
+                    {PerBuilding: "0",Buildings: null,Req: []}]},
+                {id: "Nitrogen Gas",Name: "Nitrogen Gas",Asked:0,Needed:375,NeededList: [{id: "Cooling System",Nr: 375}],RecipeNr: 0,Recepice: [
+                    {PerBuilding: "120",Buildings: 4,Req: []}]},
+                {id: "Fused Modular Frame",Name: "Fused Modular Frame",Asked:0,Needed:0,NeededList: [], RecipeNr: 0,Recepice: [
+                    {PerBuilding: "1.5",Buildings: 0,Req: [{id: "Heavy Modular Frame",Nr: 1},{id: "Aluminum Casing",Nr: 50},{id: "Nitrogen Gas",Nr: 25}]}]},
+                {id: "Heat Sink",Name: "Heat Sink",Asked:0,Needed:30,NeededList: [{id: "Cooling System",Nr: 30}],RecipeNr: 0,Recepice: [
+                    {PerBuilding: "7.5",Buildings: 4,Req: [{id: "Alclad Aluminum Sheet",Nr: 5},{id: "Copper Sheet",Nr: 3}]}]},
+                {id: "Cooling System",Name: "Cooling System",Asked:0,Needed:15,NeededList: [],RecipeNr: 0,Recepice: [
+                    {PerBuilding: "6",Buildings: 3,Req: [{id: "Heat Sink",Nr: 2},{id: "Rubber",Nr: 2},{id: "Water",Nr: 5},{id: "Nitrogen Gas",Nr: 25}]}]},
+                {id: "Turbo Motor",  Name: "Turbo Motor",  Asked:0,  Needed:3.75,  NeededList: [ ],  RecipeNr: 0,  Recepice: [
+                    {PerBuilding: "1.875", Buildings: 2, Req: [{id: "Cooling System",Nr: 4},{id: "Radio Control Unit",Nr: 2},{id: "Motor",Nr: 4},{id: "Rubber",Nr: 24}]}]}
+            ],
+            // This is no seen by the user and just for internal tracking.
+            [
+            {id:"Encased Uranium Cell Return",Name:"Encased Uranium Cell Return",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"1",Buildings:0,Req:[{id:"Sulfuric Acid",Nr:1}]}
+                   ]},
             ]
         ]
 
