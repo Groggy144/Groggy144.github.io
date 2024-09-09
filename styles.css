@@ -174,3 +174,16 @@ table td:last-child {
     background-color: black;
     top: 0;
 }
+
+
+.node circle {
+    fill: steelblue;
+}
+.node text {
+    font-size: 12px;
+}
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 2px;
+}
