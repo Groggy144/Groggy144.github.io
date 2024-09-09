@@ -20,8 +20,8 @@
         }
         window.addEventListener('load', loadState);
     </script>
-    <!--Item Basics  -->
-    <script>
+ <!--Item Basics  -->
+<script>
         // Each Pair of tiers gets its own list-> mor emodular? Maybe?
         var FactoryItems = 
         [
@@ -372,7 +372,7 @@
                 }
             }
         }
-        </script>
+</script>
 <!-- BUild the Main table-->
 <script>
 
@@ -635,10 +635,10 @@
 
             tableBody.appendChild(tbody)
         }
-    </script>
+</script>
 
 <!-- Adding new Items/Recipies-->
-    <script>
+<script>
         var NewItem = {
                 id: "", Name: "",
                 Asked:0, Needed:0,
@@ -879,12 +879,10 @@
 
 
 
-    </script>
+</script>
 
-
-
-    <!--Saving -->
-    <script>
+<!--Saving -->
+<script>
 
         function saveState() {
             console.log("Saveing");
@@ -909,7 +907,8 @@
             }
             console.log("Loaded state from memory")
         }
-    </script>
+</script>
+
 <!-- Determin the building-->
 <script>
      // var Buildings = [Constructor, Assembler, Manufactorer, Refinery, Blender, smelter, Foundary, Miner, Water, Oil, NOne ]
@@ -1120,14 +1119,162 @@
 
     }
 
-    </script>
+</script>
 
+
+<!-- Flow Chart-->
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+    // Flatten the data into nodes and links
+    const flatendItems = FactoryItems.flat();
+    function CalcFlowChart(){
+        d3.select("#flowchart").select("svg").remove();
+        const nodes = flatendItems
+        .filter(item => item.Needed !== 0) 
+        .map(item => ({
+            id: item.id,
+            name: String(item.Recepice[item.RecipeNr].Buildings) + "x " + item.Name,
+            info: item
+        }));
+
+        PowerSources.forEach(Power => {
+            if(Power.Buildings != 0 ){
+                nodes.push({id: Power.Name, name: Power.Name, info: Power})
+            }
+        })
+
+        function RescaledWidth(amount){
+            return 3*(2-Math.exp(-Math.abs(amount)/50))
+        }
+
+        const links = [];
+        flatendItems.forEach(item => {
+            item.NeededList.forEach(Goal => {
+                    if(Goal.id ==="out"){
+                        return
+                    }
+                    if(Goal.Nr === 0){
+                        return
+                    }
+                    if(Goal.Nr > 0){
+                        links.push({ source: item.id, target: Goal.id, amount: (Goal.Nr)});
+                    }
+                    if(Goal.Nr < 0){
+                        links.push({ source: Goal.id, target: item.id, amount: -(Goal.Nr)});
+                    }
+            });
+        });
+
+        console.log({ nodes, links });
+        const width = window.innerWidth;
+        const height = 1500;
+
+        const svg = d3.select("#flowchart")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .style("border", "2px solid black");
+
+        // Define arrow marker for directed edges
+        svg.append("defs").append("marker")
+            .attr("id", "end-arrow")
+            .attr("viewBox", "0 -5 10 10")
+            .attr("refX", 10)
+            .attr("refY", 0)
+            .attr("markerWidth", 6)
+            .attr("markerHeight", 6)
+            .attr("orient", "auto")
+            .append("path")
+            .attr("d", "M0,-5L10,0L0,5")
+            .attr("stroke", "#999")
+            .attr("fill", "#999");
+
+        const simulation = d3.forceSimulation(nodes)
+            .force("link", d3.forceLink(links).id(d => d.id).distance(50))
+            .force("charge", d3.forceManyBody().strength(-500))
+            .force("center", d3.forceCenter(width / 2, height / 2));
+
+        const link = svg.append("g")
+            .attr("class", "links")
+            .selectAll("line")
+            .data(links)
+            .enter()
+            .append("line")
+            .attr("class", "link")
+            .attr("marker-end", "url(#end-arrow)")
+            .style("stroke-width", d => RescaledWidth(d.amount))
+            ;
+
+        const linkText = svg.append("g")
+            .attr("class", "link-labels")
+            .selectAll("text")
+            .data(links)
+            .enter()
+            .append("text")
+            .attr("class", "link-text")
+            .attr("dy", -3)  // Position above the line
+            .attr("text-anchor", "middle")
+            .style("font-size", "12px")
+            .style("fill", "#333")  // Text color
+            .text(d => Math.ceil(d.amount));  // Display the value
+
+        const node = svg.append("g")
+            .attr("class", "nodes")
+            .selectAll("g")
+            .data(nodes)
+            .enter().append("g");
+
+        node.append("circle")
+            .attr("r", 10)
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+        node.append("text")
+            .attr("x", 15)
+            .attr("dy", ".35em")
+            .text(d => d.name);
+
+        simulation.on("tick", () => {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            linkText
+                .attr("x", d => (d.source.x + d.target.x) / 2)
+                .attr("y", d => (d.source.y + d.target.y) / 2);
+
+            node
+                .attr("transform", d => `translate(${d.x},${d.y})`);
+        });
+
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+    }
+</script>
 
 </head>
 
 <body>
 
-<h1> Factory planer</h1>
+    <h1> Factory planer</h1>
         <h2> Items</h2>
         <h3> Tier 0</h3>
         <div id="table-container0">
@@ -1204,4 +1351,6 @@
             </table>
         </div>
 
-    </body>
+        <div id="flowchart"></div>
+
+</body>
