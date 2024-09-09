@@ -415,6 +415,7 @@
             RoadTable(5, "table-Factory6")
             RoadTable(6, "table-Factory7")
             RoadTable(7, "table-Factory8")
+            CalcFlowChart();
 
         }
 
@@ -962,9 +963,9 @@
     // {Name: "Compacted Coal Power Plant", Buildings: 0, PerBuilding: 75, Req: [{id: "Water", Nr: 45}, {id: "Coal", Nr: 15}]},
     {Name: "Fuel Power Plant", Buildings: 0, PerBuilding: 125, Req: [{id: "Fuel", Nr: 15}]},
     // {Name: "Turbofuel Power Plant", Buildings: 0, PerBuilding: 125, Req: [{id: "Fuel", Nr: 15}]},
-    {Name: "Uranium Power Plant", Buildings: 0, PerBuilding: 2500, Req: [{id: "Uranium Fuel Rod", Nr: 0.2},{id: "Water", Nr: 240}, {id:"Nuclear Waste", Nr: 10}]},
+    {Name: "Uranium Power Plant", Buildings: 10, PerBuilding: 2500, Req: [{id: "Uranium Fuel Rod", Nr: 0.2},{id: "Water", Nr: 240}, {id:"Nuclear Waste", Nr: -10}]},
     ]
-    // var Buildings = [Constructor, Assembler, Manufactorer, Refinery, Blender, smelter, Foundary, Miner, Water, Oil ]
+    // var Buildings = [Constructor, Assembler, Manufactorer, Refinery, Blender, smelter, Foundary, Miner, Water, Oil, None ]
     var BuildingsPower = [4, 15, 55, 30,75, 4, 16, 12, 20, 40, 0]
     function PowerConsumption(){
         var Demand = 0;
