@@ -228,26 +228,36 @@
                     {PerBuilding:"20",Buildings:0,Req:[{id:"Sulfuric Acid",Nr:2.5},{id:"Alumina Solution",Nr:2},{id:"Aluminum Casing",Nr:1},{id:"Water",Nr:-1.5}]}]}
             ],
             [
-                {id: "UraniumOre",Name: "Uranium Ore",Asked:0,Needed:200,NeededList: [{id: "Encased Uranium Cell",Nr: 200}],RecipeNr: 2,Recepice: [
-                    {PerBuilding: 60,Buildings: 2,Req: []},{PerBuilding: 120,Buildings: 2,Req: []},{PerBuilding: 240,Buildings: 1,Req: []}]},
-                {id: "Encased Uranium Cell",Name: "Encased Uranium Cell",Asked:0,Needed:100,NeededList: [{id: "Uranium Fuel Rod",Nr: 100}],RecipeNr: 0,Recepice: [
-                    {PerBuilding: "25",Buildings: 4,Req: [{id: "UraniumOre",Nr: 2},{id: "Concrete",Nr: 0.6},{id: "Sulfuric Acid",Nr: 1.6},{id: "Encased Uranium Cell Return",Nr: -0.4}]}]},
-                {id: "Elektromagnetic Control Rod",Name: "Elektromagnetic Control Rod",Asked:0,Needed:10,NeededList: [{id: "Uranium Fuel Rod",Nr: 10}],RecipeNr: 0,Recepice: [
-                    {PerBuilding: "4",Buildings: 3,Req: [{id: "AI Limiter",Nr: 1},{id: "Stator",Nr: 1.5}]}]},
-                {id: "Uranium Fuel Rod",Name: "Uranium Fuel Rod",Asked:0,Needed:2,NeededList: [{id: "out",Nr: 2},{id: "Uranium Power Plant",Nr: 0}],RecipeNr: 0,Recepice: [
-                    {PerBuilding: "0.4",Buildings: 5,Req: [{id: "Encased Uranium Cell",Nr: 50},{id: "Encased Industrial Beam",Nr: 3},{id: "Elektromagnetic Control Rod",Nr: 5}]}]},
-                {id: "Nuclear Waste",Name: "Nuclear Waste",Asked:0,Needed:0,NeededList: [{id: "Uranium Power Plant",Nr: 0}],RecipeNr: 0,Recepice: [
-                    {PerBuilding: "0",Buildings: null,Req: []}]},
-                {id: "Nitrogen Gas",Name: "Nitrogen Gas",Asked:0,Needed:375,NeededList: [{id: "Cooling System",Nr: 375}],RecipeNr: 0,Recepice: [
-                    {PerBuilding: "120",Buildings: 4,Req: []}]},
-                {id: "Fused Modular Frame",Name: "Fused Modular Frame",Asked:0,Needed:0,NeededList: [], RecipeNr: 0,Recepice: [
-                    {PerBuilding: "1.5",Buildings: 0,Req: [{id: "Heavy Modular Frame",Nr: 1},{id: "Aluminum Casing",Nr: 50},{id: "Nitrogen Gas",Nr: 25}]}]},
-                {id: "Heat Sink",Name: "Heat Sink",Asked:0,Needed:30,NeededList: [{id: "Cooling System",Nr: 30}],RecipeNr: 0,Recepice: [
-                    {PerBuilding: "7.5",Buildings: 4,Req: [{id: "Alclad Aluminum Sheet",Nr: 5},{id: "Copper Sheet",Nr: 3}]}]},
-                {id: "Cooling System",Name: "Cooling System",Asked:0,Needed:15,NeededList: [],RecipeNr: 0,Recepice: [
-                    {PerBuilding: "6",Buildings: 3,Req: [{id: "Heat Sink",Nr: 2},{id: "Rubber",Nr: 2},{id: "Water",Nr: 5},{id: "Nitrogen Gas",Nr: 25}]}]},
-                {id: "Turbo Motor",  Name: "Turbo Motor",  Asked:0,  Needed:3.75,  NeededList: [ ],  RecipeNr: 0,  Recepice: [
-                    {PerBuilding: "1.875", Buildings: 2, Req: [{id: "Cooling System",Nr: 4},{id: "Radio Control Unit",Nr: 2},{id: "Motor",Nr: 4},{id: "Rubber",Nr: 24}]}]}
+                {id:"UraniumOre",Name:"Uranium Ore",Asked:0,Needed:0,NeededList:[],RecipeNr:2,Recepice:[
+                    {PerBuilding:60,Buildings:2,Req:[]},    {PerBuilding:120,Buildings:2,Req:[]},    {PerBuilding:240,Buildings:0,Req:[]}]},
+                {id:"Encased Uranium Cell",Name:"Encased Uranium Cell",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"25",Buildings:0,Req:[{id:"UraniumOre",Nr:2},{id:"Concrete",Nr:0.6},{id:"Sulfuric Acid",Nr:1.6},{id:"Encased Uranium Cell Return",Nr:-0.4}]}]},
+                {id:"Elektromagnetic Control Rod",Name:"Elektromagnetic Control Rod",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"4",Buildings:0,Req:[{id:"AI Limiter",Nr:1},{id:"Stator",Nr:1.5}]}]},
+                {id:"Uranium Fuel Rod",Name:"Uranium Fuel Rod",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"0.4",Buildings:0,Req:[{id:"Encased Uranium Cell",Nr:50},{id:"Encased Industrial Beam",Nr:3},{id:"Elektromagnetic Control Rod",Nr:5}]}]},
+                {id:"Nuclear Waste",Name:"Nuclear Waste",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"0",Buildings:null,Req:[]}]},
+                {id:"Nitrogen Gas",Name:"Nitrogen Gas",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"120",Buildings:0,Req:[]}]},
+                {id:"Fused Modular Frame",Name:"Fused Modular Frame",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"1.5",Buildings:0,Req:[{id:"Heavy Modular Frame",Nr:1},{id:"Aluminum Casing",Nr:50},{id:"Nitrogen Gas",Nr:25}]}]},
+                {id:"Heat Sink",Name:"Heat Sink",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"7.5",Buildings:0,Req:[{id:"Alclad Aluminum Sheet",Nr:5},{id:"Copper Sheet",Nr:3}]}]},
+                {id:"Cooling System",Name:"Cooling System",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"6",Buildings:0,Req:[{id:"Heat Sink",Nr:2},{id:"Rubber",Nr:2},{id:"Water",Nr:5},{id:"Nitrogen Gas",Nr:25}]}]},
+                {id:"Turbo Motor",Name:"Turbo Motor",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"1.875",Buildings:0,Req:[{id:"Cooling System",Nr:4},{id:"Radio Control Unit",Nr:2},{id:"Motor",Nr:4},{id:"Rubber",Nr:24}]}]},
+                {id:"Nitric Acid",Name:"Nitric Acid",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"30",Buildings:0,Req:[{id:"Nitrogen Gas",Nr:4},{id:"Water",Nr:1},{id:"Iron Plate",Nr:0.333333}]}]},
+                {id:"Non-fissile Uranium",Name:"Non-fissile Uranium",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"50",Buildings:0,Req:[{id:"Nuclear Waste",Nr:0.75},{id:"Silica",Nr:0.5},{id:"Nitric Acid",Nr:0.3},{id:"Sulfuric Acid",Nr:0.3},{id:"Water",Nr:-0.3}]}]},
+                {id:"Plutonium Pellet",Name:"Plutonium Pellet",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"30",Buildings:0,Req:[{id:"Non-fissile Uranium",Nr:3.333},{id:"Nuclear Waste",Nr:1.16666},{id:"Power by Hand",Nr:500}]}]},
+                {id:"Encased Plutonium Cell",Name:"Encased Plutonium Cell",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"5",Buildings:0,Req:[{id:"Plutonium Pellet",Nr:2},{id:"Concrete",Nr:4}]}]},
+                {id:"PLutonium Fuel Rod",Name:"PLutonium Fuel Rod",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {PerBuilding:"0.25",Buildings:0,Req:[{id:"Encased Plutonium Cell",Nr:30},{id:"Steel Beam",Nr:18},{id:"Elektromagnetic Control Rod",Nr:6},{id:"Heat Sink",Nr:10}]}]}
             ],
             // This is no seen by the user and just for internal tracking.
             [
