@@ -251,6 +251,7 @@
             ],
             // This is no seen by the user and just for internal tracking.
             [
+            {id:"Power by Hand", Name: "Power by Hand", Asked:0, Needed: 0, NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"1",Buildings:0,Req:[]}]},
             {id:"Encased Uranium Cell Return",Name:"Encased Uranium Cell Return",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
                     {PerBuilding:"1",Buildings:0,Req:[{id:"Sulfuric Acid",Nr:1}]}
                    ]},
@@ -946,6 +947,9 @@
         if(Item.id === "Oil"){return 9;}
         if(Item.id === "HeavyOilResidue"){return 10;}
         if(Item.id === "Nuclear Waste"){return 10;}
+        if(Item.id === "Power by Hand"){return 10;}
+        console.log("No buildig matched to ", Item.id)
+        return 10;
     }
     
 </script>
@@ -982,6 +986,7 @@
         PowerSources.forEach(source => {
             production += source.Buildings*source.PerBuilding;
         })
+        production += FactoryItems[FactoryItems.length-1][0].Needed
         return production
     }
 
