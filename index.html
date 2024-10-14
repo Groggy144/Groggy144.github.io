@@ -13,7 +13,7 @@
 
     <script>
         function loadState(){
-            // loadFactory()
+            //loadFactory()
             BuildAllTables()
             BuildAddTable()
             PowerTable()
@@ -25,247 +25,428 @@
         // Each Pair of tiers gets its own list-> mor emodular? Maybe?
         var FactoryItems = 
         [
+            // 0
             [
-                {id:"IronOre",Name:"Iron Ore",Asked:0,Needed:0,NeededList:[],RecipeNr: 1,Recepice:[
-                    {PerBuilding:60,Buildings:0, Req:[]},
-                    {PerBuilding:120,Buildings:0, Req:[]},
-                    {PerBuilding:240,Buildings:0, Req:[]}
+                {id:"IronOre",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:1,Recepice:[
+                    {Name: "Iron Ore Mk1", PerBuilding:60,Buildings:0, Req:[]},
+                    {Name: "Iron Ore Mk2", PerBuilding:120,Buildings:0, Req:[]},
+                    {Name: "Iron Ore Mk3", PerBuilding:240,Buildings:0, Req:[]}
                    ]},
-                {id:"IronBar",Name:"Iron Bar",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:30,Buildings:0,  Req:[{id:"IronOre",Nr:1}]}
+                {id:"IronBar",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Iron Ingot", PerBuilding:30,Buildings:0,  Req:[{id:"IronOre",Nr:1}]},
+                    {Name: "Pure Iron Ingot", PerBuilding:65,Buildings:0,  Req:[{id:"IronOre",Nr:7/13}, {id:"Water",Nr:4/13}]},
+                    {Name: "Iron Alloy Ingot", PerBuilding:75,Buildings:0,  Req:[{id:"IronOre",Nr:8/15}, {id:"CopperOre",Nr:2/15}]},
+                    {Name: "Basic Iron Ingot", PerBuilding:50,Buildings:0,  Req:[{id:"IronOre",Nr:0.5}, {id:"Limestone",Nr:0.8}]},
+                    {Name: "Leeched Iron Ingot", PerBuilding:100,Buildings:0,  Req:[{id:"IronOre",Nr:0.5}, {id:"Sulfuric Acid",Nr:0.1}]},
                    ]},
-                {id:"IronRod",Name:"Iron Rod",Asked:0,Needed:0,NeededList:[], RecipeNr: 0,
+                {id:"IronRod",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,
                     Recepice:[
-                    {PerBuilding:15,Buildings:0,  Req:[{id:"IronBar",Nr:1}]}
+                    {Name: "Iron Rod", PerBuilding:15,Buildings:0,  Req:[{id:"IronBar",Nr:1}]},
+                    {Name: "Steel Rod", PerBuilding:48,Buildings:0,  Req:[{id:"Steel Bar",Nr:1/4}]},
+                    {Name: "Aluminium Rod", PerBuilding:48,Buildings:0,  Req:[{id:"Aluminium Ingot",Nr:1/7}]},
                    ]},
-                {id:"IronScrew",Name:"Iron Screw",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:40,Buildings:0,  Req:[{id:"IronRod",Nr:0.25}]}
+                {id:"IronScrew",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Iron Screw", PerBuilding:40,Buildings:0,  Req:[{id:"IronRod",Nr:0.25}]},
+                    {Name: "Cast Screw", PerBuilding:50,Buildings:0,  Req:[{id:"IronBar",Nr:0.25}]},
+                    {Name: "Steel Screw", PerBuilding:260,Buildings:0,  Req:[{id:"Steel Bar",Nr:1/52}]},
                    ]},
-                {id:"Iron Plate",Name:"Iron Plate",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"20",Buildings:0,  Req:[{id:"IronBar",Nr:1.5}]}
+                {id:"Iron Plate",Name:"Iron Plate",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Iron Plate", PerBuilding:20,Buildings:0,  Req:[{id:"IronBar",Nr:1.5}]},
+                    {Name: "Coated Plate", PerBuilding:75,Buildings:0,  Req:[{id:"IronBar",Nr:0.5},{id:"Plastic",Nr:0.1}]},
+                    {Name: "Steel Plate", PerBuilding:45,Buildings:0,  Req:[{id:"IronOre",Nr:1/3}, {id:"Steel Bar",Nr:1/3}]},
                    ]},
-                {id:"Limestone",Name:"Limestone",Asked:0,Needed:0,NeededList:[],RecipeNr: 1, Recepice:[
-                    {PerBuilding:60,Buildings:0, Req:[]},
-                    {PerBuilding:120,Buildings:0, Req:[]},
-                    {PerBuilding:240,Buildings:0, Req:[]}
+                {id:"Limestone",Name:"Limestone",Asked:0,Needed:0,NeededList:[], color:"bisque", RecipeNr:1, Recepice:[
+                    {Name: "Limestone", PerBuilding:60,Buildings:0, Req:[]},
+                    {Name: "Limestone", PerBuilding:120,Buildings:0, Req:[]},
+                    {Name: "Limestone", PerBuilding:240,Buildings:0, Req:[]}
                    ]},
-                {id:"Concrete",Name:"Concrete",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"15",Buildings:0,  Req:[{id:"Limestone",Nr:3}]}
+                {id:"Concrete",Name:"Concrete",Asked:0,Needed:0,NeededList:[], color:"bisque", RecipeNr:0,Recepice:[
+                    {Name: "Concrete", PerBuilding:"15",Buildings:0,  Req:[{id:"Limestone",Nr:3}]},
+                    {Name: "Wet Concrete", PerBuilding:"50",Buildings:0,  Req:[{id:"Limestone",Nr:1.5},{id:"Water",Nr:1.25}]},
+                    {Name: "Rubber Concrete", PerBuilding:"90",Buildings:0,  Req:[{id:"Limestone",Nr:10/9},{id:"Rubber",Nr:2/9}]},
+                    {Name: "Fine Concrete", PerBuilding:"50",Buildings:0,  Req:[{id:"Limestone",Nr:1.2},{id:"Silica",Nr:0.3}]},
                    ]},
-                {id:"CopperOre",Name:"Copper Ore",Asked:0,Needed:0,NeededList:[],RecipeNr: 1,Recepice:[
-                    {PerBuilding:60,Buildings:0, Req:[]},
-                    {PerBuilding:120,Buildings:0, Req:[]},
-                    {PerBuilding:240,Buildings:0, Req:[]}
+                {id:"CopperOre",Name:"Copper Ore",Asked:0,Needed:0,NeededList:[], color:"orange", RecipeNr:1,Recepice:[
+                    {Name: "Copper Ore", PerBuilding:60,Buildings:0, Req:[]},
+                    {Name: "Copper Ore", PerBuilding:120,Buildings:0, Req:[]},
+                    {Name: "Copper Ore", PerBuilding:240,Buildings:0, Req:[]}
                    ]},
-                {id:"CopperBar",Name:"Copper Bar",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:30,Buildings:0,  Req:[{id:"CopperOre",Nr:1}]}
+                {id:"CopperBar",Name:"Copper Bar",Asked:0,Needed:0,NeededList:[], color:"orange", RecipeNr:0,Recepice:[
+                    {Name: "Copper Bar", PerBuilding:30,Buildings:0,  Req:[{id:"CopperOre",Nr:1}]},
+                    {Name: "Pure Copper Bar", PerBuilding:35,Buildings:0,  Req:[{id:"CopperOre",Nr:0.6}, {id:"Water",Nr:4/15}]},
+                    {Name: "Copper Alloy Bar", PerBuilding:100,Buildings:0,  Req:[{id:"IronOre",Nr:0.5}, {id:"CopperOre",Nr:0.5}]},
+                    {Name: "Tempered Copper Bar", PerBuilding:60,Buildings:0,  Req:[{id:"CopperOre",Nr:5/12}, {id:"Petroleum Coke",Nr:2/3}]},
+                    {Name: "Leeched Copper Bar", PerBuilding:110,Buildings:0,  Req:[{id:"CopperOre",Nr:9/22}, {id:"Sulfuric Acid",Nr:5/22}]},
                    ]},
-                {id:"Copper Wire",Name:"Copper Wire",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"30",Buildings:0,  Req:[{id:"CopperBar",Nr:0.5}]}
-                   ]},
-                {id:"Cable",Name:"Cable",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"30",Buildings:0,  Req:[{id:"Copper Wire",Nr:2}]}]}
+                {id:"Copper Wire",Asked:0,Needed:0,NeededList:[], color:"orange", RecipeNr:0,Recepice:[
+                    {Name: "Copper Wire", PerBuilding:"30",Buildings:0,  Req:[{id:"CopperBar",Nr:0.5}]},
+                    {Name: "Caterium Wire", PerBuilding:"120",Buildings:0,  Req:[{id:"Caterium Bar",Nr:0.125}]},
+                    {Name: "Fused Wire", PerBuilding:"90",Buildings:0,  Req:[{id:"Caterium Bar",Nr:1/30},{id:"CopperBar",Nr:2/15}]},
+                    {Name: "Iron Wire", PerBuilding:"22.5",Buildings:0,  Req:[{id:"IronBar",Nr:5/9}]},
+                    ]},
+                {id:"Cable",Name:"Cable",Asked:0,Needed:0,NeededList:[], color:"orange", RecipeNr:0,Recepice:[
+                    {Name: "Cable", PerBuilding:"30",Buildings:0,  Req:[{id:"Copper Wire",Nr:2}]},
+                    {Name: "Coated Cable", PerBuilding:"67.5",Buildings:0,  Req:[{id:"Copper Wire",Nr:5/9},{id:"HeavyOilResidue",Nr:2/9}]},
+                    {Name: "Insulated Cable", PerBuilding:"100",Buildings:0,  Req:[{id:"Copper Wire",Nr:0.45},{id:"Rubber",Nr:0.3}]},
+                    {Name: "Quickwire Cable", PerBuilding:"27.5",Buildings:0,  Req:[{id:"Quickwire",Nr:3/11},{id:"Rubber",Nr:2/11}]},
+                ]},
             ],
+            // 1
             [
-                {id:"Reinforced Plate",Name:"Reinforced Plate",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"5",Buildings:0,  Req:[{id:"Iron Plate",Nr:3},{id:"IronScrew",Nr:12}]}
+                {id:"Reinforced Plate",Name:"Reinforced Plate",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Reinfoced Plate", PerBuilding:"5",Buildings:0,  Req:[{id:"Iron Plate",Nr:3},{id:"IronScrew",Nr:12}]},
+                    {Name: "Stiched Plate", PerBuilding:"5.625",Buildings:0,  Req:[{id:"Iron Plate",Nr:10/3},{id:"Copper Wire",Nr:20/3}]},
+                    {Name: "Bolted Plate", PerBuilding:"15",Buildings:0,  Req:[{id:"Iron Plate",Nr:6},{id:"IronScrew",Nr:50/3}]},
+                    {Name: "Adhered Iron Plate", PerBuilding:"3.75",Buildings:0,  Req:[{id:"Iron Plate",Nr:3},{id:"Rubber",Nr:1}]},
+                ]},
+                {id:"Modular Frame",Name:"Modular Frame",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Modular Frame", PerBuilding:"2",Buildings:0,  Req:[{id:"Reinforced Plate",Nr:1.5},{id:"IronRod",Nr:6}]},
+                    {Name: "Placeholder", PerBuilding:"3",Buildings:0,  Req:[{id:"Reinforced Plate",Nr:2},{id:"Steel Tube",Nr:10/3}]},
                    ]},
-                {id:"Modular Frame",Name:"Modular Frame",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"2",Buildings:0,  Req:[{id:"Reinforced Plate",Nr:1.5},{id:"IronRod",Nr:6}]}
+                {id:"Rotor",Name:"Rotor",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Rotor", PerBuilding:"4",Buildings:0,  Req:[{id:"IronRod",Nr:5},{id:"IronScrew",Nr:25}]},
+                    {Name: "Steel Rotor", PerBuilding:"5",Buildings:0,  Req:[{id:"Steel Tube",Nr:2},{id:"IronScrew",Nr:25}]},
                    ]},
-                {id:"Rotor",Name:"Rotor",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"4",Buildings:0,  Req:[{id:"IronRod",Nr:5},{id:"IronScrew",Nr:25}]}
-                   ]},
-                {id:"Smart Plating",Name:"Smart Plating",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"2",Buildings:0,  Req:[{id:"Reinforced Plate",Nr:1},{id:"Rotor",Nr:1}]}]}
+                {id:"Smart Plating",Name:"Smart Plating",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Smart Plating", PerBuilding:"2",Buildings:0,  Req:[{id:"Reinforced Plate",Nr:1},{id:"Copper Wire",Nr:6}]}]}
             ],
+            // 2
             [
-                {id:"Caterium Ore",Name:"Caterium Ore",Asked:0,Needed:0,NeededList:[],RecipeNr:1,Recepice:[
-                    {PerBuilding:60,Buildings:0, Req:[]},
-                    {PerBuilding:120,Buildings:0, Req:[]},
-                    {PerBuilding:240,Buildings:0, Req:[]}
+                {id:"Caterium Ore",Name:"Caterium Ore",Asked:0,Needed:0,NeededList:[], color:"gold", RecipeNr:1,Recepice:[
+                    {Name: "Caterium Ore Mk1", PerBuilding:60,Buildings:0, Req:[]},
+                    {Name: "Caterium Ore Mk2", PerBuilding:120,Buildings:0, Req:[]},
+                    {Name: "Caterium Ore Mk3", PerBuilding:240,Buildings:0, Req:[]}
                    ]},
-                {id:"Caterium Bar",Name:"Caterium Bar",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:15,Buildings:0,Req:[{id:"Caterium Ore",Nr:3}]}
+                {id:"Caterium Bar",Asked:0,Needed:0,NeededList:[], color:"gold", RecipeNr:0,Recepice:[
+                    {Name: "Caterium Bar", PerBuilding:15,Buildings:0,Req:[{id:"Caterium Ore",Nr:3}]},
+                    {Name: "Pure Caterium Bar", PerBuilding:65,Buildings:0,  Req:[{id:"Caterium Ore",Nr:2}, {id:"Water",Nr:2}]},
                    ]},
-                {id:"Quickwire",Name:"Quickwire",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"60",Buildings:0,Req:[{id:"Caterium Bar",Nr:0.2}]}
+                {id:"Quickwire",Asked:0,Needed:0,NeededList:[], color:"gold", RecipeNr:0,Recepice:[
+                    {Name: "Quickwire", PerBuilding:"60",Buildings:0,Req:[{id:"Caterium Bar",Nr:0.2}]}
                    ]},
-                {id:"AI Limiter",Name:"AI Limiter",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"5",Buildings:0,Req:[{id:"Copper Sheet",Nr:5},{id:"Quickwire",Nr:20}]}
+                {id:"AI Limiter",Asked:0,Needed:0,NeededList:[], color:"gold", RecipeNr:0,Recepice:[
+                    {Name: "AI Limiter", PerBuilding:"5",Buildings:0,Req:[{id:"Copper Sheet",Nr:5},{id:"Quickwire",Nr:20}]}
                    ]},
-                {id:"High-Speed Connector",Name:"High-Speed Connector",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"3.75",Buildings:0,Req:[{id:"Quickwire",Nr:56},{id:"Cable",Nr:10},{id:"Circuit Board",Nr:1}]}
+                {id:"High-Speed Connector",Asked:0,Needed:0,NeededList:[], color:"gold", RecipeNr:0,Recepice:[
+                    {Name: "High-Speed Connector", PerBuilding:"3.75",Buildings:0,Req:[{id:"Quickwire",Nr:56},{id:"Cable",Nr:10},{id:"Circuit Board",Nr:1}]}
                    ]},
-                {id:"Quartz",Name:"Quartz",Asked:0,Needed:0,NeededList:[],RecipeNr:1,Recepice:[
-                    {PerBuilding:60,Buildings:0, Req:[]},
-                    {PerBuilding:120,Buildings:0, Req:[]},
-                    {PerBuilding:240,Buildings:0, Req:[]}
+                {id:"Quartz",Asked:0,Needed:0,NeededList:[], color:"fuchsia", RecipeNr:1,Recepice:[
+                    {Name: "Quartz", PerBuilding:60,Buildings:0, Req:[]},
+                    {Name: "Quartz", PerBuilding:120,Buildings:0, Req:[]},
+                    {Name: "Quartz", PerBuilding:240,Buildings:0, Req:[]}
                    ]},
-                {id:"Quartz Crystal",Name:"Quartz Crystal",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"22.5",Buildings:0,Req:[{id:"Quartz",Nr:5/6}]}
+                {id:"Quartz Crystal",Asked:0,Needed:0,NeededList:[], color:"fuchsia", RecipeNr:0,Recepice:[
+                    {Name: "Quartz Crystal", PerBuilding:"22.5",Buildings:0,Req:[{id:"Quartz",Nr:5/6}]}
                    ]},
-                {id:"Crystal Oscillator",Name:"Crystal Oscillator",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"1",Buildings:0,Req:[{id:"Quartz Crystal",Nr:18},{id:"Cable",Nr:14},{id:"Reinforced Plate",Nr:2.5}]}
+                {id:"Crystal Oscillator",Asked:0,Needed:0,NeededList:[], color:"fuchsia", RecipeNr:0,Recepice:[
+                    {Name: "Crystal Oscillator", PerBuilding:"1",Buildings:0,Req:[{id:"Quartz Crystal",Nr:18},{id:"Cable",Nr:14},{id:"Reinforced Plate",Nr:2.5}]}
                    ]},
-                {id:"Silica",Name:"Silica",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"37.5",Buildings:0,Req:[{id:"Quartz",Nr:0.6}]}
+                {id:"Silica",Name:"Silica",Asked:0,Needed:0,NeededList:[], color:"fuchsia", RecipeNr:0,Recepice:[
+                    {Name: "Silica", PerBuilding:"37.5",Buildings:0,Req:[{id:"Quartz",Nr:0.6}]}
                    ]},
-                {id:"Sulfur",Name:"Sulfur",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"120",Buildings:0,Req:[]}]}
+                {id:"Sulfur",Name:"Sulfur",Asked:0,Needed:0,NeededList:[], color:"yellow", RecipeNr:0,Recepice:[
+                    {Name: "Sulfur", PerBuilding:"120",Buildings:0,Req:[]}]}
             ],
+            // 3
             [
-                {id:"Coal",Name:"Coal",Asked:0,Needed:0,NeededList:[],RecipeNr: 1,Recepice:[
-                    {PerBuilding:60,Buildings:0, Req:[]},
-                    {PerBuilding:120,Buildings:0, Req:[]},
-                    {PerBuilding:240,Buildings:0, Req:[]}
+                {id:"Water",Name: "Water", Asked:0, Needed:0, NeededList:[], color:"blue", RecipeNr:0, Recepice:[
+                    {Name: "Water", PerBuilding:120,Buildings:0, Req:[]}
                    ]},
-                {id:"Water", Name: "Water", Asked:0, Needed:0, NeededList:[], RecipeNr:0, Recepice:[
-                    {PerBuilding:120,Buildings:0, Req:[]}
+                {id:"Copper Sheet",Name:"Copper Sheet", Asked:0, Needed:0, NeededList:[], color:"orange", RecipeNr:0, Recepice:[
+                    {Name: "Copper Sheet", PerBuilding:10, Buildings:0,  Req:[{id:"CopperBar", Nr:2}]}
                    ]},
-                {id:"Steel Bar",Name:"Steel Bar",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"45",Buildings:0,  Req:[{id:"Coal",Nr:1},{id:"IronOre",Nr:1}]}
+                {id:"Coal",Name:"Coal",Asked:0,Needed:0,NeededList:[], color:"black", RecipeNr:1,Recepice:[
+                    {Name: "Coal", PerBuilding:60,Buildings:0, Req:[]},
+                    {Name: "Coal", PerBuilding:120,Buildings:0, Req:[]},
+                    {Name: "Coal", PerBuilding:240,Buildings:0, Req:[]}
                    ]},
-                {id:"Steel Beam",Name:"Steel Beam",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"15",Buildings:0,  Req:[{id:"Steel Bar",Nr:4}]}
+                {id:"Steel Bar",Name:"Steel Bar",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Steel Bar", PerBuilding:"45",Buildings:0,  Req:[{id:"Coal",Nr:1},{id:"IronOre",Nr:1}]},
+                    {Name: "Steel Bar", PerBuilding:"60",Buildings:0,  Req:[{id:"Coal",Nr:2/3},{id:"IronBar",Nr:2/3}]},
+                ]},
+                {id:"Steel Beam",Name:"Steel Beam",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Steel Beam", PerBuilding:"15",Buildings:0,  Req:[{id:"Steel Bar",Nr:4}]},
                    ]},
-                {id:"Steel Tube",Name:"Steel Tube",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"20",Buildings:0,  Req:[{id:"Steel Bar",Nr:1.5}]}
+                {id:"Steel Tube",Name:"Steel Tube",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Steel Pipe", PerBuilding:"20",Buildings:0,  Req:[{id:"Steel Bar",Nr:1.5}]},
+                    {Name: "Iron Pipe", PerBuilding:"25",Buildings:0,  Req:[{id:"IronBar",Nr:4}]},
                    ]},
-                {id:"Copper Sheet", Name:"Copper Sheet", Asked:0, Needed:0, NeededList:[],RecipeNr: 0, Recepice:[
-                    {PerBuilding:10, Buildings:0,  Req:[{id:"CopperBar", Nr:2}]}
+                {id:"Versatile Framework",Name:"Versatile Framework",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Versatile Framework", PerBuilding:"5",Buildings:0,  Req:[{id:"Modular Frame",Nr:0.5},{id:"Steel Beam",Nr:6}]}
                    ]},
-                {id:"Versatile Framework",Name:"Versatile Framework",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"5",Buildings:0,  Req:[{id:"Modular Frame",Nr:0.5},{id:"Steel Beam",Nr:6}]}
+                {id:"Encased Industrial Beam",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0, Recepice:[
+                    {Name: "Encased Industrial Beam", PerBuilding:"6",Buildings:0,  Req:[{id:"Steel Beam",Nr:4},{id:"Concrete",Nr:5}]},
+                    {Name: "Placeholder", PerBuilding:"4",Buildings:0,  Req:[{id:"Steel Tube",Nr:7},{id:"Concrete",Nr:5}]}
                    ]},
-                {id:"Encased Industrial Beam",Name:"Encased Industrial Beam",Asked:0,Needed:0,NeededList:[],RecipeNr: 0, Recepice:[
-                    {PerBuilding:"6",Buildings:0,  Req:[{id:"Steel Beam",Nr:4},{id:"Concrete",Nr:5}]},
-                    {PerBuilding:"4",Buildings:0,  Req:[{id:"Steel Tube",Nr:7},{id:"Concrete",Nr:5}]}
+                {id:"Stator",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Stator", PerBuilding:"5",Buildings:0,  Req:[{id:"Copper Wire",Nr:8},{id:"Steel Tube",Nr:3}]}
                    ]},
-                {id:"Stator",Name:"Stator",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"5",Buildings:0,  Req:[{id:"Copper Wire",Nr:8},{id:"Steel Tube",Nr:3}]}
+                {id:"Motor",Name:"Motor",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Motor", PerBuilding:"5",Buildings:0,  Req:[{id:"Rotor",Nr:2},{id:"Stator",Nr:2}]},
+                    {Name: "Motor", PerBuilding:"7.5",Buildings:0, Req:[{id:"Rotor",Nr:2},{id:"Elektromagnetic Control Rod",Nr:1}]},
                    ]},
-                {id:"Motor",Name:"Motor",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"5",Buildings:0,  Req:[{id:"Rotor",Nr:2},{id:"Stator",Nr:2}]}
-                   ]},
-                {id:"Automated Wiring",Name:"Automated Wireng",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"2.5",Buildings:0,  Req:[{id:"Cable",Nr:20},{id:"Stator",Nr:1}]}]}
+                {id:"Automated Wiring",Asked:0,Needed:0,NeededList:[], color:"orange", RecipeNr:0,Recepice:[
+                    {Name:"Automated Wireng", PerBuilding:"2.5",Buildings:0,  Req:[{id:"Cable",Nr:20},{id:"Stator",Nr:1}]}]}
             ],
+            // 4
             [
-                {id:"Oil",Name:"Oil",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:120,Buildings:0,Req:[]}
+                {id:"Oil",Asked:0,Needed:0,NeededList:[], color:"black", RecipeNr:0,Recepice:[
+                    {Name: "Oil Extractor", PerBuilding:120,Buildings:0,Req:[]}
                    ]},
-                {id:"Plastic",Name:"Plastic",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"20",Buildings:0,Req:[{id:"Oil",Nr:1.5},{id:"HeavyOilResidue",Nr:-0.5}]}
+                {id:"Plastic",Asked:0,Needed:0,NeededList:[], color:"black", RecipeNr:0,Recepice:[
+                    {Name: "Plastic", PerBuilding:"20",Buildings:0,Req:[{id:"Oil",Nr:1.5},{id:"HeavyOilResidue",Nr:-0.5}]},
+                    {Name: "Residual Plastic", PerBuilding:"20",Buildings:0,Req:[{id:"Water",Nr:1},{id:"Polymer Resin",Nr:3}]},
+                    {Name: "Reclaimed Plastic", PerBuilding:"60",Buildings:0,Req:[{id:"Fuel",Nr:0.5},{id:"Rubber",Nr:0.5}]},
                    ]},
-                {id:"Rubber",Name:"Rubber",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"20",Buildings:0,Req:[{id:"Oil",Nr:1.5},{id:"HeavyOilResidue",Nr:-1}]}
+                {id:"Rubber",Name:"Rubber",Asked:0,Needed:0,NeededList:[], color:"black", RecipeNr:0,Recepice:[
+                    {Name: "Rubber", PerBuilding:"20",Buildings:0,Req:[{id:"Oil",Nr:1.5},{id:"HeavyOilResidue",Nr:-1}]},
+                    {Name: "Residual Rubber", PerBuilding:"20",Buildings:0,Req:[{id:"Water",Nr:2},{id:"Polymer Resin",Nr:2}]},
+                    {Name: "Reclaimed Rubber", PerBuilding:"60",Buildings:0,Req:[{id:"Fuel",Nr:0.5},{id:"Plastic",Nr:0.5}]},
                    ]},
-                {id:"HeavyOilResidue",Name:"Heavy Oil-Residue",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"0",Buildings:null,Req:[]}
+                {id:"HeavyOilResidue",Name:"Heavy Oil-Residue",Asked:0,Needed:0,NeededList:[], color:"black", RecipeNr:0,Recepice:[
+                    {Name: "Heavy Oil Residue Byproduct", PerBuilding:"0",Buildings:null,Req:[]},
+                    {Name: "Heavy Oil Residue", PerBuilding:"40",Buildings:0,Req:[{id:"Oil",Nr:0.75},{id:"Polymer Resin",Nr:-0.5}]}
                    ]},
-                {id:"Polymer Resin",Name:"Polymer Resin",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"130",Buildings:0,Req:[{id:"Oil",Nr:6/13},{id:"HeavyOilResidue",Nr:-2/13}]}
+                {id:"Polymer Resin",Name:"Polymer Resin",Asked:0,Needed:0,NeededList:[], color:"black", RecipeNr:0,Recepice:[
+                    {Name: "Polymer Resin Byprodct", PerBuilding:"0",Buildings:null,Req:[]},
+                    {Name: "Polymer Resin", PerBuilding:"130",Buildings:0,Req:[{id:"Oil",Nr:6/13},{id:"HeavyOilResidue",Nr:-2/13}]},
+                    {Name: "Polymer Resin to plastic", PerBuilding:-120,Buildings:0,Req:[{id:"Water",Nr:1/3},{id:"Plastic",Nr:-1/3}]},
+                    {Name: "Polymer Resin to Rubber", PerBuilding:-120,Buildings:0,Req:[{id:"Water",Nr:1/3},{id:"Rubber",Nr:-1/3}]},
                    ]},
-                {id:"Petroleum Coke",Name:"Petroleum Coke",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"120",Buildings:0,Req:[{id:"HeavyOilResidue",Nr:1/3}]}
+                {id:"Petroleum Coke",Name:"Petroleum Coke",Asked:0,Needed:0,NeededList:[], color:"black", RecipeNr:0,Recepice:[
+                    {Name: "Petroleum Coke", PerBuilding:"120",Buildings:0,Req:[{id:"HeavyOilResidue",Nr:1/3}]}
                    ]},
-                {id:"Fuel",Name:"Fuel",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"40",Buildings:0,Req:[{id:"Oil",Nr:1.5},{id:"Polymer Resin",Nr:0.75}]}
+                {id:"Fuel",Name:"Fuel",Asked:0,Needed:0,NeededList:[], color:"black", RecipeNr:0,Recepice:[
+                    {Name: "Fuel", PerBuilding:"40",Buildings:0,Req:[{id:"Oil",Nr:1.5},{id:"Polymer Resin",Nr:-0.75}]},
+                    {Name: "Residual Fuel", PerBuilding:"40",Buildings:0,Req:[{id:"HeavyOilResidue",Nr:1.5}]},
+                    {Name: "Diluted Fuel", PerBuilding:"60",Buildings:0,Req:[{id:"HeavyOilResidue",Nr:0.5},{id:"Water",Nr:1}]},
+                   ]},
+                {id:"Canister",Name:"Canister",Asked:0,Needed:0,NeededList:[], color:"black", RecipeNr:0,Recepice:[
+                    {Name: "Canister", PerBuilding:"60",Buildings:0,Req:[{id:"Plastic",Nr:0.5}]}
+                   ]},
+                {id:"Packeged Fuel",Name:"Packeged Fuel",Asked:0,Needed:0,NeededList:[], color:"black", RecipeNr:0,Recepice:[
+                    {Name: "Packeged Fuel", PerBuilding:"40",Buildings:0,Req:[{id:"Canister",Nr:1},{id:"Fuel",Nr:1}]}
                    ]},
             ],
+            // 5
             [
-                {id:"Canister",Name:"Canister",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"60",Buildings:0,Req:[{id:"Plastic",Nr:0.5}]}
+                {id:"Circuit Board",Asked:0,Needed:0,NeededList:[], color:"black", RecipeNr:0,Recepice:[
+                    {Name: "Circuit Board", PerBuilding:"7.5",Buildings:0,Req:[{id:"Copper Sheet",Nr:2},{id:"Plastic",Nr:4}]},
+                    {Name: "Caterium Circuit Board", PerBuilding:"8.75",Buildings:0,Req:[{id:"Quickwire",Nr:2},{id:"Plastic",Nr:4}]},
+                    {Name: "Placeholder", PerBuilding:"5",Buildings:0,Req:[{id:"Rubber",Nr:4},{id:"Petroleum Coke",Nr:8}]},
                    ]},
-                {id:"Circuit Board",Name:"Circuit Board",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"7.5",Buildings:0,Req:[{id:"Copper Sheet",Nr:2},{id:"Plastic",Nr:4}]}
+                {id:"Computer",Name:"Computer",Asked:0,Needed:0,NeededList:[], color:"orange", RecipeNr:0,Recepice:[
+                    {Name: "Computer", PerBuilding:"2.5",Buildings:0,Req:[{id:"Circuit Board",Nr:10},{id:"Cable",Nr:9},{id:"Plastic",Nr:18},{id:"IronScrew",Nr:52}]},
+                    {Name: "Caterium Computer", PerBuilding:10/3,Buildings:0,Req:[{id:"Circuit Board",Nr:1.5},{id:"Crystal Oscillator",Nr:0.5}]},
+
                    ]},
-                {id:"Heavy Modular Frame",Name:"Heavy Modular Frame",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"2",Buildings:0,Req:[{id:"Modular Frame",Nr:5},{id:"Steel Tube",Nr:15},{id:"Encased Industrial Beam",Nr:5},{id:"IronScrew",Nr:100}]},
-                    {PerBuilding: 45/16,Buildings:0,Req:[{id:"Modular Frame",Nr:8/3},{id:"Steel Tube",Nr:12},{id:"Encased Industrial Beam",Nr:10/3},{id:"Concrete",Nr:22/3}]}
+                {id:"Heavy Modular Frame",Name:"Heavy Modular Frame",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Heavy Modular Frame", PerBuilding:"2",Buildings:0,Req:[{id:"Modular Frame",Nr:5},{id:"Steel Tube",Nr:15},{id:"Encased Industrial Beam",Nr:5},{id:"IronScrew",Nr:100}]},
+                    {Name: "Encased Heavy Modular Frame", PerBuilding: 45/16,Buildings:0,Req:[{id:"Modular Frame",Nr:8/3},{id:"Steel Tube",Nr:12},{id:"Encased Industrial Beam",Nr:10/3},{id:"Concrete",Nr:22/3}]},
+                    {Name: "Placeholder", PerBuilding:"3.75",Buildings:0,Req:[{id:"Modular Frame",Nr:5},{id:"Rubber",Nr:20},{id:"Encased Industrial Beam",Nr:3},{id:"IronScrew",Nr:104}]},
                    ]},
-                {id:"Computer",Name:"Computer",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"2.5",Buildings:0,Req:[{id:"Circuit Board",Nr:10},{id:"Cable",Nr:9},{id:"Plastic",Nr:18},{id:"IronScrew",Nr:52}]}
+                {id:"Modular Engine",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Modular Engine", PerBuilding:"1",Buildings:0,Req:[{id:"Motor",Nr:2},{id:"Rubber",Nr:15},{id:"Smart Plating",Nr:2}]}
                    ]},
-                {id:"Modular Engine",Name:"Modular Engine",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"1",Buildings:0,Req:[{id:"Motor",Nr:2},{id:"Rubber",Nr:15},{id:"Smart Plating",Nr:2}]}
-                   ]},
-                {id:"Adaptive Control Unit",Name:"Adaptive Control Unit",Asked:0,Needed:0,NeededList:[],RecipeNr: 0,Recepice:[
-                    {PerBuilding:"1",Buildings:0,Req:[{id:"Automated Wiring",Nr:15},{id:"Circuit Board",Nr:10},{id:"Heavy Modular Frame",Nr:2},{id:"Computer",Nr:2}]}]}
+                {id:"Adaptive Control Unit",Name:"",Asked:0,Needed:0,NeededList:[], color:"orange", RecipeNr:0,Recepice:[
+                    {Name: "Adaptive Control Unit", PerBuilding:"1",Buildings:0,Req:[{id:"Automated Wiring",Nr:15},{id:"Circuit Board",Nr:10},{id:"Heavy Modular Frame",Nr:2},{id:"Computer",Nr:2}]}]}
             ],
+            // 6
             [
-                {id:"Bauxit",Name:"Bauxit",Asked:0,Needed:0,NeededList:[],RecipeNr:1,Recepice:[
-                    {PerBuilding:60,Buildings:0,Req:[]},
-                    {PerBuilding:120,Buildings:0,Req:[]},
-                    {PerBuilding:240,Buildings:0,Req:[]}
+                {id:"Bauxit",Name:"Bauxit",Asked:0,Needed:0,NeededList:[], color:"peru", RecipeNr:1,Recepice:[
+                    {Name: "Bauxit", PerBuilding:60,Buildings:0,Req:[]},
+                    {Name: "Bauxit", PerBuilding:120,Buildings:0,Req:[]},
+                    {Name: "Bauxit", PerBuilding:240,Buildings:0,Req:[]}
                    ]},
-                {id:"Alumina Solution",Name:"Alumina Solution",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"120",Buildings:0,Req:[{id:"Silica",Nr:-5/12},{id:"Water",Nr:1.5},{id:"Bauxit",Nr:1}]}
+                {id:"Alumina Solution",Asked:0,Needed:0,NeededList:[], color:"peru", RecipeNr:0,Recepice:[
+                    {Name: "Alumina Solution", PerBuilding:"120",Buildings:0,Req:[{id:"Silica",Nr:-5/12},{id:"Water",Nr:1.5},{id:"Bauxit",Nr:1}]}
                    ]},
-                {id:"Aluminum Scrap",Name:"Aluminum Scrap",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"360",Buildings:0,Req:[{id:"Alumina Solution",Nr:2/3},{id:"Coal",Nr:1/3},{id:"Water",Nr:-1/3}]}
+                {id:"Aluminum Scrap",Name:"Aluminum Scrap",Asked:0,Needed:0,NeededList:[], color:"peru", RecipeNr:0,Recepice:[
+                    {Name: "Aluminum Scrap", PerBuilding:"360",Buildings:0,Req:[{id:"Alumina Solution",Nr:2/3},{id:"Coal",Nr:1/3},{id:"Water",Nr:-1/3}]},
+                    {Name: "Placeholder", PerBuilding:"300",Buildings:0,Req:[{id:"Alumina Solution",Nr:0.6},{id:"Petroleum Coke",Nr:0.2},{id:"Water",Nr:-7/20}]}
+                ]},
+                {id:"Aluminium Ingot",Name:"Aluminium Ingot",Asked:0,Needed:0,NeededList:[], color:"peru", RecipeNr:0,Recepice:[
+                    {Name: "Aluminium Ingot", PerBuilding:"60",Buildings:0,Req:[{id:"Silica",Nr:1.25},{id:"Aluminum Scrap",Nr:1.5}]}
                    ]},
-                {id:"Aluminium Ingot",Name:"Aluminium Ingot",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"60",Buildings:0,Req:[{id:"Silica",Nr:1.25},{id:"Aluminum Scrap",Nr:1.5}]}
+                {id:"Aluminum Casing",Name:"Aluminum Casing",Asked:0,Needed:0,NeededList:[], color:"peru", RecipeNr:0,Recepice:[
+                    {Name: "Aluminum Casing", PerBuilding:"60",Buildings:0,Req:[{id:"Aluminium Ingot",Nr:1.5}]},
+                    {Name: "Alclad Casing", PerBuilding:"112.5",Buildings:0,Req:[{id:"Aluminium Ingot",Nr:4/3},{id:"CopperBar",Nr:2/3}]}
                    ]},
-                {id:"Aluminum Casing",Name:"Aluminum Casing",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"60",Buildings:0,Req:[{id:"Aluminium Ingot",Nr:1.5}]}
+                {id:"Alclad Aluminum Sheet",Name:"Alclad Aluminum Sheet",Asked:0,Needed:0,NeededList:[], color:"peru", RecipeNr:0,Recepice:[
+                    {Name: "Alclad Aluminum Sheet", PerBuilding:"30",Buildings:0,Req:[{id:"Aluminium Ingot",Nr:1},{id:"CopperBar",Nr:1/3}]}
                    ]},
-                {id:"Radio Control Unit",Name:"Radio Control Unit",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"2.5",Buildings:0,Req:[{id:"Aluminum Casing",Nr:16},{id:"Crystal Oscillator",Nr:0.5},{id:"Computer",Nr:0.5}]}
-                   ]},
-                {id:"Supercomputer",Name:"Supercomputer",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"1.875",Buildings:0,Req:[{id:"Computer",Nr:2},{id:"AI Limiter",Nr:2},{id:"High-Speed Connector",Nr:3},{id:"Plastic",Nr:28}]}
-                   ]},
-                {id:"Alclad Aluminum Sheet",Name:"Alclad Aluminum Sheet",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"30",Buildings:0,Req:[{id:"Aluminium Ingot",Nr:1},{id:"CopperBar",Nr:1/3}]}
-                   ]},
-                {id:"Sulfuric Acid",Name:"Sulfuric Acid",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"50",Buildings:0,Req:[{id:"Water",Nr:1},{id:"Sulfur",Nr:1}]}
-                   ]},
-                {id:"Battery",Name:"Battery",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"20",Buildings:0,Req:[{id:"Sulfuric Acid",Nr:2.5},{id:"Alumina Solution",Nr:2},{id:"Aluminum Casing",Nr:1},{id:"Water",Nr:-1.5}]}]}
             ],
+            // 7
             [
-                {id:"UraniumOre",Name:"Uranium Ore",Asked:0,Needed:0,NeededList:[],RecipeNr:2,Recepice:[
-                    {PerBuilding:60,Buildings:2,Req:[]},    {PerBuilding:120,Buildings:2,Req:[]},    {PerBuilding:240,Buildings:0,Req:[]}]},
-                {id:"Encased Uranium Cell",Name:"Encased Uranium Cell",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"25",Buildings:0,Req:[{id:"UraniumOre",Nr:2},{id:"Concrete",Nr:0.6},{id:"Sulfuric Acid",Nr:1.6},{id:"Encased Uranium Cell Return",Nr:-0.4}]}]},
-                {id:"Elektromagnetic Control Rod",Name:"Elektromagnetic Control Rod",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"4",Buildings:0,Req:[{id:"AI Limiter",Nr:1},{id:"Stator",Nr:1.5}]}]},
-                {id:"Uranium Fuel Rod",Name:"Uranium Fuel Rod",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"0.4",Buildings:0,Req:[{id:"Encased Uranium Cell",Nr:50},{id:"Encased Industrial Beam",Nr:3},{id:"Elektromagnetic Control Rod",Nr:5}]}]},
-                {id:"Nuclear Waste",Name:"Nuclear Waste",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"0",Buildings:null,Req:[]}]},
-                {id:"Nitrogen Gas",Name:"Nitrogen Gas",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"120",Buildings:0,Req:[]}]},
-                {id:"Fused Modular Frame",Name:"Fused Modular Frame",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"1.5",Buildings:0,Req:[{id:"Heavy Modular Frame",Nr:1},{id:"Aluminum Casing",Nr:50},{id:"Nitrogen Gas",Nr:25}]}]},
-                {id:"Heat Sink",Name:"Heat Sink",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"7.5",Buildings:0,Req:[{id:"Alclad Aluminum Sheet",Nr:5},{id:"Copper Sheet",Nr:3}]}]},
-                {id:"Cooling System",Name:"Cooling System",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"6",Buildings:0,Req:[{id:"Heat Sink",Nr:2},{id:"Rubber",Nr:2},{id:"Water",Nr:5},{id:"Nitrogen Gas",Nr:25}]}]},
-                {id:"Turbo Motor",Name:"Turbo Motor",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"1.875",Buildings:0,Req:[{id:"Cooling System",Nr:4},{id:"Radio Control Unit",Nr:2},{id:"Motor",Nr:4},{id:"Rubber",Nr:24}]}]},
-                {id:"Nitric Acid",Name:"Nitric Acid",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"30",Buildings:0,Req:[{id:"Nitrogen Gas",Nr:4},{id:"Water",Nr:1},{id:"Iron Plate",Nr:1/3}]}]},
-                {id:"Non-fissile Uranium",Name:"Non-fissile Uranium",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"50",Buildings:0,Req:[{id:"Nuclear Waste",Nr:0.75},{id:"Silica",Nr:0.5},{id:"Nitric Acid",Nr:0.3},{id:"Sulfuric Acid",Nr:0.3},{id:"Water",Nr:-0.3}]}]},
-                {id:"Plutonium Pellet",Name:"Plutonium Pellet",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"30",Buildings:0,Req:[{id:"Non-fissile Uranium",Nr:10/3},{id:"Nuclear Waste",Nr:5/6},{id:"Power by Hand",Nr:500}]}]},
-                {id:"Encased Plutonium Cell",Name:"Encased Plutonium Cell",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"5",Buildings:0,Req:[{id:"Plutonium Pellet",Nr:2},{id:"Concrete",Nr:4}]}]},
-                {id:"PLutonium Fuel Rod",Name:"PLutonium Fuel Rod",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"0.25",Buildings:0,Req:[{id:"Encased Plutonium Cell",Nr:30},{id:"Steel Beam",Nr:18},{id:"Elektromagnetic Control Rod",Nr:6},{id:"Heat Sink",Nr:10}]}]}
-            ],
-            // This is no seen by the user and just for internal tracking.
-            [
-            {id:"Power by Hand", Name: "Power by Hand", Asked:0, Needed: 0, NeededList:[],RecipeNr:0,Recepice:[{PerBuilding:"1",Buildings:0,Req:[]}]},
-            {id:"Encased Uranium Cell Return",Name:"Encased Uranium Cell Return",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
-                    {PerBuilding:"1",Buildings:0,Req:[{id:"Sulfuric Acid",Nr:1}]}
+                {id:"Radio Control Unit",Name:"Radio Control Unit",Asked:0,Needed:0,NeededList:[], color:"fuchsia", RecipeNr:0,Recepice:[
+                    {Name: "Radio Control Unit", PerBuilding:"2.5",Buildings:0,Req:[{id:"Aluminum Casing",Nr:16},{id:"Crystal Oscillator",Nr:0.5},{id:"Computer",Nr:0.5}]}
                    ]},
-            ]
+                {id:"Supercomputer",Name:"Supercomputer",Asked:0,Needed:0,NeededList:[], color:"orange", RecipeNr:0,Recepice:[
+                    {Name: "Supercomputer", PerBuilding:"1.875",Buildings:0,Req:[{id:"Computer",Nr:2},{id:"AI Limiter",Nr:2},{id:"High-Speed Connector",Nr:3},{id:"Plastic",Nr:28}]},
+                    {Name: "OC Supercomputer", PerBuilding:"3",Buildings:0,Req:[{id:"Radio Control Unit",Nr:2},{id:"Cooling System",Nr:2}]}
+                   ]},
+                {id:"Sulfuric Acid",Name:"Sulfuric Acid",Asked:0,Needed:0,NeededList:[], color:"yellow", RecipeNr:0,Recepice:[
+                    {Name: "Sulfuric Acid", PerBuilding:"50",Buildings:0,Req:[{id:"Water",Nr:1},{id:"Sulfur",Nr:1}]}
+                   ]},
+                {id:"Battery",Name:"Battery",Asked:0,Needed:0,NeededList:[], color:"yellow", RecipeNr:0,Recepice:[
+                    {Name: "Battery", PerBuilding:"20",Buildings:0,Req:[{id:"Sulfuric Acid",Nr:2.5},{id:"Alumina Solution",Nr:2},{id:"Aluminum Casing",Nr:1},{id:"Water",Nr:-1.5}]}
+                   ]},
+            ],
+            // 8
+            [
+                {id:"Nitrogen Gas",Name:"Nitrogen Gas",Asked:0,Needed:0,NeededList:[{id:"Nitric Acid",Nr:0}],color:"black",RecipeNr:0,Recepice:[
+                    {Name: "Nitrogen Gas", PerBuilding:"120",Buildings:0,Req:[]}
+                    ]},
+                {id:"Fused Modular Frame",Name:"Fused Modular Frame",Asked:0,Needed:0,NeededList:[],color:"black",RecipeNr:0,Recepice:[
+                    {Name: "Fused Modular Frame", PerBuilding:"1.5",Buildings:0,Req:[{id:"Heavy Modular Frame",Nr:1},{id:"Aluminum Casing",Nr:50},{id:"Nitrogen Gas",Nr:25}]},
+                    {Name: "Placeholder", PerBuilding:"3",Buildings:0,Req:[{id:"Heavy Modular Frame",Nr:1},{id:"Aluminum Ingot",Nr:50},{id:"Nitric Acid",Nr:8}, {if:"Fuel", Nr:10}]},
+                    ]},
+                {id:"Heat Sink",Name:"Heat Sink",Asked:0,Needed:0,NeededList:[{id:"Plutonium Fuel Rod",Nr:0}],color:"peru",RecipeNr:0,Recepice:[
+                    {Name: "Heat Sink", PerBuilding:"7.5",Buildings:0,Req:[{id:"Alclad Aluminum Sheet",Nr:5},{id:"Copper Sheet",Nr:3}]},
+                    {Name: "Placeholder", PerBuilding:"10",Buildings:0,Req:[{id:"Aluminum Casing",Nr:3},{id:"Rubber",Nr:3}]}
+                    ]},
+                {id:"Cooling System",Name:"Cooling System",Asked:0,Needed:0,NeededList:[],color:"peru",RecipeNr:0,Recepice:[
+                    {Name: "Cooling System", PerBuilding:"6",Buildings:0,Req:[{id:"Heat Sink",Nr:2},{id:"Rubber",Nr:2},{id:"Water",Nr:5},{id:"Nitrogen Gas",Nr:25}]},
+                    {Name: "Placeholder", PerBuilding:"5",Buildings:0,Req:[{id:"Heat Sink",Nr:2},{id:"motor",Nr:0.5},{id:"Nitrogen Gas",Nr:12}]},
+                    ]},
+                {id:"Turbo Motor",Name:"Turbo Motor",Asked:0,Needed:0,NeededList:[],color:"peru",RecipeNr:0,Recepice:[
+                    {Name: "Turbo Motor", PerBuilding:"1.875",Buildings:0,Req:[{id:"Cooling System",Nr:4},{id:"Radio Control Unit",Nr:2},{id:"Motor",Nr:4},{id:"Rubber",Nr:24}]},
+                    {Name: "Placeholder", PerBuilding:"2.813",Buildings:0,Req:[{id:"Radio Control Unit",Nr:3},{id:"Elektromagnetic Control Rod",Nr:5/3},{id:"Motor",Nr:7/3},{id:"Rotor",Nr:7/3}]},
+                    {Name: "Placeholder", PerBuilding:"1.875",Buildings:0,Req:[{id:"Nitrogen Gas",Nr:24},{id:"Pressure Conversion Cube",Nr:2},{id:"Motor",Nr:2},{id:"Stator",Nr:4}]},
+                    ]},
+                {id:"Nitric Acid",Name:"Nitric Acid",Asked:0,Needed:0,NeededList:[{id:"Non-fissile Uranium",Nr:0}],color:"black",RecipeNr:0,Recepice:[
+                    {Name: "Nitric Acid", PerBuilding:"30",Buildings:0,Req:[{id:"Nitrogen Gas",Nr:4},{id:"Water",Nr:1},{id:"Iron Plate",Nr:0.3333333333333333}]},
+                    ]},
+                {id:"Assembly Director System",Name:"Assembly Director System",Asked:0,Needed:0,NeededList:[],color:"peru",RecipeNr:0,Recepice:[
+                    {Name: "Assembly Director System", PerBuilding:0.75,Buildings:0,Req:[{id:"Adaptive Control Unit",Nr:2},{id:"Supercomputer",Nr:1}]},
+                    ]},
+                {id:"Magnetic Field Generator",Name:"Magnetic Field Generator",Asked:0,Needed:0,NeededList:[],color:"peru",RecipeNr:0,Recepice:[
+                    {Name: "Magnetic Field Generator", PerBuilding:1,Buildings:0,Req:[{id:"Versatile Framework",Nr:2.5},{id:"Elektromagnetic Control Rod",Nr:1}]},
+                    ]},
+                {id:"Thermal Propulsion Rocket",Name:"Thermal Propulsion Rocket",Asked:0,Needed:0,NeededList:[],color:"peru",RecipeNr:0,Recepice:[
+                    {Name: "Thermal Propulsion Rocket", PerBuilding:1,Buildings:0,Req:[{id:"Modular Engine",Nr:2.5},{id:"Turbo Motor",Nr:1},{id:"Cooling System",Nr:3},{id:"Fused Modular Frame",Nr:1}]},
+                    ]},
+                {id:"Nuclear Pasta",Name:"Nuclear Pasta",Asked:0,Needed:0,NeededList:[],color:"peru",RecipeNr:0,Recepice:[
+                    {Name: "Nuclear Pasta", PerBuilding:1,Buildings:0,Req:[{id:"Pressure Conversion Cube",Nr:1},{id:"Copper Powder",Nr:200}]},
+                    ]},
+                {id:"Copper Powder",Name:"Copper Powder",Asked:0,Needed:0,NeededList:[],color:"orange",RecipeNr:0,Recepice:[
+                    {Name: "Copper Powder", PerBuilding:"50",Buildings:0,Req:[{id:"CopperBar",Nr:6}]},
+                    ]},
+                {id:"Pressure Conversion Cube",Name:"Pressure Conversion Cube",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                    {Name: "Pressure Conversion Cube", PerBuilding:"1",Buildings:0,Req:[{id:"Fused Modular Frame",Nr:1},{id:"Radio Control Unit",Nr:2}]}]}
+            ],
+            // 9
+            [
+                {id:"UraniumOre",Name:"Uranium Ore",Asked:0,Needed:0,NeededList:[], color:"lime", RecipeNr:2,Recepice:[
+                    {Name: "Uranium Ore", PerBuilding:60,Buildings:2,Req:[]},
+                    {Name: "Uranium Ore", PerBuilding:120,Buildings:2,Req:[]},
+                    {Name: "Uranium Ore Mk 3", PerBuilding:240,Buildings:0,Req:[]},
+                    ]},
+                {id:"Encased Uranium Cell",Name:"Encased Uranium Cell",Asked:0,Needed:0,NeededList:[], color:"lime", RecipeNr:0,Recepice:[
+                    {Name: "Encased Uranium Cell", PerBuilding:"25",Buildings:0,Req:[{id:"UraniumOre",Nr:2},{id:"Concrete",Nr:0.6},{id:"Sulfuric Acid",Nr:1.6},{id:"Encased Uranium Cell Return",Nr:-0.4}]},
+                    {Name: "Placeholder", PerBuilding:"20",Buildings:0,Req:[{id:"UraniumOre",Nr:1.25},{id:"Silica",Nr:0.75},{id:"Sulfur",Nr:1.25},{id:"Quickwire",Nr:3.75}]},
+                    ]},
+                {id:"Elektromagnetic Control Rod",Name:"Elektromagnetic Control Rod",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name: "Elektromagnetic Control Rod", PerBuilding:"4",Buildings:0,Req:[{id:"AI Limiter",Nr:1},{id:"Stator",Nr:1.5}]},
+                    ]},
+                {id:"Uranium Fuel Rod",Name:"Uranium Fuel Rod",Asked:0,Needed:0,NeededList:[], color:"lime", RecipeNr:0,Recepice:[
+                    {Name: "Uranium Fuel Rod", PerBuilding:"0.4",Buildings:0,Req:[{id:"Encased Uranium Cell",Nr:50},{id:"Encased Industrial Beam",Nr:3},{id:"Elektromagnetic Control Rod",Nr:5}]}
+                ]},
+                {id:"Uranium Waste",Name:"Uranium Waste",Asked:0,Needed:0,NeededList:[], color:"lime", RecipeNr:0,Recepice:[
+                    {Name: "Uranium Waste", PerBuilding:"0",Buildings:null,Req:[]},
+                    ]},
+                {id:"Non-fissile Uranium",Name:"Non-fissile Uranium",Asked:0,Needed:0,NeededList:[], color:"lime", RecipeNr:0,Recepice:[
+                    {Name: "Non-fissile Uranium", PerBuilding:"50", Buildings:0,Req:[{id:"Uranium Waste",Nr:0.75},{id:"Silica",Nr:0.5},{id:"Nitric Acid",Nr:0.3},{id:"Sulfuric Acid",Nr:0.3},{id:"Water",Nr:-0.3}]},
+                    {Name: "fertile Uranium", PerBuilding:"100",Buildings:0,Req:[{id:"Uranium Waste",Nr:0.25},{id:"Uranium",Nr:0.25},{id:"Nitric Acid",Nr:0.15},{id:"Sulfuric Acid",Nr:0.25},{id:"Water",Nr:-0.4}]},
+                ]},
+                {id:"Plutonium Pellet",Name:"Plutonium Pellet",Asked:0,Needed:0,NeededList:[], color:"lime", RecipeNr:0,Recepice:[
+                    {Name: "Plutonium Pellet", PerBuilding:"30",Buildings:0,Req:[{id:"Non-fissile Uranium",Nr:10/3},{id:"Uranium Waste",Nr:5/6},{id:"Power by Hand",Nr:500}]},
+                    ]},
+                {id:"Encased Plutonium Cell",Name:"Encased Plutonium Cell",Asked:0,Needed:0,NeededList:[], color:"lime", RecipeNr:0,Recepice:[
+                    {Name: "Encased Plutonium Cell", PerBuilding:"5",Buildings:0,Req:[{id:"Plutonium Pellet",Nr:2},{id:"Concrete",Nr:4}]},
+                    ]},
+                {id:"Plutonium Fuel Rod",Name:"Plutonium Fuel Rod",Asked:0,Needed:0,NeededList:[], color:"lime", RecipeNr:0,Recepice:[
+                    {Name: "Plutonium Fuel Rod", PerBuilding:"0.25",Buildings:0,Req:[{id:"Encased Plutonium Cell",Nr:30},{id:"Steel Beam",Nr:18},{id:"Elektromagnetic Control Rod",Nr:6},{id:"Heat Sink",Nr:10}]},
+                    {Name: "Plutonium Fuel Unit", PerBuilding:"0.5",Buildings:0,Req:[{id:"Encased Plutonium Cell",Nr:20},{id:"Pressure Conversion Cube",Nr:1}]}
+                    ]},
+                {id:"Plutonium Waste",Name:"Plutonium Waste",Asked:0,Needed:0,NeededList:[], color:"lime", RecipeNr:0,Recepice:[
+                    {Name: "Plutonium Waste", PerBuilding:"0",Buildings:null,Req:[]},
+                    ]},
+                {id:"Ficsonium",Name: "Ficsonium",Asked: 0,Needed: 0,NeededList: [], color:"lime",RecipeNr: 0,Recepice: [
+                    {Name: "Ficsonium", PerBuilding: "10",Buildings: 0,Req: [ { id: "Plutonium Waste",Nr: 1},{ id: "Singularity Cell",Nr: 1},{ id: "Dark Matter Resdiue",Nr: 20}]}
+                ]},
+                {id:"Ficsonium Fuel Rod",Name: "Ficsonium Fuel Rod",Asked: 0,Needed: 0,NeededList: [], color:"lime",RecipeNr: 0,Recepice: [ 
+                    {Name: "Ficsonium Fuel Rod", PerBuilding:"2.5",Buildings: 0,Req: [{ id: "Ficsonium",Nr:2},{ id: "Elektromagnetic Control Rod",Nr: 2},{ id: "FICSIT Trigon",Nr: 40},{ id: "Excited Photonic Matter",Nr: 20},{ id: "Dark Matter Resdiue",Nr: -20}]}  
+                ]}
+            ],
+            // 10
+            [
+            {id:"SAM",Name:"SAM",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:1,Recepice:[
+                {Name: "SAM", PerBuilding:60,Buildings:0,Req:[]},
+                {Name: "SAM", PerBuilding:120,Buildings:0,Req:[]},
+                {Name: "SAM", PerBuilding:240,Buildings:0,Req:[]},
+                    ]},
+            {id:"Reanimated SAM",Name:"Reanimated SAM",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "Reanimated SAM", PerBuilding:30,Buildings:0,Req:[{id:"SAM",Nr:4}]}
+                ]},
+            {id:"SAM Fluctuator",Name:"SAM  Fluctuator",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "AM Fluctuator", PerBuilding:10,Buildings:0,Req:[{id:"Reanimated SAM",Nr:6},{id:"Copper Wire",Nr:5},{id:"Steel Tube",Nr:3}]},
+                    ]},
+            {id:"FICSIT Ingot",Name:"FICSIT Ingot",Asked:0,Needed:0,NeededList:[],RecipeNr:0,Recepice:[
+                {Name: "FICSIT Ingot (Iron)", PerBuilding:"10",Buildings:0,Req:[{id:"Reanimated SAM",Nr:4},{id:"IronBar",Nr:24}]},
+                {Name: "FICSIT Ingot (Caterium)", PerBuilding:15,Buildings:0,Req:[{id:"Reanimated SAM",Nr:3},{id:"Caterium Bar",Nr:4}]},
+                {Name: "FICSIT Ingot (Aluminium)", PerBuilding:40,Buildings:0,Req:[{id:"Reanimated SAM",Nr:2},{id:"Aluminium Ingot",Nr:4}]},
+                    ]},
+            {id:"FICSIT Trigon",Name:"FICSIT Trigon",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "FICSIT Trigon", PerBuilding:30,Buildings:0,Req:[{id:"FICSIT Ingot",Nr:1/3}]},
+                    ]},
+            {id:"Diamond",Name:"Diamond",Asked:"0",Needed:60,NeededList:[{id:"out",Nr:60}],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "DIamond", PerBuilding:30,Buildings:2,Req:[{id:"Coal",Nr:20},{id:"Power by Hand",Nr:50/3}]},
+                    ]},
+            {id:"Time Crystal",Name:"Time Crystal",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "Time Crystal", PerBuilding:6,Buildings:0,Req:[{id:"Diamond",Nr:2}]},
+                    ]},
+            {id:"Excited Photonic Matter",Name:"Excited Photonic Matter",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "Excited Photonic Matter", PerBuilding:"200",Buildings:0,Req:[]},
+                    ]},
+            {id:"Dark Matter Resdiue",Name:"Dark Matter Resdiue",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "Dark Matter Resdiue", PerBuilding:100,Buildings:0,Req:[{id:"Reanimated SAM",Nr:0.5}]},
+                    ]},
+            {id:"Dark Matter Crystal",Name:"Dark Matter Crystal",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "Dark Matter Crystal", PerBuilding:30,Buildings:0,Req:[{id:"Diamond",Nr:1},{id:"Dark Matter Resdiue",Nr:5}]},
+                {Name: "Dark Matter condensation", PerBuilding:20,Buildings:0,Req:[{id:"Dark Matter Resdiue",Nr:10}]},
+                {Name: "Dark Matter Trap", PerBuilding:60,Buildings:0,Req:[{id:"Time Crystal",Nr:0.5},{id:"Dark Matter Resdiue",Nr:2.5}]},
+                    ]},
+            {id:"Superposition OSilator",Name:"Superposition OSilator",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "Superposition Osilator", PerBuilding:5,Buildings:0,Req:[{id:"Dark Matter Crystal",Nr:6},{id:"Crystal Oscillator",Nr:1},{id:"Alclad Aluminum Sheet",Nr:9},{id:"Excited Photonic Matter",Nr:25},{id:"Dark Matter Resdiue",Nr:-25}]},
+                    ]},
+            ],
+            // 11
+            [
+            {id:"Biochemic Sculptor",Name:"Biochemic Sculptor",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "Biochemic Sculptor", PerBuilding:2,Buildings:0,Req:[{id:"Assembly Director System",Nr:0.25},{id:"FICSIT Trigon",Nr:20},{id:"Water",Nr:5}]},
+                    ]},
+            {id:"Neural Quantum Prozessor",Name:"Neural Quantum Prozessor",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "Neural Quantum Prozessor", PerBuilding:3,Buildings:0,Req:[{id:"Time Crystal",Nr:5},{id:"Supercomputer",Nr:1},{id:"FICSIT Trigon",Nr:15},{id:"Excited Photonic Matter",Nr:25},{id:"Dark Matter Resdiue",Nr:-25}]},
+                    ]},
+            {id:"AI Expansion Server",Name:"AI Expansion Server",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "AI Expansion Server", PerBuilding:4,Buildings:0,Req:[{id:"Magnetic Field Generator",Nr:1},{id:"Neural Quantum Prozessor",Nr:1},{id:"Singularity Cell",Nr:1},{id:"Excited Photonic Matter",Nr:25},{id:"Dark Matter Resdiue",Nr:25}]},
+                    ]},
+            {id:"Singularity Cell",Name:"Singularity Cell",Asked:"0",Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "Singularity Cell", PerBuilding:10,Buildings:0,Req:[{id:"Nuclear Pasta",Nr:0.1},{id:"Dark Matter Crystal",Nr:2},{id:"Iron Plate",Nr:10},{id:"Concrete",Nr:20}]},
+                    ]},
+            {id:"Balistic Warp Drive",Name:"Balistic Warp Drive",Asked:0,Needed:0,NeededList:[],color:"darkviolet",RecipeNr:0,Recepice:[
+                {Name: "Balistic Warp Drive", PerBuilding:1,Buildings:0,Req:[{id:"Thermal Propulsion Rocket",Nr:1},{id:"Singularity Cell",Nr:5},{id:"Superposition OSilator",Nr:2},{id:"Dark Matter Crystal",Nr:40}]}]}
+            ],
+            // 12 This is no seen by the user and just for internal tracking.
+            [
+                {id:"Power by Hand",Name: "Power by Hand", Asked:0, Needed: 0, NeededList:[], color:"black", RecipeNr:0,Recepice:[
+                    {Name: "Power", PerBuilding:"1",Buildings:0,Req:[]},
+                    ]},
+                {id:"Encased Uranium Cell Return",Asked:0,Needed:0,NeededList:[], color:"yellow", RecipeNr:0,Recepice:[
+                        {Name: "Sulfuric Acid Return", PerBuilding:"1",Buildings:0,Req:[{id:"Sulfuric Acid",Nr:1}]},
+                    ]},
+            ],
         ]
 
         function AddToFactory(NewItem, TierIndex){
@@ -303,6 +484,7 @@
             var indexFactor = getIndex(ID)
             var TierIndex = indexFactor[0]
             var ItemIndex = indexFactor[1]
+
             var item = FactoryItems[TierIndex][ItemIndex];
 
             var NeededListIndex = item.NeededList.findIndex(item => item.id === DepItem.id);
@@ -316,6 +498,14 @@
                 // console.log("ALready have ", DepItem.id )
                 // console.log(item.NeededList[NeededListIndex])
                 // console.log(DepItem)
+                
+                //catch loops?
+                console.log(Math.abs(item.NeededList[NeededListIndex].Nr - DepItem.Nr))
+                if(Math.abs(item.NeededList[NeededListIndex].Nr - DepItem.Nr) < 0.001)
+                {
+                    return
+                }
+
                 var previousNeed = item.NeededList[NeededListIndex].Nr
                 item.NeededList[NeededListIndex].Nr = Number(DepItem.Nr)
                 item.Needed = Number(DepItem.Nr)+Number(item.Needed) - previousNeed;
@@ -341,7 +531,7 @@
         function AddPowers(){
             PowerSources.forEach(Source => {
                 Source.Req.forEach(ReqItem => {
-                    AddNeeded(ReqItem.id, {id: Source.Name, Nr: Source.Buildings*ReqItem.Nr})
+                    AddNeeded(ReqItem.id, {id: Source.id, Nr: Source.Buildings*ReqItem.Nr})
                 })
             })
         }
@@ -417,14 +607,18 @@
         function BuildAllTables(){
             CalcAllBuildings()
             PowerTable()
-            RoadTable(0, "table-Factory0")
+            RoadTable(0, "table-FactoryBasics")
             RoadTable(1, "table-Factory12")
             RoadTable(2, "table-FactoryMAM")
-            RoadTable(3, "table-Factory34")
-            RoadTable(4, "table-Factory5")
-            RoadTable(5, "table-Factory6")
-            RoadTable(6, "table-Factory7")
-            RoadTable(7, "table-Factory8")
+            RoadTable(3, "table-FactorySteel")
+            RoadTable(4, "table-FactoryOil")
+            RoadTable(5, "table-FactoryComputing")
+            RoadTable(6, "table-FactoryAuminium")
+            RoadTable(7, "table-FactoryElectronic")
+            RoadTable(8, "table-FactoryEdge")
+            RoadTable(9, "table-FactoryNuclear")
+            RoadTable(10, "table-FactoryQuantum")
+            RoadTable(11, "table-FactoryAssemly")
             CalcFlowChart();
 
         }
@@ -443,10 +637,9 @@
             TitleCell.textContent = key;
             Row.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
-                console.log(FactoryItems[m][i].id, FactoryItems[m][i].Needed)
-                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){console.log("skip"); continue}
+                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){ continue}
                 let Cell = document.createElement('td');
-                Cell.textContent = FactoryItems[m][i][key];
+                Cell.textContent = FactoryItems[m][i].Recepice[FactoryItems[m][i].RecipeNr].Name;
                 let CycleRecipeButton = document.createElement('button')
                 CycleRecipeButton.onclick = (function(m, i) {
                     return function() {
@@ -463,19 +656,19 @@
             tbody.appendChild(Row);
 
             // Asked as Input
-            var key = keys[1];
+            var key = "Asked";
             var Row = document.createElement('tr');
             var TitleCell = document.createElement('td');
             TitleCell.textContent = key;
             Row.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
-                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){console.log("skip"); continue}
+                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){ continue}
                 var Item = FactoryItems[m][i];
                 var Cell = document.createElement('td');
                 var input = document.createElement('input');
-                input.id = 'Input' + Item[keys[0]] + key;
+                input.id = 'Input' + Item.id + "Asked";
                 input.oninput = handleAskedInput.bind(null, m, input.id, i, key);
-                input.value = Item[key];
+                input.value = Item.Asked;
                 input.style.backgroundColor= 'transparent'; /* Set the background color to transparent */
                 input.style.opacity= 1.5  ; 
                 input.style.width= "50px"  ; 
@@ -492,11 +685,10 @@
             TitleCell.textContent = key;
             Row.appendChild(TitleCell);
             for (var i = 0; i < FactoryItems[m].length; i++) {
-                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){console.log("skip"); continue}
+                if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){continue}
                 var Cell = document.createElement('td');
                 Cell.textContent = Math.ceil(Number( FactoryItems[m][i][key]));
                 Row.appendChild(Cell);
-                console.log(FactoryItems[m][i].id, "here")
             }
             tbody.appendChild(Row);
 
@@ -562,7 +754,7 @@
             for (var i = 0; i < FactoryItems[m].length; i++) {
                 if(ShowOnlyNeeded && FactoryItems[m][i].Needed == 0){console.log("skip"); continue}
                 var Cell = document.createElement('td');
-                var NeededList = FactoryItems[m][i][key];
+                var NeededList = FactoryItems[m][i].NeededList;
                 var NeededTable = document.createElement('table');
                 for (var j = 0; j < NeededList.length; j++) {
                     var NeededRow =  document.createElement('tr')
@@ -630,8 +822,6 @@
                 if(Underclock === 1) Underclock = 0
                 if(FactoryItems[m][i].Needed < 0)
                 {
-                        console.log(FactoryItems[m][i].id, recipe)
-
                         Cell.style.background = "red";
                 }
                 Cell.textContent = (String(Math.floor(Overhead))
@@ -652,14 +842,14 @@
 <!-- Adding new Items/Recipies-->
 <script>
         var NewItem = {
-                id: "", Name: "",
+                id: "",
                 Asked:0, Needed:0,
                 NeededList:[],
                 RecipeNr:0,
                 Recepice:[
                 ]
             };
-            var NewRecepice = {PerBuilding:0,Buildings:0,  Req:[]}
+            var NewRecepice = {Name: "", PerBuilding:0,Buildings:0,  Req:[]}
 
         function NewItemAddRecipe(){
             PerBuildingField = document.getElementById("InputAddingPerBuilding")
@@ -675,22 +865,24 @@
 
             FactoryItems[index[0]][index[1]].Recepice.push(NewRecepice)
             resetNewRecepice();
+            resetNewItem();
             return
         }
 
         function AddAlternative(){
             var NameField = document.getElementById("InputAddingName")
             var index = getIndex( NameField.value)
-            console.log("Copying Item", NameField.value, " from", index)
+            console.log("Copying Item",NameField.value, " from", index)
             if (index === -1) return;
             var ItemCopy = structuredClone(FactoryItems[index[0]][index[1]])
             var RecepiceLength = ItemCopy.Recepice.length
+            console.log(ItemCopy.id)
             for(var i = 0; i< RecepiceLength; i++)
             {
-                ItemCopy.Recepice[i].Req.push({id: ItemCopy.Id, Nr: -1})
+                ItemCopy.Recepice[i].Req.push({id: ItemCopy.id, Nr: -1})
             }
             ItemCopy.id = "Alternative" + ItemCopy.id
-            ItemCopy.Name = "Alternative" + ItemCopy.Name
+            console.log(ItemCopy)
             AddToFactory(ItemCopy, index[0])
             BuildAllTables();
         }
@@ -699,19 +891,17 @@
             NewItemAddRecipe()
             NameField = document.getElementById("InputAddingName")
             NewItem.id  = NameField.value
-            NewItem.Name  = NameField.value
-
             
             TierField = document.getElementById("InputAddingTier");
 
             AddToFactory(NewItem, TierField.value)
-            console.log("Addign item: ", NewItem)
+            console.log("Adding item: ", NewItem)
             resetNewItem();
         }
         function handleAddButton(){
             var NameField = document.getElementById("InputAddingName")
             var index = getIndex( NameField.value)
-            console.log("NEw item name: ", NameField.value)
+            console.log("NEw item name: ",NameField.value)
             console.log("FOund at ", index)
             if( index === -1){
                 AddNewItem()
@@ -725,18 +915,18 @@
         }
         function resetNewItem(){
             NewItem = {
-                id: "", Name: "",
+                id: "",Name: "",
                 Asked:0, Needed:0,
                 NeededList:[],
                 RecipeNr:0,
                 Recepice:[
                 ]
             };
-            NewRecepice = {PerBuilding:0,Buildings:0,  Req:[]}
+            NewRecepice = {Name: "", PerBuilding:0,Buildings:0,  Req:[]}
             BuildAddTable()
         }
         function resetNewRecepice(){
-            NewRecepice = {PerBuilding:0,Buildings:0,  Req:[]}
+            NewRecepice = {Name: "", PerBuilding:0,Buildings:0,  Req:[]}
         }
         
         function handleAddReqButton(){
@@ -787,7 +977,7 @@
                 input.id = 'InputAddingTier';
                 input.style.backgroundColor= 'transparent'; /* Set the background color to transparent */
                 input.style.opacity= 1.5  ; 
-                input.value = 3;
+                input.value = 10;
                 Cell.appendChild(input);
                 TierRow.appendChild(Cell);
             }
@@ -855,7 +1045,7 @@
                         FactoryTier.forEach(function(item) {
                             var option = document.createElement("option");
                             option.value = item.id;
-                            option.text = item.Name;
+                            option.text = item.Recepice[item.RecipeNr].Name;
                             DropDownSelect.appendChild(option);
                         })
                     });
@@ -926,7 +1116,7 @@
      // var Buildings = [Constructor, Assembler, Manufactorer, Refinery, Blender, smelter, Foundary, Miner, Water, Oil, NOne ]
     function BuildingType(Item){
         var fluids = ["Water", "Oil", "Fuel", "HeavyOilResidue"];
-        var Ores = ["IronOre", "Iron Ore", "CopperOre", "CopperOre", "Caterium Ore", "Coal", "Quartz", "Limestone", "Bauxit", "Sulfur", "UraniumOre"];
+        var Ores = ["IronOre", "Iron Ore", "CopperOre", "CopperOre", "Caterium Ore", "Coal", "Quartz", "Limestone", "Bauxit", "Sulfur", "UraniumOre", "SAM"];
         if(Item.Recepice[Item.RecipeNr].Req.some(req => fluids.includes(req.id)))
         {
             if(Item.Recepice[Item.RecipeNr].Req.length <3){
@@ -957,7 +1147,7 @@
         if(Item.id === "Water"){return 8;}
         if(Item.id === "Oil"){return 9;}
         if(Item.id === "HeavyOilResidue"){return 10;}
-        if(Item.id === "Nuclear Waste"){return 10;}
+        if(Item.id === "Uranium Waste"){return 10;}
         if(Item.id === "Power by Hand"){return 10;}
         console.log("No buildig matched to ", Item.id)
         return 10;
@@ -968,12 +1158,14 @@
 <!-- Power-->
 <script>
     var PowerSources = [
-    {Name: "Biomass Burner", Buildings: 0, PerBuilding: 35, Req: []},
-    {Name: "Coal Power Plant", Buildings: 0, PerBuilding: 75, Req: [{id: "Water", Nr: 45}, {id: "Coal", Nr: 15}]},
-    // {Name: "Compacted Coal Power Plant", Buildings: 0, PerBuilding: 75, Req: [{id: "Water", Nr: 45}, {id: "Coal", Nr: 15}]},
-    {Name: "Fuel Power Plant", Buildings: 0, PerBuilding: 125, Req: [{id: "Fuel", Nr: 15}]},
-    // {Name: "Turbofuel Power Plant", Buildings: 0, PerBuilding: 125, Req: [{id: "Fuel", Nr: 15}]},
-    {Name: "Uranium Power Plant", Buildings: 10, PerBuilding: 2500, Req: [{id: "Uranium Fuel Rod", Nr: 0.2},{id: "Water", Nr: 240}, {id:"Nuclear Waste", Nr: -10}]},
+    {id: "Biomass Burner", Buildings: 0, PerBuilding: 35, Req: []},
+    {id: "Coal Power Plant", Buildings: 0, PerBuilding: 75, Req: [{id: "Water", Nr: 45}, {id: "Coal", Nr: 15}]},
+    // {id: "Compacted Coal Power Plant", Buildings: 0, PerBuilding: 75, Req: [{id: "Water", Nr: 45}, {id: "Coal", Nr: 15}]},
+    {id: "Fuel Power Plant", Buildings: 0, PerBuilding: 125, Req: [{id: "Fuel", Nr: 15}]},
+    // {id: "Turbofuel Power Plant", Buildings: 0, PerBuilding: 125, Req: [{id: "Fuel", Nr: 15}]},
+    {id: "Uranium Power Plant", Buildings: 0, PerBuilding: 2500, Req: [{id: "Uranium Fuel Rod", Nr: 0.2},{id: "Water", Nr: 240}, {id:"Uranium Waste", Nr: -10}]},
+    {id: "Plutonium Power Plant", Buildings: 0, PerBuilding: 2500, Req: [{id: "Plutonium Fuel Rod", Nr: 0.1},{id: "Water", Nr: 240}, {id:"Plutonium Waste", Nr: -1}]},
+    {id: "Ficsonium Power Plant", Buildings: 0, PerBuilding: 2500, Req: [{id: "Ficsonium Fuel Rod", Nr: 1},{id: "Water", Nr: 240},]},
     ]
     // var Buildings = [Constructor, Assembler, Manufactorer, Refinery, Blender, smelter, Foundary, Miner, Water, Oil, None ]
     var BuildingsPower = [4, 15, 55, 30,75, 4, 16, 12, 20, 40, 0]
@@ -1004,7 +1196,7 @@
     function handlePowerBuildingInput(NAME){
         var inputfield = document.getElementById('InputPower'+NAME)
         var foundIndex = PowerSources.findIndex(
-            item => item.Name === NAME);
+            item => item.id === NAME);
         if(foundIndex === -1){
             console.log('Cant find', ID)
             return -1
@@ -1058,7 +1250,7 @@
             }
             PowerSources.forEach(element => {
                 var TitleCell = document.createElement('td')
-                TitleCell.textContent = element.Name
+                TitleCell.textContent = element.id
                 TitleRow.appendChild(TitleCell)
             });
             tbody.appendChild(TitleRow)
@@ -1117,8 +1309,8 @@
             PowerSources.forEach(element => {
                 var Cell = document.createElement('td');
                 var input = document.createElement('input');
-                input.id = 'InputPower'+element.Name;
-                input.oninput = handlePowerBuildingInput.bind(null, element.Name);
+                input.id = 'InputPower'+element.id;
+                input.oninput = handlePowerBuildingInput.bind(null, element.id);
                 input.value = element.Buildings;
                 input.style.backgroundColor= 'transparent'; /* Set the background color to transparent */
                 input.style.opacity= 1.5  ; 
@@ -1142,74 +1334,104 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script>
     // Flatten the data into nodes and links
-    const flatendItems = FactoryItems.flat();
-    function CalcFlowChart(){
+
+    function CalcFlowChart() {
+        var flatendItems = FactoryItems.flat();
+        // Clear previous SVG
         d3.select("#flowchart").select("svg").remove();
+
+        // Create nodes from the data
         const nodes = flatendItems
-        .filter(item => item.Needed !== 0) 
-        .map(item => ({
-            id: item.id,
-            name: String(item.Recepice[item.RecipeNr].Buildings) + "x " + item.Name,
-            info: item
-        }));
+            .filter(item => item.Needed !== 0)
+            .map(item => ({
+                id: item.id,
+                name: String(item.Recepice[item.RecipeNr].Buildings) + "x " + item.Recepice[item.RecipeNr].Name,
+                info: item
+            }));
 
+        // Add power sources as nodes
         PowerSources.forEach(Power => {
-            if(Power.Buildings != 0 ){
-                nodes.push({id: Power.Name, name: Power.Name, info: Power})
+            if (Power.Buildings != 0) {
+                nodes.push({ id: Power.id,Name: Power.id, info: Power });
             }
-        })
+        });
 
-        function RescaledWidth(amount){
-            return 3*(2-Math.exp(-Math.abs(amount)/50))
+        // Function to rescale link width based on amount
+        function RescaledWidth(amount) {
+            return 2 * (4 - 2*Math.exp(-Math.abs(amount) / 50)- Math.exp(-Math.abs(amount) / 500));
         }
 
+        // Create links from the data
         const links = [];
         flatendItems.forEach(item => {
+            if (item.id === "Power by Hand") return;
+
             item.NeededList.forEach(Goal => {
-                    if(Goal.id ==="out"){
-                        return
-                    }
-                    if(Goal.Nr === 0){
-                        return
-                    }
-                    if(Goal.Nr > 0){
-                        links.push({ source: item.id, target: Goal.id, amount: (Goal.Nr)});
-                    }
-                    if(Goal.Nr < 0){
-                        links.push({ source: Goal.id, target: item.id, amount: -(Goal.Nr)});
-                    }
+                if (Goal.id === "out" || Goal.Nr === 0) return;
+                if (Goal.id === "Power by Hand") return;
+                if (item.Needed === 0) {
+                    nodes.push({
+                        id: item.id,
+                        name: String(item.Recepice[item.RecipeNr].Buildings) + "x " +  item.Recepice[item.RecepiceNr].Name,
+                        info: item
+                    });
+                }
+                if (Goal.Nr > 0) {
+                    links.push({
+                        source: item.id,
+                        target: Goal.id,
+                        amount: Goal.Nr,
+                        color: item.color
+                    });
+                }
+                if (Goal.Nr < 0) {
+                    links.push({
+                        source: Goal.id,
+                        target: item.id,
+                        amount: -Goal.Nr,
+                        color: item.color
+                    });
+                }
             });
         });
 
         console.log({ nodes, links });
+
+        // Define the dimensions of the SVG
         const width = window.innerWidth;
         const height = 1500;
 
+        // Create the SVG element
         const svg = d3.select("#flowchart")
             .append("svg")
             .attr("width", width)
             .attr("height", height)
             .style("border", "2px solid black");
 
-        // Define arrow marker for directed edges
-        svg.append("defs").append("marker")
-            .attr("id", "end-arrow")
-            .attr("viewBox", "0 -5 10 10")
-            .attr("refX", 10)
-            .attr("refY", 0)
-            .attr("markerWidth", 6)
-            .attr("markerHeight", 6)
-            .attr("orient", "auto")
-            .append("path")
-            .attr("d", "M0,-5L10,0L0,5")
-            .attr("stroke", "#999")
-            .attr("fill", "#999");
+        // Create unique markers for each link color dynamically
+        links.forEach((link, index) => {
+            svg.append("defs").append("marker")
+                .attr("id", `end-arrow-${index}`)
+                .attr("viewBox", "0 -5 10 10")
+                .attr("refX", 10)
+                .attr("refY", 0)
+                .attr("markerWidth", 6)
+                .attr("markerHeight", 6)
+                .attr("orient", "auto")
+                .append("path")
+                .attr("d", "M0,-5L10,0L0,5")
+                .attr("stroke", link.color)  // Set the stroke color to match the link's color
+                .attr("fill", link.color);   // Set the fill color to match the link's color
+        });
 
+        // Initialize the force simulation
+        let chargeStrength = -500;
         const simulation = d3.forceSimulation(nodes)
             .force("link", d3.forceLink(links).id(d => d.id).distance(50))
-            .force("charge", d3.forceManyBody().strength(-500))
+            .force("charge", d3.forceManyBody().strength(chargeStrength))
             .force("center", d3.forceCenter(width / 2, height / 2));
 
+        // Create the links (lines) between nodes
         const link = svg.append("g")
             .attr("class", "links")
             .selectAll("line")
@@ -1217,10 +1439,11 @@
             .enter()
             .append("line")
             .attr("class", "link")
-            .attr("marker-end", "url(#end-arrow)")
+            .attr("marker-end", (d, i) => `url(#end-arrow-${i})`) // Use the dynamically created marker
             .style("stroke-width", d => RescaledWidth(d.amount))
-            ;
+            .style("stroke", d => d.color); // Set the line color to the link's color
 
+        // Add labels to the links
         const linkText = svg.append("g")
             .attr("class", "link-labels")
             .selectAll("text")
@@ -1228,12 +1451,13 @@
             .enter()
             .append("text")
             .attr("class", "link-text")
-            .attr("dy", -3)  // Position above the line
+            .attr("dy", -3)
             .attr("text-anchor", "middle")
             .style("font-size", "12px")
-            .style("fill", "#333")  // Text color
-            .text(d => Math.ceil(d.amount));  // Display the value
+            .style("fill", "#333")
+            .text(d => Math.ceil(d.amount));
 
+        // Create the nodes and add drag functionality
         const node = svg.append("g")
             .attr("class", "nodes")
             .selectAll("g")
@@ -1252,6 +1476,7 @@
             .attr("dy", ".35em")
             .text(d => d.name);
 
+        // Simulation tick actions
         simulation.on("tick", () => {
             link
                 .attr("x1", d => d.source.x)
@@ -1267,6 +1492,7 @@
                 .attr("transform", d => `translate(${d.x},${d.y})`);
         });
 
+        // Drag event functions
         function dragstarted(event, d) {
             if (!event.active) simulation.alphaTarget(0.3).restart();
             d.fx = d.x;
@@ -1283,6 +1509,12 @@
             d.fx = null;
             d.fy = null;
         }
+        // Event listener for the slider to adjust the charge strength
+        d3.select("#strength-slider").on("input", function() {
+            chargeStrength = +this.value; // Get the slider value as a number
+            simulation.force("charge", d3.forceManyBody().strength(chargeStrength)); // Update the force strength
+            simulation.alpha(1).restart(); // Restart the simulation with new settings
+        });
     }
 </script>
 
@@ -1292,45 +1524,64 @@
 
     <h1> Factory planer</h1>
         <h2> Items</h2>
-        <h3> Tier 0</h3>
-        <div id="table-container0">
-        <table id="table-Factory0">
+        <h3> Tier 0: Basics</h3>
+        <div>
+        <table id="table-FactoryBasics">
         </table>
         </div>
-        <h3> Tiers 1 and 2</h3>
-        <div id="table-container12">
+        <h3> Tiers 1 and 2: Part Assembly</h3>
+        <div>
         <table id="table-Factory12">
         </table>
         </div>
         <h3> MAM Research</h3>
-        <div id="table-containerMAM">
+        <div>
         <table id="table-FactoryMAM">
         </table>
         </div>
-        <h3> Tiers 3 and 4</h3>
-        <div id="table-container34">
-        <table id="table-Factory34">
+        <h3> Tiers 3 and 4: Steel Production</h3>
+        <div>
+        <table id="table-FactorySteel">
         </table>
         </div>
         <h3> Tiers 5: Oil</h3>
-        <div id="table-container5">
-        <table id="table-Factory5">
+        <div>
+        <table id="table-FactoryOil">
         </table>
         </div>
 
-        <h3> Tiers 6</h3>
-        <div id="table-container6">
-        <table id="table-Factory6">
+        <h3> Tiers 6: Industrial Manufacturing</h3>
+        <div>
+        <table id="table-FactoryComputing">
         </table>
         </div>
-        <h3> Tiers 7</h3>
-        <div id="table-container7">
-        <table id="table-Factory7">
+        <h3> Tiers 7: Aluminium</h3>
+        <div>
+        <table id="table-FactoryAuminium">
+        </table>
+        <h3> Tiers 7: Advanced electric</h3>
+        <div>
+        <table id="table-FactoryElectronic">
         </table>
         </div>
-        <h3> Tiers 8</h3>
-        <div id="table-container8">
-        <table id="table-Factory8">
+        <h3> Tiers 8: Advanced and Leading-Edge</h3>
+        <div>
+        <table id="table-FactoryEdge">
+        </table>
+        </div>
+        <h3> Tiers 7&8: Nuclear</h3>
+        <div>
+        <table id="table-FactoryNuclear">
+        </table>
+        </div>
+        <h3> Tiers 9: Quantum Technology</h3>
+        <div>
+        <table id="table-FactoryQuantum">
+        </table>
+        </div>
+        <h3> Tiers 9: Project Assembly</h3>
+        <div>
+        <table id="table-FactoryAssemly">
         </table>
         </div>
         <button onclick=BuildAllTables()>Recalulate</button>
@@ -1352,6 +1603,9 @@
         Seperatly calulate the in and output of the
         moduls, e.g. in a seperate tab, and include them as a new "Item".
         You maually have to set the number via the "asked" fields later.
+        <br>
+        Carefull with loops! When the main Product is part of a loop, the website can crash.
+        This can be avoided by adding the recipe as an alternate, although the value has to be adjusted by hand
         <div id="Add-container">
         <table id="add-Factory">
         </table>
@@ -1367,6 +1621,10 @@
             </table>
         </div>
 
+        <div>
+            <label for="strength-slider">Adjust Flowchart Strength: </label>
+            <input type="range" id="strength-slider" min="-2000" max="500" value="-500" step="20">
+        </div>
         <div id="flowchart"></div>
 
 </body>
