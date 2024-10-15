@@ -197,6 +197,7 @@
                     {Name: "Plastic", PerBuilding:"20",Buildings:0,Req:[{id:"Oil",Nr:1.5},{id:"HeavyOilResidue",Nr:-0.5}]},
                     {Name: "Residual Plastic", PerBuilding:"20",Buildings:0,Req:[{id:"Water",Nr:1},{id:"Polymer Resin",Nr:3}]},
                     {Name: "Reclaimed Plastic", PerBuilding:"60",Buildings:0,Req:[{id:"Fuel",Nr:0.5},{id:"Rubber",Nr:0.5}]},
+                    {Name: "Plastic with Oil Trippler", PerBuilding:"86.666",Buildings:0,Req:[{id:"Oil",Nr:1/3},{id:"Water",Nr:0.8666}]},
                    ]},
                 {id:"Rubber",Name:"Rubber",Asked:0,Needed:0,NeededList:[], color:"black", RecipeNr:0,Recepice:[
                     {Name: "Rubber", PerBuilding:"20",Buildings:0,Req:[{id:"Oil",Nr:1.5},{id:"HeavyOilResidue",Nr:-1}]},
@@ -235,8 +236,8 @@
                     {Name: "Caterium Circuit Board", PerBuilding:"8.75",Buildings:0,Req:[{id:"Quickwire",Nr:2},{id:"Plastic",Nr:4}]},
                     {Name: "Placeholder", PerBuilding:"5",Buildings:0,Req:[{id:"Rubber",Nr:4},{id:"Petroleum Coke",Nr:8}]},
                    ]},
-                {id:"Computer",Name:"Computer",Asked:0,Needed:0,NeededList:[], color:"orange", RecipeNr:0,Recepice:[
-                    {Name: "Computer", PerBuilding:"2.5",Buildings:0,Req:[{id:"Circuit Board",Nr:10},{id:"Cable",Nr:9},{id:"Plastic",Nr:18},{id:"IronScrew",Nr:52}]},
+                {id:"Computer",Asked:0,Needed:0,NeededList:[], color:"orange", RecipeNr:0,Recepice:[
+                    {Name: "Computer", PerBuilding:"2.5",Buildings:0,Req:[{id:"Circuit Board",Nr:10},{id:"Cable",Nr:8},{id:"Plastic",Nr:16}]},
                     {Name: "Caterium Computer", PerBuilding:10/3,Buildings:0,Req:[{id:"Circuit Board",Nr:1.5},{id:"Crystal Oscillator",Nr:0.5}]},
 
                    ]},
@@ -346,8 +347,8 @@
                     {Name: "Encased Uranium Cell", PerBuilding:"25",Buildings:0,Req:[{id:"UraniumOre",Nr:2},{id:"Concrete",Nr:0.6},{id:"Sulfuric Acid",Nr:1.6},{id:"Encased Uranium Cell Return",Nr:-0.4}]},
                     {Name: "Placeholder", PerBuilding:"20",Buildings:0,Req:[{id:"UraniumOre",Nr:1.25},{id:"Silica",Nr:0.75},{id:"Sulfur",Nr:1.25},{id:"Quickwire",Nr:3.75}]},
                     ]},
-                {id:"Elektromagnetic Control Rod",Name:"Elektromagnetic Control Rod",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
-                    {Name: "Elektromagnetic Control Rod", PerBuilding:"4",Buildings:0,Req:[{id:"AI Limiter",Nr:1},{id:"Stator",Nr:1.5}]},
+                {id:"Elektromagnetic Control Rod",Asked:0,Needed:0,NeededList:[], color:"red", RecipeNr:0,Recepice:[
+                    {Name:"Elektromagnetic Control Rod", PerBuilding:"4",Buildings:0,Req:[{id:"AI Limiter",Nr:1},{id:"Stator",Nr:1.5}]},
                     ]},
                 {id:"Uranium Fuel Rod",Name:"Uranium Fuel Rod",Asked:0,Needed:0,NeededList:[], color:"lime", RecipeNr:0,Recepice:[
                     {Name: "Uranium Fuel Rod", PerBuilding:"0.4",Buildings:0,Req:[{id:"Encased Uranium Cell",Nr:50},{id:"Encased Industrial Beam",Nr:3},{id:"Elektromagnetic Control Rod",Nr:5}]}
@@ -442,10 +443,10 @@
             [
                 {id:"Power by Hand",Name: "Power by Hand", Asked:0, Needed: 0, NeededList:[], color:"black", RecipeNr:0,Recepice:[
                     {Name: "Power", PerBuilding:"1",Buildings:0,Req:[]},
-                    ]},
+                ]},
                 {id:"Encased Uranium Cell Return",Asked:0,Needed:0,NeededList:[], color:"yellow", RecipeNr:0,Recepice:[
-                        {Name: "Sulfuric Acid Return", PerBuilding:"1",Buildings:0,Req:[{id:"Sulfuric Acid",Nr:1}]},
-                    ]},
+                    {Name: "Sulfuric Acid Return", PerBuilding:"1",Buildings:0,Req:[{id:"Sulfuric Acid",Nr:1}]},
+                ]},
             ],
         ]
 
@@ -1372,7 +1373,7 @@
                 if (item.Needed === 0) {
                     nodes.push({
                         id: item.id,
-                        name: String(item.Recepice[item.RecipeNr].Buildings) + "x " +  item.Recepice[item.RecepiceNr].Name,
+                        name: String(item.Recepice[item.RecipeNr].Buildings) + "x " +  item.Recepice[item.RecipeNr].Name,
                         info: item
                     });
                 }
